@@ -1,0 +1,61 @@
+utilisateurs:
+    id (INT - 11)
+    nom (VAR - 50)
+    prenom (VAR - 50)
+    email (VAR - 50)
+    avatar (VAR - 255) NULL
+    rang (VAR - 255)
+    naissance (DATE)
+
+badges:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT)
+    image (VAR - 255)
+
+badges_utilisateurs:
+    id (INT - 11)
+    id_badge (INT - 11) -> Clé badges
+    id_utilisateur (INT - 11) -> Clé utilisateurs
+
+personnages:
+    id (INT - 11)
+    nom (VAR - 50)
+    prenom (VAR - 50)
+    sexe (TYN - 1)
+    image (VAR - 255)
+    avatar (VAR - 255)
+    histoire (TEXT)
+
+races:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT)
+    image (VAR - 255)
+
+races_personnages:
+    id (INT - 11)
+    id_race (INT - 11) -> Clé races
+    id_personnage (INT - 11) -> Clé personnages
+
+classes:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT)
+    image (VAR - 255)
+
+classes_personnages:
+    id (INT - 11)
+    id_classe (INT - 11) -> Clé classes
+    id_personnage (INT - 11) -> Clé personnages
+
+blessures:
+    id (INT - 11)
+    titre (VAR - 75)
+    
+
+competences:
+
+
+
+
