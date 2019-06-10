@@ -2,21 +2,22 @@ utilisateurs:
     id (INT - 11)
     nom (VAR - 50)
     prenom (VAR - 50)
+    pseudo (VAR - 50)
+    mdp (VAR - 255)
     email (VAR - 50)
     avatar (VAR - 255) NULL
-    rang (VAR - 255)
+    rang (VAR - 100)
     naissance (DATE)
+    messages (INT - 11)
+    slug (VAR - 255)
 
 badges:
     id (INT - 11)
     titre (VAR - 75)
     description (TEXT)
     image (VAR - 255)
-
-badges_utilisateurs:
-    id (INT - 11)
-    id_badge (INT - 11) -> Clé badges
-    id_utilisateur (INT - 11) -> Clé utilisateurs
+    slug (VAR - 255)
+    id_utilisateur (INT - 11) -> ManyToOne // Plusieurs badges peuvent être actifs auprès d'un même utilisateur
 
 personnages:
     id (INT - 11)
@@ -24,38 +25,116 @@ personnages:
     prenom (VAR - 50)
     sexe (TYN - 1)
     image (VAR - 255)
-    avatar (VAR - 255)
+    portrait (VAR - 255)
     histoire (TEXT)
+    slug (VAR - 255)
+    id_utilisateur (INT - 11) -> ManyToOne // Plusieurs personnages peuvent appartenir à un même utilisateur
 
 races:
     id (INT - 11)
     titre (VAR - 75)
     description (TEXT)
     image (VAR - 255)
-
-races_personnages:
-    id (INT - 11)
-    id_race (INT - 11) -> Clé races
-    id_personnage (INT - 11) -> Clé personnages
+    slug (VAR - 255)
+    id_personnage (INT - 11) -> OneToMany // Une même race peut être choisie par plusieurs personnages
 
 classes:
     id (INT - 11)
     titre (VAR - 75)
     description (TEXT)
     image (VAR - 255)
-
-classes_personnages:
-    id (INT - 11)
-    id_classe (INT - 11) -> Clé classes
-    id_personnage (INT - 11) -> Clé personnages
+    slug (VAR - 255)
+    id_personnage (INT - 11) -> OneToMany // Une même classe peut être choisie par plusieurs personnages
 
 blessures:
     id (INT - 11)
     titre (VAR - 75)
-    
+    effet (TEXT)
+    image (VAR - 255)
+    slug (VAR - 255)
+    id_personnage (INT - 11) -> OneToMany // Une même blessure peut être infligée à plusieurs personnages
 
 competences:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT)
+    image (VAR - 255)
+    slug (VAR - 255)
+    id_personnage (INT - 11) -> OneToMany // Une même compétence peut être choisie par plusieurs personnages
 
+sorts:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT)
+    image (VAR - 255)
+    slug (VAR - 255)
+    id_personnage (INT - 11) -> OneToMany // Un même sort peut être choisi par plusieurs personnages
 
+forums_categories:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT) NULL
+    ordre (SMALL)
+    date_creation (DATETIME)
+    droit_acces (VAR - 100)
+    slug (VAR - 255)
+    visible (BOOL)
 
+forums_sujets:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT) NULL
+    ordre (SMALL)
+    date_creation (DATETIME)
+    droit_acces (VAR - 100)
+    visible (BOOL)
+    slug (VAR - 255)
+    id_forum_categorie (INT - 11) -> ManyToOne // Plusieurs sujets peuvent appartenir à une même catégorie
 
+forums_posts:
+    id (INT - 11)
+    titre (VAR - 75)
+    message (LONGTEXT)
+    ordre (SMALL)
+    date_creation (DATETIME)
+    derniere_edition (DATETIME) NULL
+    visible (BOOL)
+    slug (VAR - 255)
+    id_forum_sujet (INT - 11) -> ManyToOne // Plusieurs posts peuvent appartenir à un même sujets
+
+forums_historiques:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (VAR - 255)
+    date_creation (DATETIME)
+
+encyclopedie_categories:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT) NULL
+    couverture (VAR - 255)
+    ordre (SMALL)
+    date_creation (DATETIME)
+    droit_acces (VAR - 100)
+    slug (VAR - 255)
+    visible (BOOL)
+
+encyclopedie_sujets:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT) NULL
+    ordre (SMALL)
+    date_creation (DATETIME)
+    visible (BOOL)
+    slug (VAR - 255)
+    id_encyclopedie_categorie (INT - 11) -> ManyToOne // Plusieurs sujets peuvent appartenir à une même catégorie
+
+encyclopedie_posts:
+    id (INT - 11)
+    titre (VAR - 75)
+    description (TEXT) NULL
+    ordre (SMALL)
+    date_creation (DATETIME)
+    visible (BOOL)
+    slug (VAR - 255)
+    id_encyclopedie_sujet (INT - 11) -> ManyToOne // Plusieurs posts peuvent appartenir à un même sujet
