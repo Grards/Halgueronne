@@ -1,12 +1,12 @@
 utilisateurs:
     id (INT - 11)
-    nom (VAR - 50)
-    prenom (VAR - 50)
-    pseudo (VAR - 50)
+    nom (VAR - 75)
+    prenom (VAR - 75)
+    pseudo (VAR - 75)
     mdp (VAR - 255)
-    email (VAR - 50)
+    email (VAR - 75)
     avatar (VAR - 255) NULL
-    rang (VAR - 100)
+    rang (VAR - 75)
     naissance (DATE)
     messages (INT - 11)
     slug (VAR - 255)
@@ -21,12 +21,12 @@ badges:
 
 personnages:
     id (INT - 11)
-    nom (VAR - 50)
-    prenom (VAR - 50)
+    nom (VAR - 75)
+    prenom (VAR - 75)
     sexe (TYN - 1)
-    image (VAR - 255)
-    portrait (VAR - 255)
-    histoire (TEXT)
+    image (VAR - 255) NULL
+    portrait (VAR - 255) NULL
+    biographie (TEXT)
     slug (VAR - 255)
     id_utilisateur (INT - 11) -> ManyToOne // Plusieurs personnages peuvent appartenir à un même utilisateur
 
@@ -76,7 +76,7 @@ forums_categories:
     description (TEXT) NULL
     ordre (SMALL)
     date_creation (DATETIME)
-    droit_acces (VAR - 100)
+    droit_acces (VAR - 75)
     slug (VAR - 255)
     visible (BOOL)
 
@@ -86,7 +86,7 @@ forums_sujets:
     description (TEXT) NULL
     ordre (SMALL)
     date_creation (DATETIME)
-    droit_acces (VAR - 100)
+    droit_acces (VAR - 75)
     visible (BOOL)
     slug (VAR - 255)
     id_forum_categorie (INT - 11) -> ManyToOne // Plusieurs sujets peuvent appartenir à une même catégorie
@@ -115,7 +115,7 @@ encyclopedie_categories:
     couverture (VAR - 255)
     ordre (SMALL)
     date_creation (DATETIME)
-    droit_acces (VAR - 100)
+    droit_acces (VAR - 75)
     slug (VAR - 255)
     visible (BOOL)
 
