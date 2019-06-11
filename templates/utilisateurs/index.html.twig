@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>Liste des utilisateurs</h1>
+    {% for utilisateur in utilisateurs %}
+        <div class="row">
+            <h3>{{ utilisateur.pseudo }}</h3>
+        </div>
+        <div class="row">
+            <div><img src="{{ utilisateur.avatar }}" alt="Avatar de l'utilisateur"></div>
+        </div> 
+        <div class="row">
+            <ul>
+                <li>Nom : {{ utilisateur.nom }}</li>
+                <li>Prénom : {{ utilisateur.prenom }}</li>
+                <li>Email : {{ utilisateur.email }}</li>
+                <li>Rang : {{ utilisateur.rang }}</li>
+                <li>Naissance : {{utilisateur.naissance | date('d/m/Y') }}</li>
+                <li>Messages : {{utilisateur.messages }}</li>
+            </ul>
+        </div>
+        <div class="row">
+            <a href="{{ path('utilisateurs', {'id' : utilisateur.id}) }}" class="btn btn-primary">Voir utilisateur</a>
+        </div> 
+    {% endfor %}
+</div>
+{% endblock %}
