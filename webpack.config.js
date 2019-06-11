@@ -54,6 +54,7 @@ Encore
     })
 
     .addStyleEntry('css/app','./assets/css/style.scss')
+    .addEntry('js/app', './assets/js/app.js')
 
     // enables Sass/SCSS support
     .enableSassLoader()

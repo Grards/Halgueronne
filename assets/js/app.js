@@ -1,14 +1,8 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+var $ = require('jquery'); 
 
-// any CSS you require will output into a single css file (app.css in this case)
-// require('../css/app.css');
+global.$ = global.jQuery = $;
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+require('popper.js');
+ 
+// On utilise ce chemin pour aller chercher le min.js car bootstrap est installé via npm, dans les node_modules et non copié manuellement dans les assets.
+require('../../node_modules/bootstrap/dist/js/bootstrap.min.js');
