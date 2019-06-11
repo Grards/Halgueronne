@@ -53,8 +53,10 @@ Encore
         corejs: 3
     })
 
+    .addStyleEntry('css/app','./assets/css/style.scss')
+
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -69,6 +71,7 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
+
 ;
 
 module.exports = Encore.getWebpackConfig();
