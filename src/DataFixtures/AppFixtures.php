@@ -16,18 +16,26 @@ class AppFixtures extends Fixture
         for($i=1; $i<=10; $i++){
             $utilisateur = new Utilisateurs();
 
-            $avatar = $faker->imageUrl(50,50);
+            $nom = $faker->lastName();
+            $prenom = $faker->firstNameMale();
+            $pseudo = $faker->userName();
+            $mdp = $faker->password();
+            $email = $faker->freeEmail();
+            $avatar = $faker->imageUrl(200,200);
+            $rang = $faker->jobTitle();
+            $naissance = $faker->dateTimeBetween($startDate = '-50 years', $endDate = '-18 years', $timezone = null);
+            $slug = $faker->slug();
 
-            $utilisateur->setNom("Grard")
-                        ->setPrenom("Steve")
-                        ->setPseudo("Lucifer_Kira")
-                        ->setMdp("Testmdp")
-                        ->setEmail("grard.steve@gmail.com")
+            $utilisateur->setNom($nom)
+                        ->setPrenom($prenom)
+                        ->setPseudo($pseudo)
+                        ->setMdp($mdp)
+                        ->setEmail($email)
                         ->setAvatar($avatar)
-                        ->setRang("Admin")
-                        ->setNaissance(new \DateTime())
-                        ->setMessages(0)
-                        ->setSlug("grard.steve");
+                        ->setRang($rang)
+                        ->setNaissance($naissance)
+                        ->setMessages(mt_rand(0,120))
+                        ->setSlug($slug);
 
             $manager->persist($utilisateur);
         }
