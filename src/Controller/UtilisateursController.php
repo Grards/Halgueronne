@@ -21,13 +21,14 @@ class UtilisateursController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/utilisateurs/{id}", name="utilisateurs_show")
-    //  */
-    // public function show(Utiliateurs $utilisateurs)
-    // {
-    //     return $this->render('utilisateurs/show.html.twig', [
-    //         'utilisateurs' => $utilisateurs
-    //     ]);
-    // }
+    /**
+     * @Route("/utilisateurs/{id}", name="utilisateurs_show")
+     */
+    public function show(UtilisateursRepository $repo, $id)
+    {
+        $utilisateurs = $repo->find($id);
+        return $this->render('utilisateurs/show.html.twig', [
+            'utilisateurs' => $utilisateurs
+        ]);
+    }
 }

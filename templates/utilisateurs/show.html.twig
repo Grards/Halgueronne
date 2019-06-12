@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>Uilisateur</h1>
+
+        <div class="row">
+            <h3>{{ utilisateurs.pseudo }}</h3>
+        </div>
+        <div class="row">
+            <div><img src="{{ utilisateurs.avatar }}" alt="Avatar de l'utilisateur"></div>
+        </div> 
+        <div class="row">
+            <ul>
+                <li>Nom : {{ utilisateurs.nom }}</li>
+                <li>Prénom : {{ utilisateurs.prenom }}</li>
+                <li>Email : {{ utilisateurs.email }}</li>
+                <li>Rang : {{ utilisateurs.rang }}</li>
+                <li>Naissance : {{utilisateurs.naissance | date('d/m/Y') }}</li>
+                <li>Messages : {{utilisateurs.messages }}</li>
+            </ul>
+        </div>
+
+</div>
+{% endblock %}
