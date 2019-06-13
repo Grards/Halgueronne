@@ -13,6 +13,23 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('Fr-fr');
 
+        $slug = $faker->slug();
+
+        for($i=1; $i<=30; $i++){
+            $badge = new Badges();
+
+            $titre = $faker->sentence($nbWords = 6, $variableNbWords = true);
+            $description = $faker->paragraphs($nb = 3, $asText = false);
+            $image = $faker->imageUrl(150,150);
+
+            $badge->setTitre($titre)
+                  ->setDescription($description)
+                  ->setImage($image)
+                  ->setSlug($slug);
+
+            $manager->persist($badge);
+        }
+
         for($i=1; $i<=10; $i++){
             $utilisateur = new Utilisateurs();
 
@@ -24,7 +41,6 @@ class AppFixtures extends Fixture
             $avatar = $faker->imageUrl(200,200);
             $rang = $faker->jobTitle();
             $naissance = $faker->dateTimeBetween($startDate = '-50 years', $endDate = '-18 years', $timezone = null);
-            $slug = $faker->slug();
 
             $utilisateur->setNom($nom)
                         ->setPrenom($prenom)
@@ -39,6 +55,8 @@ class AppFixtures extends Fixture
 
             $manager->persist($utilisateur);
         }
+
+
         
         $manager->flush();           
     }

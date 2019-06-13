@@ -47,9 +47,7 @@ class UtilisateursController extends AbstractController
             );
 
             // Redirection vers la page désirée une fois le formulaire envoyé.
-            return $this->redirectToRoute('utilisateurs',[
-                'slug' => $utilisateurs->getSlug()
-            ]);
+            return $this->redirectToRoute('utilisateurs_show',['id'=>$utilisateurs->getId()]);
         }
 
         return $this->render('utilisateurs/new.html.twig',[
