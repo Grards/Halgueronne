@@ -1,21 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">Test de colonne</div>
-            <div class="col-lg-3">Test de colonne</div>
-            <div class="col-lg-3">Test de colonne</div>
-            <div class="col-lg-3">Test de colonne</div>
-        </div>
+    <div id="main" class="container-fluid">
+        <div class="row slide">
+            <div class="col-12">
+                <div id="video-fond" class="d-none d-md-block">
+                    <video src="videos/particles_blue_mini.mp4" autoplay loop muted>
+                    </video>
+                </div>
 
-        <div class="row">
-            <div class="col-lg-3">Test de colonne</div>
-            <div class="col-lg-3">Test de colonne</div>
-            <div class="col-lg-3">Test de colonne</div>
-            <div class="col-lg-3">Test de colonne</div>
+                <div class="col-12" id="filtre"></div>
+                <h1>Halgueronne</h1>
+            </div>
         </div>
-    </class>
+    </div>
 
 
 {% endblock %}

@@ -1,5 +1,33 @@
-/*  
+/*  --- IMPORT BOOTSTRAP ---
     Bootstrap est installé avec la commande npm install bootstrap
     Pour l'utiliser, on va chercher le fichier scss qui a été installé dans les modules de node_modules
 */
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/* --- IMPORTS FONT-FACES --- */
+@font-face {
+    font-family: "Geizer";
+    src: url("../../public/fonts/geizer/Geizer.otf");
+}
+
+/* --- VARIABLES --- */
+
+
+/* --- GENERALITIES --- */
+body, html{
+    height: 100%;
+    overflow-x: hidden;
+}
+
+h1{
+    font-family: "Geizer";
+}
+
+.slide{
+    height: 100%;
+}
+
+
+/* --- IMPORTS SCSS --- */
+@import "accueil.scss";
+@import "utilisateurs.scss";
