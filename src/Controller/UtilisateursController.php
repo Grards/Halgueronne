@@ -28,7 +28,7 @@ class UtilisateursController extends AbstractController
      * La propriété Request représente ici le POST
      * @Route("/utilisateurs/new", name="utilisateurs_create")
      */
-    public function create(Request $request, ObjectManager $manager){
+    public function create(Request $request, ObjectManager $manager, UtilisateursRepository $repo){
         $utilisateurs = new Utilisateurs();
         $form = $this->createForm(UtilisateursType::class, $utilisateurs);
         // Fonction qui permet de parcourir la requête et d'extraire les information du form
@@ -47,20 +47,20 @@ class UtilisateursController extends AbstractController
             );
 
             // Redirection vers la page désirée une fois le formulaire envoyé.
-            return $this->redirectToRoute('utilisateurs_show',['id'=>$utilisateurs->getId()]);
+            return $this->redirectToRoute('utilisateurs_show',['slug'=>$utilisateurs->getSlug()]);
         }
-
+        
         return $this->render('utilisateurs/new.html.twig',[
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/utilisateurs/{id}", name="utilisateurs_show")
+     * @Route("/utilisateurs/{slug}", name="utilisateurs_show")
      */
-    public function show(UtilisateursRepository $repo, $id)
+    public function show(UtilisateursRepository $repo, $slug)
     {
-        $utilisateurs = $repo->find($id);
+        $utilisateurs = $repo->findOneBySlug($slug);
         return $this->render('utilisateurs/show.html.twig', [
             'utilisateurs' => $utilisateurs
         ]);

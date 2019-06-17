@@ -12,16 +12,13 @@
         </div> 
         <div class="row">
             <ul>
-                <li>Nom : {{ utilisateur.nom }}</li>
-                <li>Prénom : {{ utilisateur.prenom }}</li>
                 <li>Email : {{ utilisateur.email }}</li>
                 <li>Rang : {{ utilisateur.rang }}</li>
-                <li>Naissance : {{utilisateur.naissance | date('d/m/Y') }}</li>
                 <li>Messages : {{utilisateur.messages }}</li>
             </ul>
         </div>
         <div class="row">
-            <a href="{{ path('utilisateurs_show', {'id' : utilisateur.id}) }}" class="btn btn-primary">Voir utilisateur</a>
+            <a href="{{ path('utilisateurs_show', {'slug' : utilisateur.slug}) }}" class="btn btn-primary">Voir utilisateur</a>
         </div> 
     {% endfor %}
 </div>

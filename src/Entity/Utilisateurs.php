@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateursRepository")
+ * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields="pseudo", errorPath="pseudo", message="Ce pseudo est déjà utilisé par quelqu'un d'autre")
+ * @UniqueEntity(fields="email", errorPath="email", message="Cette adresse email est déjà utilisée")
+ * @UniqueEntity(fields="slug", errorPath="slug", message="Ce slug existe déjà")
+ * )
  */
 class Utilisateurs
 {
@@ -21,20 +26,11 @@ class Utilisateurs
     /**
      * @ORM\Column(type="string", length=75)
      */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=75)
-     */
-    private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=75)
-     */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $mdp;
 
@@ -54,11 +50,6 @@ class Utilisateurs
     private $rang;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $naissance;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $messages;
@@ -69,48 +60,23 @@ class Utilisateurs
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Badges", mappedBy="idUtilisateur", orphanRemoval=true)
+     * Permet d'intialiser le slug !
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
      */
-    private $badges;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Personnages", mappedBy="idUtilisateur", orphanRemoval=true)
-     */
-    private $personnages;
-
-    public function __construct()
-    {
-        $this->badges = new ArrayCollection();
-        $this->personnages = new ArrayCollection();
+    public function initializeSlug() {
+        if(empty($this->slug)) {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->pseudo);
+        }
     }
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
     }
 
     public function getPseudo(): ?string
@@ -173,18 +139,6 @@ class Utilisateurs
         return $this;
     }
 
-    public function getNaissance(): ?\DateTimeInterface
-    {
-        return $this->naissance;
-    }
-
-    public function setNaissance(\DateTimeInterface $naissance): self
-    {
-        $this->naissance = $naissance;
-
-        return $this;
-    }
-
     public function getMessages(): ?int
     {
         return $this->messages;
@@ -205,68 +159,6 @@ class Utilisateurs
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Badges[]
-     */
-    public function getBadges(): Collection
-    {
-        return $this->badges;
-    }
-
-    public function addBadge(Badges $badge): self
-    {
-        if (!$this->badges->contains($badge)) {
-            $this->badges[] = $badge;
-            $badge->setIdUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBadge(Badges $badge): self
-    {
-        if ($this->badges->contains($badge)) {
-            $this->badges->removeElement($badge);
-            // set the owning side to null (unless already changed)
-            if ($badge->getIdUtilisateur() === $this) {
-                $badge->setIdUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Personnages[]
-     */
-    public function getPersonnages(): Collection
-    {
-        return $this->personnages;
-    }
-
-    public function addPersonnage(Personnages $personnage): self
-    {
-        if (!$this->personnages->contains($personnage)) {
-            $this->personnages[] = $personnage;
-            $personnage->setIdUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removePersonnage(Personnages $personnage): self
-    {
-        if ($this->personnages->contains($personnage)) {
-            $this->personnages->removeElement($personnage);
-            // set the owning side to null (unless already changed)
-            if ($personnage->getIdUtilisateur() === $this) {
-                $personnage->setIdUtilisateur(null);
-            }
-        }
 
         return $this;
     }

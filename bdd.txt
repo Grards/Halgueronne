@@ -1,15 +1,23 @@
 utilisateurs:
     id (INT - 11)
-    nom (VAR - 75)
-    prenom (VAR - 75)
-    pseudo (VAR - 75)
+    pseudo (VAR - 75) // unique
     mdp (VAR - 255)
-    email (VAR - 75)
+    email (VAR - 75) // unique
     avatar (VAR - 255) NULL
     rang (VAR - 75)
-    naissance (DATE)
     messages (INT - 11)
-    slug (VAR - 255)
+    slug (VAR - 255) // unique
+
+messages:
+    id (INT - 11)
+    sujet (VAR - 100)
+    contenu (TEXT)
+    date_envoi
+    statut (VAR - 10) // Non-lu, lu, répondu, brouillon, envoyé, archivé.
+    auteur (INT - 11) -> ManyToOne // Plusieurs messages par auteur.
+    destinataire (TEXT) -> OneToMany // Chaque message peut avoir plusieurs destinataires.
+                           Géré en TEXT car on recevra une liste avec des séparateurs ',' entre chaque id utilisateur et un statut pour chacun d'eux, genre :
+                           d:{id}(destinataire principal),cv:{id}(copie_visible),ci:{id}(copie invisible)
 
 badges:
     id (INT - 11)
@@ -17,18 +25,28 @@ badges:
     description (TEXT)
     image (VAR - 255)
     slug (VAR - 255)
-    id_utilisateur (INT - 11) -> ManyToOne // Plusieurs badges peuvent être actifs auprès d'un même utilisateur
+
+badges_utilisateurs:
+    id (INT - 11)
+    date_obtention (DATETIME)
+    badge (INT - 11) -> OneToOne // Une seule obtention de badge par utilisateur
+    utilisateur (INT - 11) -> OneToOne // Un seul utilisateur par obtention de badge
 
 personnages:
     id (INT - 11)
     nom (VAR - 75)
     prenom (VAR - 75)
-    sexe (TYN - 1)
-    image (VAR - 255) NULL
-    portrait (VAR - 255) NULL
+    sexe (VAR - 1)
+    portrait (VAR - 255)
+    naissance_jour (SMALLINT) NULL -> La naissance et la mort sont découpées en champs SMALLINT car il s'agit d'un calendrier spécifique au jeu et non du calendrier terrien.
+    naissance_mois (SMALLINT) NULL -> Les valeurs peuvent être nulles car on peut ne pas connaitre la date de naissance exacte d'un personnage et qu'il n'est pas forcément déjà mort.
+    naissance_annee (SMALLINT) NULL
+    mort_jour (SMALLINT) NULL -> Si au moins un champ de mort est rempli, alors le personnage ne sera plus disponible en jeu.
+    mort_mois (SMALLINT) NULL
+    mort_annee (SMALLINT) NULL
     biographie (TEXT)
     slug (VAR - 255)
-    id_utilisateur (INT - 11) -> ManyToOne // Plusieurs personnages peuvent appartenir à un même utilisateur
+    utilisateur (INT - 11) -> ManyToOne // Plusieurs personnages pour un utilisateur. (Mais via leur rang, les MJ's pourront avoir accès à TOUS les peronnages + édition, etc...)
 
 races:
     id (INT - 11)
@@ -36,7 +54,7 @@ races:
     description (TEXT)
     image (VAR - 255)
     slug (VAR - 255)
-    id_personnage (INT - 11) -> OneToMany // Une même race peut être choisie par plusieurs personnages
+    personnage (INT - 11) -> OneToMany // Une même race pour plusieurs personnages.
 
 classes:
     id (INT - 11)
@@ -44,7 +62,7 @@ classes:
     description (TEXT)
     image (VAR - 255)
     slug (VAR - 255)
-    id_personnage (INT - 11) -> OneToMany // Une même classe peut être choisie par plusieurs personnages
+    personnage (INT - 11) -> OneToMany // Une même classe pour plusieurs personnages.
 
 blessures:
     id (INT - 11)
@@ -52,7 +70,7 @@ blessures:
     effet (TEXT)
     image (VAR - 255)
     slug (VAR - 255)
-    id_personnage (INT - 11) -> OneToMany // Une même blessure peut être infligée à plusieurs personnages
+    personnage (INT - 11) -> ManyToMany // Plusieurs blessures pour plusieurs personnages.
 
 competences:
     id (INT - 11)
@@ -60,7 +78,7 @@ competences:
     description (TEXT)
     image (VAR - 255)
     slug (VAR - 255)
-    id_personnage (INT - 11) -> OneToMany // Une même compétence peut être choisie par plusieurs personnages
+    personnage (INT - 11) -> ManytToMany // Plusieurs compétences pour plusieurs personnages.
 
 sorts:
     id (INT - 11)
@@ -68,41 +86,50 @@ sorts:
     description (TEXT)
     image (VAR - 255)
     slug (VAR - 255)
-    id_personnage (INT - 11) -> OneToMany // Un même sort peut être choisi par plusieurs personnages
+    personnage (INT - 11) -> ManyToMany // Plusieurs sorts pour plusieurs personnages.
 
 forums_categories:
     id (INT - 11)
+    parent_id (INT - 11) NULL // Si NULL, ce forum est une section qui regroupe des catégories.
     titre (VAR - 75)
     description (TEXT) NULL
-    ordre (SMALL)
+    ordre (SMALLINT)
     date_creation (DATETIME)
     droit_acces (VAR - 75)
-    slug (VAR - 255)
     visible (BOOL)
+    slug (VAR - 255)
 
 forums_sujets:
     id (INT - 11)
     titre (VAR - 75)
     description (TEXT) NULL
-    ordre (SMALL)
+    ordre (SMALLINT)
     date_creation (DATETIME)
     droit_acces (VAR - 75)
     visible (BOOL)
     slug (VAR - 255)
-    id_forum_categorie (INT - 11) -> ManyToOne // Plusieurs sujets peuvent appartenir à une même catégorie
+    forum_categorie (INT - 11) -> ManyToOne // Plusieurs sujets pour une catégorie.
 
 forums_posts:
     id (INT - 11)
     titre (VAR - 75)
     message (LONGTEXT)
-    ordre (SMALL)
+    ordre (SMALLINT)
     date_creation (DATETIME)
-    derniere_edition (DATETIME) NULL
+    derniere_edition (DATETIME) NULL // Si NULL, pas d'affichage d'édition effectuée sur le poste.
     visible (BOOL)
     slug (VAR - 255)
-    id_forum_sujet (INT - 11) -> ManyToOne // Plusieurs posts peuvent appartenir à un même sujets
+    forum_sujet (INT - 11) -> ManyToOne // Plusieurs posts pour un sujet.
+    auteur (INT - 11) -> OneToOne // Chaque post ne peut avoir qu'un seul auteur.
 
-forums_historiques:
+forums_bannissements:
+    id (INT - 11)
+    raison (TEXT)
+    date_debut (DATETIME)
+    date_fin (DATETIME)
+    utilisateur (INT - 11) ->  ManyToOne // Plusieurs bannissements temporaires possibles par utilisateur au cours du temps.
+
+forums_historiques: // Historique des actions effectuées au niveau du forum (visible côté admin seulement)
     id (INT - 11)
     titre (VAR - 75)
     description (VAR - 255)
@@ -110,31 +137,33 @@ forums_historiques:
 
 encyclopedie_categories:
     id (INT - 11)
+    parent_id (INT - 11) NULL // Si NULL, il s'agit d'une section qui regroupe des catégories.
     titre (VAR - 75)
     description (TEXT) NULL
-    couverture (VAR - 255)
-    ordre (SMALL)
+    couverture (VAR - 255) NULL // Si ce n'est pas une section, pas de couverture.
+    ordre (SMALLINT)
     date_creation (DATETIME)
     droit_acces (VAR - 75)
-    slug (VAR - 255)
     visible (BOOL)
+    slug (VAR - 255)
 
 encyclopedie_sujets:
     id (INT - 11)
     titre (VAR - 75)
     description (TEXT) NULL
-    ordre (SMALL)
+    ordre (SMALLINT)
     date_creation (DATETIME)
     visible (BOOL)
     slug (VAR - 255)
-    id_encyclopedie_categorie (INT - 11) -> ManyToOne // Plusieurs sujets peuvent appartenir à une même catégorie
+    encyclopedie_categorie (INT - 11) -> ManyToOne // Plusieurs sujets pour une catégorie.
 
 encyclopedie_posts:
     id (INT - 11)
     titre (VAR - 75)
     description (TEXT) NULL
-    ordre (SMALL)
+    ordre (SMALLINT)
     date_creation (DATETIME)
     visible (BOOL)
     slug (VAR - 255)
-    id_encyclopedie_sujet (INT - 11) -> ManyToOne // Plusieurs posts peuvent appartenir à un même sujet
+    encyclopedie_sujet (INT - 11) -> ManyToOne // Chaque sujet peut avoir plusieurs posts.
+    auteur (INT - 11) -> OneToOne // Chaque post ne peut avoir qu'un seul auteur.

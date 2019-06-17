@@ -13,45 +13,36 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('Fr-fr');
 
-        $slug = $faker->slug();
+        // for($i=1; $i<=30; $i++){
+        //     $badge = new Badges();
 
-        for($i=1; $i<=30; $i++){
-            $badge = new Badges();
+        //     $titre = $faker->sentence($nbWords = 6, $variableNbWords = true);
+        //     $description = $faker->paragraphs($nb = 3, $asText = false);
+        //     $image = $faker->imageUrl(150,150);
 
-            $titre = $faker->sentence($nbWords = 6, $variableNbWords = true);
-            $description = $faker->paragraphs($nb = 3, $asText = false);
-            $image = $faker->imageUrl(150,150);
+        //     $badge->setTitre($titre)
+        //           ->setDescription($description)
+        //           ->setImage($image)
+        //           ->setSlug($slug);
 
-            $badge->setTitre($titre)
-                  ->setDescription($description)
-                  ->setImage($image)
-                  ->setSlug($slug);
-
-            $manager->persist($badge);
-        }
+        //     $manager->persist($badge);
+        // }
 
         for($i=1; $i<=10; $i++){
             $utilisateur = new Utilisateurs();
 
-            $nom = $faker->lastName();
-            $prenom = $faker->firstNameMale();
             $pseudo = $faker->userName();
             $mdp = $faker->password();
             $email = $faker->freeEmail();
             $avatar = $faker->imageUrl(200,200);
             $rang = $faker->jobTitle();
-            $naissance = $faker->dateTimeBetween($startDate = '-50 years', $endDate = '-18 years', $timezone = null);
 
-            $utilisateur->setNom($nom)
-                        ->setPrenom($prenom)
-                        ->setPseudo($pseudo)
+            $utilisateur->setPseudo($pseudo)
                         ->setMdp($mdp)
                         ->setEmail($email)
                         ->setAvatar($avatar)
                         ->setRang($rang)
-                        ->setNaissance($naissance)
-                        ->setMessages(mt_rand(0,120))
-                        ->setSlug($slug);
+                        ->setMessages(mt_rand(0,120));
 
             $manager->persist($utilisateur);
         }
