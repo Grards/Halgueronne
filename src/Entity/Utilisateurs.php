@@ -60,19 +60,30 @@ class Utilisateurs
     private $slug;
 
     /**
-     * Permet d'intialiser le slug !
+     * Permet d'intialiser le slug, tant pour les Fixtures que pour le formulaire (on réédite le slug par dessus la valeur de base donnée par défaut)
      * @ORM\PrePersist
      * @ORM\PreUpdate
      * 
      * @return void
      */
     public function initializeSlug() {
-        if(empty($this->slug)) {
-            $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->pseudo);
-        }
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->pseudo);
     }
 
+    /**
+     * Permet d'intialiser un avatar par défaut si aucun n'a été fourni au moment de la création de compte.
+     * Par défaut, les ressources sont recherchées depuis le dossier "public".
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function initializeAvatar() {
+        if(empty($this->avatar)) {
+            $this->avatar = 'img/no-avatar.png';
+        }
+    }
 
     public function getId(): ?int
     {

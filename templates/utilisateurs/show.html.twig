@@ -8,7 +8,11 @@
             <h3>{{ utilisateurs.pseudo }}</h3>
         </div>
         <div class="row">
-            <div><img src="{{ utilisateurs.avatar }}" alt="Avatar de l'utilisateur"></div>
+            {% if utilisateurs.avatar == 'img/no-avatar.png' %}
+                <div><img src="../img/no-avatar.png" alt="Avatar de l'utilisateur"></div>
+            {% else %}
+                <div><img src="{{ utilisateurs.avatar }}" alt="Avatar de l'utilisateur"></div>
+            {% endif %}
         </div> 
         <div class="row">
             <ul>

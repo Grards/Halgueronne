@@ -38,10 +38,10 @@ class UtilisateursType extends AbstractType
             ->add('pseudo', TextType::class)
             ->add('mdp', PasswordType::class, $this->getConfiguration("Mot de passe","Minimum 6 caractères"))
             ->add('email', EmailType::class, $this->getConfiguration("","Ex : exemple@mail.com"))
-            ->add('avatar', UrlType::class, $this->getConfiguration("","Ex : http://www.lienimage.com"))
+            ->add('avatar', UrlType::class, ['attr'=>['placeholder' => "Ex : http://www.lienimage.com"], 'required'=>false])
             ->add('rang', TextType::class)
-            ->add('messages', NumberType::class, ['data' => 0])
-            ->add('slug', TextType::class, ['data' => 'valeurpardefaut'])
+            ->add('messages', HiddenType::class, ['data' => 0])
+            ->add('slug', HiddenType::class, ['data' => 'valeurpardefaut'])
         ;
     }
 

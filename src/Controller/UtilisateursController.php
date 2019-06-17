@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Utilisateurs;
 use App\Form\UtilisateursType;
 use App\Repository\UtilisateursRepository;
+use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,9 +50,9 @@ class UtilisateursController extends AbstractController
             // Redirection vers la page désirée une fois le formulaire envoyé.
             return $this->redirectToRoute('utilisateurs_show',['slug'=>$utilisateurs->getSlug()]);
         }
-        
+
         return $this->render('utilisateurs/new.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
