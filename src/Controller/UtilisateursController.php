@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UtilisateursController extends AbstractController
 {
     /**
+     * Permet d'afficher tous les utilisateurs
      * @Route("/utilisateurs", name="utilisateurs")
      */
     public function index(UtilisateursRepository $repo)
@@ -26,8 +27,9 @@ class UtilisateursController extends AbstractController
     }
 
     /**
+     * Permet d'ajouter un utilisateur
      * La propriété Request représente ici le POST
-     * @Route("/utilisateurs/new", name="utilisateurs_create")
+     * @Route("/utilisateurs/new", name="utilisateurs_new")
      */
     public function create(Request $request, ObjectManager $manager, UtilisateursRepository $repo){
         $utilisateurs = new Utilisateurs();
@@ -57,6 +59,7 @@ class UtilisateursController extends AbstractController
     }
 
     /**
+     * Permet d'afficher un utilisateur en particulier
      * @Route("/utilisateurs/{slug}", name="utilisateurs_show")
      */
     public function show(UtilisateursRepository $repo, $slug)
@@ -67,5 +70,31 @@ class UtilisateursController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet d'éditer un utilisateur
+     * @Route("/utilisateurs/{slug}/edit", name="utilisateurs_edit")
+     * @return Response
+     */
+    public function edit(Utilisateurs $utilisateurs, Request $request, ObjectManager $manager){
+        $form = $this->createForm(UtilisateursType::class, $utilisateurs);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($utilisateurs);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                "L'utilisateur <strong>{$utilisateurs->getPseudo()}</strong> a bien été modifé!"
+            );
+            return $this->redirectToRoute('utilisateurs_show',[
+                'slug' => $utilisateurs->getSlug()
+            ]);
+        }
+
+        return $this->render('utilisateurs/edit.html.twig',[
+            'form' => $form->createView(),
+            'utilisateurs' => $utilisateurs
+        ]);
+    }
 
 }

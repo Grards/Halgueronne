@@ -5,6 +5,7 @@ namespace App\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateursRepository")
@@ -25,12 +26,13 @@ class Utilisateurs
 
     /**
      * @ORM\Column(type="string", length=75)
+     * @Assert\Length(min=3, max=75, minMessage="Votre pseudonyme doit faire au minimum 3 caractères", maxMessage="Votre pseudonyme doit faire au maximum 75 caractères")
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @Assert\Length(min=6, max=255, minMessage="Votre mot de passe doit faire au minimum 6 caractères", maxMessage="Votre mot de passe doit faire au maximum 255 caractères")
      */
     private $mdp;
 
@@ -69,6 +71,19 @@ class Utilisateurs
     public function initializeSlug() {
         $slugify = new Slugify();
         $this->slug = $slugify->slugify($this->pseudo);
+    }
+
+    /**
+     * Permet d'intialiser le nombre de messages à 0 lors de la création de l'utilisateur
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function initializeMessages() {
+        if(empty($this->messages)) {
+            $this->messages = 0;
+        }
     }
 
     /**

@@ -2,7 +2,9 @@
 
 {% block body %}
 <div class="container">
-    <h1>Liste des utilisateurs</h1>
+    <div class="row">
+        <h1>Liste des utilisateurs</h1>
+    </div>
     {% for utilisateur in utilisateurs %}
         <div class="row">
             <h3>{{ utilisateur.pseudo }}</h3>
@@ -21,5 +23,9 @@
             <a href="{{ path('utilisateurs_show', {'slug' : utilisateur.slug}) }}" class="btn btn-primary">Voir utilisateur</a>
         </div> 
     {% endfor %}
+    <div class="row">
+        <a href="{{ path('utilisateurs_new')}}" class="btn btn-success">Ajouter un utilisateur</a>
+        <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
+    </div>
 </div>
 {% endblock %}

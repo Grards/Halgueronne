@@ -40,8 +40,8 @@ class UtilisateursType extends AbstractType
             ->add('email', EmailType::class, $this->getConfiguration("","Ex : exemple@mail.com"))
             ->add('avatar', UrlType::class, ['attr'=>['placeholder' => "Ex : http://www.lienimage.com"], 'required'=>false])
             ->add('rang', TextType::class)
-            ->add('messages', HiddenType::class, ['data' => 0])
-            ->add('slug', HiddenType::class, ['data' => 'valeurpardefaut'])
+            ->add('messages', NumberType::class, ['attr'=>['placeholder' => "Sera rempli automatiquement"], 'required'=>false])
+            ->add('slug', HiddenType::class, ['attr'=>['placeholder' => "Sera rempli automatiquement"], 'required'=>false])
         ;
     }
 
