@@ -4,8 +4,9 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateursRepository")
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields="slug", errorPath="slug", message="Ce slug existe déjà")
  * )
  */
-class Utilisateurs
+class Utilisateurs implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -35,6 +36,11 @@ class Utilisateurs
      * @Assert\Length(min=6, max=255, minMessage="Votre mot de passe doit faire au minimum 6 caractères", maxMessage="Votre mot de passe doit faire au maximum 255 caractères")
      */
     private $mdp;
+
+    /** 
+     * @Assert\EqualTo(propertyPath="mdp", message="Vous n'avez pas correctement confirmé votre mot de passe") 
+     */ 
+    public $mdpConfirm;
 
     /**
      * @ORM\Column(type="string", length=75)
@@ -188,4 +194,24 @@ class Utilisateurs
 
         return $this;
     }
+
+    /**
+     * Ajout de la partie sécurité
+     */
+
+    public function getRoles(){
+        return ['ROLE_USER'];
+    }
+
+    public function getPassword(){
+        return $this->mdp;
+    }
+
+    public function getSalt(){}
+
+    public function getUsername(){
+        return $this->pseudo;
+    }
+
+    public function eraseCredentials(){}
 }

@@ -35,8 +35,9 @@ class UtilisateursType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class)
+            ->add('pseudo', TextType::class, $this->getConfiguration("","Minimum 3 caractères"))
             ->add('mdp', PasswordType::class, $this->getConfiguration("Mot de passe","Minimum 6 caractères"))
+            ->add('mdpConfirm', PasswordType::class, $this->getConfiguration("Confirmation du mot de passe","Veuillez confirmer votre mot de passe"))
             ->add('email', EmailType::class, $this->getConfiguration("","Ex : exemple@mail.com"))
             ->add('avatar', UrlType::class, ['attr'=>['placeholder' => "Ex : http://www.lienimage.com"], 'required'=>false])
             ->add('rang', TextType::class)

@@ -6,12 +6,20 @@ use Faker\Factory;
 use App\Entity\Utilisateurs;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder){
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('Fr-fr');
+        
 
         // for($i=1; $i<=30; $i++){
         //     $badge = new Badges();
@@ -30,15 +38,17 @@ class AppFixtures extends Fixture
 
         for($i=1; $i<=10; $i++){
             $utilisateur = new Utilisateurs();
+            
+            /* On donne le mot de passe 'password' par défaut aux Fakers, qui sont ensuite cryptés dans la BDD, en guise de test */
+            $hash = $this->encoder->encodePassword($utilisateur, 'password');
 
             $pseudo = $faker->userName();
-            $mdp = $faker->password();
             $email = $faker->freeEmail();
             $avatar = $faker->imageUrl(200,200);
             $rang = $faker->jobTitle();
 
             $utilisateur->setPseudo($pseudo)
-                        ->setMdp($mdp)
+                        ->setMdp($hash)
                         ->setEmail($email)
                         ->setAvatar($avatar)
                         ->setRang($rang)

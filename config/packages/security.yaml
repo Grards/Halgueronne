@@ -2,12 +2,40 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        in_database:
+            entity:
+                class: App\Entity\Utilisateurs
+                property: pseudo
+    encoders:
+        App\Entity\Utilisateurs:
+            # bcrypt est déprécié depuis la v4.3 de Symfony. Il est conseillé d'utiliser auto
+            algorithm: auto
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin: 
+            pattern: ^/admin 
+            anonymous: true 
+
+            provider: in_database 
+
+            form_login: 
+                login_path: admin_account_login 
+                check_path: admin_account_login 
+            logout: 
+                path: admin_account_logout 
+                target: home
         main:
             anonymous: true
+            provider : in_database
+            form_login:
+                login_path: account_login
+                check_path: account_login
+            logout: 
+                path: account_logout
+                # renvoie vers la page d'accueil, une fois déconnecté
+                target: home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

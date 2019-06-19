@@ -39,6 +39,10 @@ class UtilisateursController extends AbstractController
 
         // On vérifie si le formulaire n'est pas vide et s'il est valide, avant d'enregistrer le tout grâce au Manager en paramètre de la fonction create.
         if($form->isSubmitted() && $form->isValid()){
+            // Hashage du mot de passe à l'inscription, sur base de l'agorithme décrit dans les encoders (security.yaml)
+            $hash = $encoder->encodePassword($utilisateurs, $utilisateurs->getPassword());
+            $utilisateurs->setHash($hash);
+
             // Prévient qu'on veut sauver dans l'entité en paramètre
             $manager->persist($utilisateurs);
             // Envoie la requête SQL
