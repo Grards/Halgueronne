@@ -3,13 +3,13 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Modifier l'utilisateur</h1>
+        <h1>Edit account</h1>
     </div>
     <div class="row">
         {{ form_start(form) }}
         {{ form_widget(form) }}
-            <button type="submit" class="btn btn-success">Modifier l'utilisateur</button>
-            <a href="{{ path('utilisateurs')}}" class="btn btn-danger">Retour</a>
+            <button type="submit" class="btn btn-success">Edit my account</button>
+            <a href="{{ path('home')}}" class="btn btn-danger">Return</a>
         {{ form_end(form) }}
     </div>
 </div>

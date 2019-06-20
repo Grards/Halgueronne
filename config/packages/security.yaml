@@ -4,10 +4,10 @@ security:
         in_memory: { memory: ~ }
         in_database:
             entity:
-                class: App\Entity\Utilisateurs
-                property: pseudo
+                class: App\Entity\Users
+                property: login
     encoders:
-        App\Entity\Utilisateurs:
+        App\Entity\Users:
             # bcrypt est déprécié depuis la v4.3 de Symfony. Il est conseillé d'utiliser auto
             algorithm: auto
     firewalls:
@@ -21,10 +21,10 @@ security:
             provider: in_database 
 
             form_login: 
-                login_path: admin_account_login 
-                check_path: admin_account_login 
+                login_path: account_login
+                check_path: account_login
             logout: 
-                path: admin_account_logout 
+                path: account_logout
                 target: home
         main:
             anonymous: true
@@ -46,5 +46,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

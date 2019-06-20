@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190617063430 extends AbstractMigration
+final class Version20190620164052 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20190617063430 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE utilisateurs (id INT AUTO_INCREMENT NOT NULL, pseudo VARCHAR(75) NOT NULL, mdp VARCHAR(255) NOT NULL, email VARCHAR(75) NOT NULL, avatar VARCHAR(255) DEFAULT NULL, rang VARCHAR(75) NOT NULL, messages INT NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, login VARCHAR(75) NOT NULL, password VARCHAR(255) NOT NULL, mail VARCHAR(75) NOT NULL, avatar VARCHAR(255) DEFAULT NULL, role VARCHAR(75) NOT NULL, posts INT NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190617063430 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE utilisateurs');
+        $this->addSql('DROP TABLE users');
     }
 }

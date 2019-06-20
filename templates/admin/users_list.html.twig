@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Users list</h1>
+    </div>
+    {% for user in users %}
+        <div class="row">
+            <h3>{{ user.login }}</h3>
+        </div>
+        <div class="row">
+            <div><img class="users-list-avatar" src="{{ user.avatar }}" alt="User's avatar"></div>
+        </div> 
+        <div class="row">
+            <ul>
+                <li>Mail : {{ user.mail }}</li>
+                <li>Role : {{ user.role }}</li>
+                <li>Posts : {{user.posts }}</li>
+            </ul>
+        </div>
+        <div class="row">
+            <a href="{{ path('account_user', {'slug' : user.slug}) }}" class="btn btn-primary">Voir utilisateur</a>
+        </div> 
+    {% endfor %}
+    <div class="row">
+        <a href="{{ path('inscription')}}" class="btn btn-success">Ajouter un utilisateur</a>
+        <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Uilisateur</h1>
+    </div>
+    <div class="row">
+        <h3>{{ users.login }}</h3>
+    </div>
+    <div class="row">
+        {% if users.avatar == 'img/no-avatar.png' %}
+            <div><img class="row users-list-avatar" src="../../img/no-avatar.png" alt="User's avatar"></div>
+        {% else %}
+            <div><img class="row users-list-avatar" src="{{ users.avatar }}" alt="User's avatar"></div>
+        {% endif %}
+    </div> 
+    <div class="row">
+        <ul>
+            <li>Mail : {{ users.mail }}</li>
+            <li>Role : {{ users.role }}</li>
+            <li>Posts : {{users.posts }}</li>
+        </ul>
+    </div>
+     <div class="row">
+        <a href="{{ path('account_edit', {'slug' : users.slug}) }}" class="btn btn-primary">Edit my profile</a>
+        <a href="{{ path('home')}}" class="btn btn-danger">Return</a>
+    </div> 
+</div>
+{% endblock %}

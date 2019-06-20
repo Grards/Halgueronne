@@ -1,11 +1,11 @@
-utilisateurs:
+Users:
     id (INT - 11)
-    pseudo (VAR - 75) // unique
-    mdp (VAR - 255)
-    email (VAR - 75) // unique
+    login (VAR - 75) // unique
+    password (VAR - 255)
+    mail (VAR - 75) // unique
     avatar (VAR - 255) NULL
-    rang (VAR - 75)
-    messages (INT - 11)
+    role (VAR - 75)
+    posts (INT - 11)
     slug (VAR - 255) // unique
 
 messages:

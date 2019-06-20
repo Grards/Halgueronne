@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Utilisateurs;
+use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -37,24 +37,24 @@ class AppFixtures extends Fixture
         // }
 
         for($i=1; $i<=10; $i++){
-            $utilisateur = new Utilisateurs();
+            $users = new Users();
             
             /* On donne le mot de passe 'password' par défaut aux Fakers, qui sont ensuite cryptés dans la BDD, en guise de test */
-            $hash = $this->encoder->encodePassword($utilisateur, 'password');
+            $hash = $this->encoder->encodePassword($users, 'password');
 
-            $pseudo = $faker->userName();
-            $email = $faker->freeEmail();
+            $login = $faker->userName();
+            $mail = $faker->freeEmail();
             $avatar = $faker->imageUrl(200,200);
-            $rang = $faker->jobTitle();
+            $role = $faker->jobTitle();
 
-            $utilisateur->setPseudo($pseudo)
-                        ->setMdp($hash)
-                        ->setEmail($email)
+            $users->setLogin($login)
+                        ->setPassword($hash)
+                        ->setMail($mail)
                         ->setAvatar($avatar)
-                        ->setRang($rang)
-                        ->setMessages(mt_rand(0,120));
+                        ->setRole($role)
+                        ->setPosts(mt_rand(0,120));
 
-            $manager->persist($utilisateur);
+            $manager->persist($users);
         }
 
 

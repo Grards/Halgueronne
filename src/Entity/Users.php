@@ -9,14 +9,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UtilisateursRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity(fields="pseudo", errorPath="pseudo", message="Ce pseudo est déjà utilisé par quelqu'un d'autre")
- * @UniqueEntity(fields="email", errorPath="email", message="Cette adresse email est déjà utilisée")
- * @UniqueEntity(fields="slug", errorPath="slug", message="Ce slug existe déjà")
+ * @UniqueEntity(fields="login", errorPath="login", message="This login already exists !")
+ * @UniqueEntity(fields="mail", errorPath="mail", message="This mail address already exists !")
+ * @UniqueEntity(fields="slug", errorPath="slug", message="This slug already exists !")
  * )
  */
-class Utilisateurs implements UserInterface
+
+
+class Users implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -27,25 +29,25 @@ class Utilisateurs implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=75)
-     * @Assert\Length(min=3, max=75, minMessage="Votre pseudonyme doit faire au minimum 3 caractères", maxMessage="Votre pseudonyme doit faire au maximum 75 caractères")
+     * @Assert\Length(min=3, max=75, minMessage="Your login must be at least 3 characters long", maxMessage="Your login must be at most 75 characters")
      */
-    private $pseudo;
+    private $login;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=6, max=255, minMessage="Votre mot de passe doit faire au minimum 6 caractères", maxMessage="Votre mot de passe doit faire au maximum 255 caractères")
+     * @Assert\Length(min=6, max=75, minMessage="Your password must be at least 6 characters long", maxMessage="Your password address must be at most 75 characters")
      */
-    private $mdp;
+    private $password;
 
     /** 
-     * @Assert\EqualTo(propertyPath="mdp", message="Vous n'avez pas correctement confirmé votre mot de passe") 
+     * @Assert\EqualTo(propertyPath="password", message="You have not correctly confirmed your password") 
      */ 
-    public $mdpConfirm;
+    public $passwordConfirm;
 
     /**
      * @ORM\Column(type="string", length=75)
      */
-    private $email;
+    private $mail;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -53,21 +55,21 @@ class Utilisateurs implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\Column(type="string", length=75)
+     * @ORM\Column(type="string", length=75, nullable=true)
      */
-    private $rang;
+    private $role;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $messages;
+    private $posts;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
 
-    /**
+/**
      * Permet d'intialiser le slug, tant pour les Fixtures que pour le formulaire (on réédite le slug par dessus la valeur de base donnée par défaut)
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -76,7 +78,7 @@ class Utilisateurs implements UserInterface
      */
     public function initializeSlug() {
         $slugify = new Slugify();
-        $this->slug = $slugify->slugify($this->pseudo);
+        $this->slug = $slugify->slugify($this->login);
     }
 
     /**
@@ -86,9 +88,9 @@ class Utilisateurs implements UserInterface
      * 
      * @return void
      */
-    public function initializeMessages() {
-        if(empty($this->messages)) {
-            $this->messages = 0;
+    public function initializePosts() {
+        if(empty($this->posts)) {
+            $this->posts = 0;
         }
     }
 
@@ -106,43 +108,56 @@ class Utilisateurs implements UserInterface
         }
     }
 
+    /**
+     * Permet d'intialiser un rôle par défaut si aucun n'a été fourni au moment de la création de compte.
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function initializeRole() {
+        if(empty($this->role)) {
+            $this->role = 'ROLE_USER';
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPseudo(): ?string
+    public function getLogin(): ?string
     {
-        return $this->pseudo;
+        return $this->login;
     }
 
-    public function setPseudo(string $pseudo): self
+    public function setLogin(string $login): self
     {
-        $this->pseudo = $pseudo;
+        $this->login = $login;
 
         return $this;
     }
 
-    public function getMdp(): ?string
+    public function getPassword(): ?string
     {
-        return $this->mdp;
+        return $this->password;
     }
 
-    public function setMdp(string $mdp): self
+    public function setPassword(string $password): self
     {
-        $this->mdp = $mdp;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getMail(): ?string
     {
-        return $this->email;
+        return $this->mail;
     }
 
-    public function setEmail(string $email): self
+    public function setMail(string $mail): self
     {
-        $this->email = $email;
+        $this->mail = $mail;
 
         return $this;
     }
@@ -159,26 +174,26 @@ class Utilisateurs implements UserInterface
         return $this;
     }
 
-    public function getRang(): ?string
+    public function getRole(): ?string
     {
-        return $this->rang;
+        return $this->role;
     }
 
-    public function setRang(string $rang): self
+    public function setRole(string $role): self
     {
-        $this->rang = $rang;
+        $this->role = $role;
 
         return $this;
     }
 
-    public function getMessages(): ?int
+    public function getPosts(): ?int
     {
-        return $this->messages;
+        return $this->posts;
     }
 
-    public function setMessages(int $messages): self
+    public function setPosts(int $posts): self
     {
-        $this->messages = $messages;
+        $this->posts = $posts;
 
         return $this;
     }
@@ -203,14 +218,10 @@ class Utilisateurs implements UserInterface
         return ['ROLE_USER'];
     }
 
-    public function getPassword(){
-        return $this->mdp;
-    }
-
     public function getSalt(){}
 
     public function getUsername(){
-        return $this->pseudo;
+        return $this->login;
     }
 
     public function eraseCredentials(){}
