@@ -6,17 +6,21 @@ use App\Entity\Users;
 use App\Form\RegisterType;
 use Cocur\Slugify\Slugify;
 use App\Repository\UsersRepository;
+use App\Repository\CharactersRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+
 class AccountsController extends AbstractController
 {
     /**
-     * @Route("/login", name="account_login")
+     * @Route("/connexion", name="account_login")
      */
     public function login(AuthenticationUtils $utils){
 
@@ -35,7 +39,7 @@ class AccountsController extends AbstractController
     /**
      * Permet de se déconnecter.
      * Fonctionne grâce à security.yaml, via le firewall logout.
-     * @Route("/logout", name="account_logout")
+     * @Route("/deconnexion", name="account_logout")
      * @return void
      */
     public function logout(){}
@@ -44,7 +48,7 @@ class AccountsController extends AbstractController
     /**
      * Permet de s'inscrire
      * La propriété Request représente ici le POST
-     * @Route("/account/register", name="account_register")
+     * @Route("/inscription", name="account_register")
      */
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
         $users = new Users();
@@ -65,11 +69,11 @@ class AccountsController extends AbstractController
 
             $this->addFlash(
                 'success',
-                "Your account <strong>{$users->getLogin()}</ strong> has been created !"
+                "Votre compte <strong>{$users->getLogin()}</strong> a été créé !"
             );
 
             // Redirection vers la page désirée une fois le formulaire envoyé.
-            return $this->redirectToRoute('user',['slug'=>$users->getSlug()]);
+            return $this->redirectToRoute('account_profile',['slug'=>$users->getSlug()]);
         }
 
         return $this->render('accounts/register.html.twig',[
@@ -78,42 +82,49 @@ class AccountsController extends AbstractController
     }
 
     /**
-     * Permet d'afficher le profil utilisateur
-     * @Route("/account/{slug}", name="account_profile")
-     */
-    public function accountProfile(UsersRepository $repo, $slug)
-    {
-        $users = $repo->findOneBySlug($slug);
-        return $this->render('accounts/profile.html.twig', [
-            'users' => $users
-        ]);
-    }
-
-    /**
-     * Permet d'éditer son compte
-     * @Route("/account/{slug}/edit", name="account_edit")
+     * Permet d'éditer son compte. Seuls le propriétaire du compte et un admin peuvent accéder à cette page et modifier les informations de comptes.
+     * Doit se trouver avant /profil/{slug}, sinon il va considérer cette route comme étant un slug.
+     * @Route("/profil/modification", name="account_edit")
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function accountEdit(Users $users, Request $request, ObjectManager $manager){
-        $form = $this->createForm(UsersType::class, $users);
+    public function accountEdit(Request $request, ObjectManager $manager) {
+        $user = $this->getUser();
+        $form = $this->createForm(RegisterType::class, $user);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $manager->persist($users);
+            // Hashage du mot de passe à l'inscription, sur base de l'agorithme décrit dans les encoders (security.yaml)
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+
+            $manager->persist($user);
             $manager->flush();
+
             $this->addFlash(
                 'success',
-                "Your account <strong>{$users->getLogin()}</strong> has been edited successfully !"
+                'Les données du profil ont été enregistrées'
             );
-            return $this->redirectToRoute('account_profile',[
-                'slug' => $users->getSlug()
-            ]);
-        }
 
-        return $this->render('accounts/edit.html.twig',[
+        }
+        return $this->render("accounts/edit.html.twig",[
             'form' => $form->createView(),
-            'users' => $users
+            'users' => $user
+        ]);
+    }    
+
+    /**
+     * Permet d'afficher le profil utilisateur
+     * @Route("/profil/{slug}", name="account_profile")
+     */
+    public function accountProfile(UsersRepository $repo_user, $slug)
+    {
+        $users = $repo_user->findOneBySlug($slug);
+        return $this->render('accounts/profile.html.twig', [
+            'users' => $users,
         ]);
     }
 
+    
 }

@@ -2,11 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Halgueronne{% endblock %}</title>
         {% block stylesheets %}
             <!-- La fonction twig asset() permet de retrouver un fichier statique, peu importe sa version. Et donc de récupérer la css créée par npm run build -->
             <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
         {% endblock %}
+        
     </head>
     <body>
         <!-- On boucle car on peut avoir plusieurs messages sur la même clé d'association concernant les flashes lors des confirmations d'envois de formulaires -->
@@ -20,10 +22,14 @@
             </div>
         {% endfor %}
 
+        {% include 'partials/header.html.twig' %}
+
         {% block body %}{% endblock %}
 
         
         
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{asset('build/js/app.js')}}"></script>
+        {% endblock %}
     </body>
 </html>

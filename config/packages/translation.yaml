@@ -1,6 +1,10 @@
 framework:
+    # Par défaut, le site est en langue française, de la région de France. Symfony cherche le fichier de traduction fr_FR.yaml
+    # default_locale: 'fr_FR'
     default_locale: '%locale%'
     translator:
         default_path: '%kernel.project_dir%/translations'
         fallbacks:
+            # Si Symfony ne trouve pas la traduction pour la localisation de l'utilisateur, il va aller chercher la traduction dans le fichier fr.yaml
+            # - 'fr'
             - '%locale%'

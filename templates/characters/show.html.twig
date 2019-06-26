@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id="personnage-page" class="slide">
+    <div class="container">
+        <div class="row">
+            <h1>{{ character.firstname }} {{ character.lastname }}</h1>
+        </div>
+        <div class="row">
+            {% if character.picture == 'img/no-character-picture.png' %}
+                <div><img class="row" src="../../img/no-character-picture.png" alt="Image du personnage"></div>
+            {% else %}
+                <div><img class="row" src="{{ character.picture }}" alt="Image du personnage "></div>
+            {% endif %}
+        </div> 
+        <div class="row">
+            <ul>
+                <li>Sexe : 
+                {% if character.gender == 'f' %}
+                    Féminin
+                {% elseif character.gender == 'm' %}
+                    Masculin
+                {% else %}
+                    Indéfini
+                {% endif %}
+                </li>
+                <li>Naissance : {{ character.birthDay }} / {{ character.birthMonth }} / {{ character.birthYear }} </li>
+                <li>Mort : 
+                {% if (character.deathDay == NULL) and (character.deathMonth == NULL) and (character.deathYear == NULL) %}
+                    -
+                {% else %}
+                    {{ character.deathDay }} / {{ character.deathMonth }} / {{ character.deathYear }} </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="row">
+            <h3>Biographie :</h3>
+            {{ character.background }}
+        </div>
+        <div class="row">
+            <a href="{{ path('character_edit')}}" class="btn btn-primary">Editer le personnage</a>
+            <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
+        </div> 
+    </div>  
+</div>
+{% endblock %}

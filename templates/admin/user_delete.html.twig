@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Êtes-vous sure de vouloir supprimer cette utilisateur ?</h1>
+    </div>
+    <div class="row">
+        <h3>Cette action est irréversible.</h3>
+    </div>
+    <div class="row">
+        <h3>{{ users.login }}</h3>
+    </div>
+    <div class="row">
+        {% if users.avatar == 'img/no-avatar.png' %}
+            <div><img class="row users-list-avatar" src="../../public/img/no-avatar.png" alt="Avatar de l'utilisateur"></div>
+        {% else %}
+            <div><img class="row users-list-avatar" src="{{ users.avatar }}" alt="Avatar de l'utilisateur"></div>
+        {% endif %}
+    </div> 
+    <div class="row">
+        <ul>
+            <li>Email : {{ users.mail }}</li>
+            <li>Message : {{users.posts }}</li>
+        </ul>
+    </div>
+    <div class="row">
+        <a href="{{ path('admin_user_delete_confirm', {'slug' : users.slug}) }}" class="btn btn-success">Confirmer</a>
+        <a href="{{ path('admin_users_list') }}" class="btn btn-danger">Annuler</a>
+    </div> 
+</div>
+{% endblock %}

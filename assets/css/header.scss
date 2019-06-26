@@ -1,0 +1,196 @@
+
+nav{
+    position: fixed;
+    width: 50px;
+    height: 38px;
+    top: 25px;
+    left: 25px;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+.bar{
+    width: 40px;
+    height: 5px;
+    background-color: #e9be74;
+    margin: 6px auto;
+    z-index: 1000;
+    box-shadow: 0px 2px 1px black;
+}
+
+#bar1,#bar2,#bar3{
+    transition: all 0.4s;
+}
+
+.change #bar1{
+    transform: rotate(-45deg) translate(-8px,8px);
+    background-color: white;
+    box-shadow: none;
+}
+
+.change #bar2{
+    opacity: 0;
+}
+
+.change #bar3{
+    transform: rotate(45deg) translate(-8px,-8px);
+    background-color: white;
+    box-shadow: none;
+}
+
+#menu{
+    width: 40%;
+    height: 100%;
+    background-color: #101116;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 900;
+    border-right: 4px solid;
+    border-image: linear-gradient(
+        to bottom, 
+        #facc7c,
+        #d3962d, 
+      ) 1 100%;
+    box-shadow: 10px 0px 50px black;
+
+    @media (max-width: 767.98px) { 
+        width: 100%;
+        border: none;
+        box-shadow: none;
+    }
+
+    #menu-content{
+        min-height: 50%;
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 100px;
+        margin-bottom: auto;
+        padding: 25px;
+    }
+
+    h2{
+        color: #facc7c;
+    }
+
+    p{
+        color: whitesmoke;
+        text-align: justify;
+    }
+}
+
+
+#connexion-content{
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 0;
+    width: 275px;
+    height: 80px;
+    padding-top: 25px;
+
+    #connexion-nav{
+        position: absolute;
+        top: 0;
+        right: 73px; // Pour se placer sur le bord gauche de l'avatar qui fait 75px de large. Et -2px pour le border left.
+        z-index: 0;
+        background-color: #495057;
+        border: 2px solid #e9be74;
+        border-right: none;
+        height: 100px;
+        width: 0;
+    }
+
+    #connexion-nav-list{
+        display: none;
+
+        a{
+            display: block;
+            background: none;
+            color: whitesmoke;
+            line-height: 20px;
+            margin-left: 10px;
+        }
+    }
+
+    a{
+        background-color: #facc7c;
+        border: 1px solid #495057;
+        width: 125px;
+        color: #495057;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    
+    a:hover{
+        background-color: #e9be74;
+    }
+    
+    #connexion-user{
+        position: absolute;
+        right: 0;
+        margin-right: 25px;
+        height: 100px;
+        width: 100px;
+        box-shadow: 0px 2px 10px black;
+
+        #connexion-avatar{
+            height: 100%;
+            width: 100%;
+            filter: grayscale(1);
+            transition: 0.4s;
+        }
+
+        #connexion-avatar:hover{
+            filter: grayscale(0);
+        }
+
+        #connexion-login{
+            text-align: center;
+            position: top;
+            background-color: whitesmoke;
+            font-family: "Geizer";
+            letter-spacing: 0.5px;
+            font-size: 24px;
+            line-height: 25px;
+            overflow: hidden;
+            box-shadow: 0px 2px 10px black;
+        }
+
+        #connexion-avatar:hover, #connexion-login:hover{
+            cursor: pointer;
+        }
+    }
+    
+
+    // SMALL DEVICES
+    @media (max-width: 991.98px) {
+        position: fixed;
+        right: 0;
+
+        input{
+            width: 125px;
+            float: none;
+        }
+
+        button{
+            margin-right: 0;
+            margin-top: 10px;
+            width: 125px;
+        }
+    }
+}
+
+.btn{
+    box-shadow: 0px 1px 4px black;
+}
+
+.connexion-alert{
+    position: absolute;
+    z-index: 2000;
+    top: 15px;
+    left: 50%;
+    width: 600px;
+    margin-left: -300px;
+} 

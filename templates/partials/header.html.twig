@@ -1,0 +1,37 @@
+<nav id="burger">
+  <div class="bar" id="bar1"></div>
+  <div class="bar" id="bar2"></div>
+  <div class="bar" id="bar3"></div>
+</nav>
+
+<div id="menu">
+  <div id="menu-content">
+    <h2>Titre test</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id similique unde fugiat corporis sunt odit eos ipsum eligendi modi sint, cupiditate possimus necessitatibus doloribus molestias asperiores reprehenderit voluptatum impedit suscipit.</p>
+    <h2>Titre test</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id similique unde fugiat corporis sunt odit eos ipsum eligendi modi sint, cupiditate possimus necessitatibus doloribus molestias asperiores reprehenderit voluptatum impedit suscipit.</p>
+    <h2>Titre test</h2>
+  </div>
+</div>
+
+
+<div id="connexion-content">
+  {% if app.user %}
+    <div id="connexion-user">
+      <div id="connexion-nav">
+        <div id="connexion-nav-list">
+          {% if app.user.role == 'ROLE_ADMIN' %}
+            <a href="{{ path('admin') }}">Admin</a>
+          {% endif %}
+          <a href="{{ path('account_profile',{'slug' :app.user.slug}) }}">Profil</a>
+          <a href="{{ path('account_logout') }}">Déconnexion</a>
+        </div>
+      </div>
+      <img id="connexion-avatar" src="{{ app.user.avatar }}" alt="Avatar utilisateur">
+      <div id="connexion-login">{{ app.user.login|slice(0,9)}}</div>
+    </div>
+  {% else %}
+    <a href="{{ path('account_login')}}" class="btn">Se connecter</a>
+    <a href="{{ path('account_register')}}" class="btn">S'inscrire</a>    
+  {% endif %}  
+</div>

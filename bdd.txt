@@ -19,34 +19,34 @@ messages:
                            Géré en TEXT car on recevra une liste avec des séparateurs ',' entre chaque id utilisateur et un statut pour chacun d'eux, genre :
                            d:{id}(destinataire principal),cv:{id}(copie_visible),ci:{id}(copie invisible)
 
-badges:
+Badges:
     id (INT - 11)
-    titre (VAR - 75)
+    title (VAR - 75)
     description (TEXT)
-    image (VAR - 255)
+    picture (VAR - 255)
     slug (VAR - 255)
 
-badges_utilisateurs:
+Badges_Obtained:
     id (INT - 11)
-    date_obtention (DATETIME)
-    badge (INT - 11) -> OneToOne // Une seule obtention de badge par utilisateur
-    utilisateur (INT - 11) -> OneToOne // Un seul utilisateur par obtention de badge
+    date_obtained (DATETIME)
+    badge (INT - 11) -> ManyToMany // Une seule obtention de badge par utilisateur
+    user (INT - 11) -> ManyToMany // Un seul utilisateur par obtention de badge
 
-personnages:
+Characters:
     id (INT - 11)
-    nom (VAR - 75)
-    prenom (VAR - 75)
-    sexe (VAR - 1)
-    portrait (VAR - 255)
-    naissance_jour (SMALLINT) NULL -> La naissance et la mort sont découpées en champs SMALLINT car il s'agit d'un calendrier spécifique au jeu et non du calendrier terrien.
-    naissance_mois (SMALLINT) NULL -> Les valeurs peuvent être nulles car on peut ne pas connaitre la date de naissance exacte d'un personnage et qu'il n'est pas forcément déjà mort.
-    naissance_annee (SMALLINT) NULL
-    mort_jour (SMALLINT) NULL -> Si au moins un champ de mort est rempli, alors le personnage ne sera plus disponible en jeu.
-    mort_mois (SMALLINT) NULL
-    mort_annee (SMALLINT) NULL
-    biographie (TEXT)
+    lastname (VAR - 75)
+    firstname (VAR - 75)
+    gender (VAR - 1)
+    picture (VAR - 255)
+    birth_day (SMALLINT) NULL -> La naissance et la mort sont découpées en champs SMALLINT car il s'agit d'un calendrier spécifique au jeu et non du calendrier terrien.
+    birth_month (SMALLINT) NULL -> Les valeurs peuvent être nulles car on peut ne pas connaitre la date de naissance exacte d'un personnage et qu'il n'est pas forcément déjà mort.
+    birth_year (SMALLINT) NULL
+    death_day (SMALLINT) NULL -> Si au moins un champ de mort est rempli, alors le personnage ne sera plus disponible en jeu.
+    death_month (SMALLINT) NULL
+    death_year (SMALLINT) NULL
+    background (TEXT)
     slug (VAR - 255)
-    utilisateur (INT - 11) -> ManyToOne // Plusieurs personnages pour un utilisateur. (Mais via leur rang, les MJ's pourront avoir accès à TOUS les peronnages + édition, etc...)
+    user (INT - 11) -> ManyToOne // Plusieurs personnages pour un utilisateur. (Mais via leur rang, les MJ's pourront avoir accès à TOUS les peronnages + édition, etc...)
 
 races:
     id (INT - 11)

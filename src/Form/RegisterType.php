@@ -33,10 +33,10 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('login', TextType::class, $this->getConfiguration("","Minimum 3 characters"))
-            ->add('password', PasswordType::class, $this->getConfiguration("","Minimum 6 characters"))
-            ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Password Confirm","Please confirm your password"))
-            ->add('mail', EmailType::class, $this->getConfiguration("","Ex : example@mail.com"))
+            ->add('login', TextType::class, $this->getConfiguration("","Minimum 3 caractères"))
+            ->add('password', PasswordType::class, $this->getConfiguration("Mot de passe","Minimum 6 caractères"))
+            ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Confirmation","veuillez confirmer votre mot de passe"))
+            ->add('mail', EmailType::class, $this->getConfiguration("Email","Ex : exemple@mail.com"))
             ->add('avatar', UrlType::class, ['attr'=>['placeholder' => "Ex : http://www.urlavatar.com"], 'required'=>false])
             ->add('role', HiddenType::class, ['attr'=>['placeholder' => "Will be filled automatically"], 'required'=>false])
             ->add('posts', HiddenType::class, ['attr'=>['placeholder' => "Will be filled automatically"], 'required'=>false])

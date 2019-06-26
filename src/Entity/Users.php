@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,13 +13,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity(fields="login", errorPath="login", message="This login already exists !")
- * @UniqueEntity(fields="mail", errorPath="mail", message="This mail address already exists !")
- * @UniqueEntity(fields="slug", errorPath="slug", message="This slug already exists !")
- * )
+ * @UniqueEntity(fields="login", errorPath="login", message="Cet utilisateur existe déjà.")
+ * @UniqueEntity(fields="mail", errorPath="mail", message="Cet email est déjà utilisé.")
+ * @UniqueEntity(fields="slug", errorPath="slug", message="Ce slug existe déjà.")
  */
-
-
 class Users implements UserInterface
 {
     /**
@@ -60,17 +59,27 @@ class Users implements UserInterface
     private $role;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $posts;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
 
-/**
-     * Permet d'intialiser le slug, tant pour les Fixtures que pour le formulaire (on réédite le slug par dessus la valeur de base donnée par défaut)
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Characters", mappedBy="user", orphanRemoval=true)
+     */
+    private $characters;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->characters = new ArrayCollection();
+    }
+
+    /**
+     * Permet d'intialiser le slug, tant pour les Fixtures que pour le formulaire.
      * @ORM\PrePersist
      * @ORM\PreUpdate
      * 
@@ -186,18 +195,6 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getPosts(): ?int
-    {
-        return $this->posts;
-    }
-
-    public function setPosts(int $posts): self
-    {
-        $this->posts = $posts;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -211,11 +208,48 @@ class Users implements UserInterface
     }
 
     /**
+     * @return Collection|Characters[]
+     */
+    public function getCharacters(): Collection
+    {
+        return $this->characters;
+    }
+
+    public function addCharacter(Characters $character): self
+    {
+        if (!$this->characters->contains($character)) {
+            $this->characters[] = $character;
+            $character->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCharacter(Characters $character): self
+    {
+        if ($this->characters->contains($character)) {
+            $this->characters->removeElement($character);
+            // set the owning side to null (unless already changed)
+            if ($character->getUser() === $this) {
+                $character->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+     /**
      * Ajout de la partie sécurité
      */
 
     public function getRoles(){
-        return ['ROLE_USER'];
+        if($this->role=="ROLE_ADMIN"){
+            $roles[]=$this->role;
+           $roles[] = 'ROLE_USER';
+         }else{
+             $roles[]=$this->role;
+         }
+         return $roles;
     }
 
     public function getSalt(){}
@@ -225,4 +259,17 @@ class Users implements UserInterface
     }
 
     public function eraseCredentials(){}
+
+    
+    public function getPosts(): ?int
+    {
+        return $this->posts;
+    }
+
+    public function setPosts(int $posts): self
+    {
+        $this->posts = $posts;
+
+        return $this;
+    }
 }
