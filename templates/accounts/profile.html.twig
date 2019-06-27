@@ -41,9 +41,9 @@
         </div>
         <div class="row">
             {# Empêche un utilisateur accédant à la page de profil d'un tiers, d'avoir accès au bouton "Editer mon profil". Seuls le propriétaire et un admin peuvent le voir. #}
-            {% if (app.user.role == 'ROLE_ADMIN') or (app.user.login == users.login) %}
+            {# {% if (app.user.role == 'ROLE_ADMIN') or (app.user.login == users.login) %} #}
             <a href="{{ path('account_edit') }}" class="btn btn-primary">Editer mon profil</a>
-            {% endif %}
+            {# {% endif %} #}
             <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
         </div> 
     </div>  
