@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CharactersController extends AbstractController
 {
     /**
-     * @Route("/characters", name="characters")
+     * @Route("/characters", name="characters", schemes={"https"})
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class CharactersController extends AbstractController
     /**
      * Permet d'ajouter un personnage
      * La propriété Request représente ici le POST
-     * @Route("/personnage/creer", name="character_create")
+     * @Route("/personnage/creer", name="character_create", schemes={"https"})
      * @IsGranted("ROLE_USER")
      */
     public function characterCreate(Request $request, ObjectManager $manager){
@@ -62,7 +62,7 @@ class CharactersController extends AbstractController
     /**
      * Permet d'éditer un personnage
      * Doit se trouver avant /profil/{slug}, sinon il va considérer cette route comme étant un slug.
-     * @Route("/personnage/modification", name="character_edit")
+     * @Route("/personnage/modification", name="character_edit", schemes={"https"})
      * @IsGranted("ROLE_USER")
      * @return Response
      */
@@ -92,7 +92,7 @@ class CharactersController extends AbstractController
 
     /**
      * Permet d'afficher un personnage en particulier
-     * @Route("/personnage/{slug}", name="character_show")
+     * @Route("/personnage/{slug}", name="character_show", schemes={"https"})
      */
     public function characterShow(CharactersRepository $repo_character, $slug)
     {

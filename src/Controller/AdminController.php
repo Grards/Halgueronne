@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="admin", schemes={"https"})
      */
     public function index()
     {
@@ -23,7 +23,7 @@ class AdminController extends AbstractController
 
     /**
      * Permet d'afficher tous les utilisateurs
-     * @Route("/admin/liste_utilisateurs", name="admin_users_list")
+     * @Route("/admin/liste_utilisateurs", name="admin_users_list", schemes={"https"})
      */
     public function usersList(UsersRepository $repo)
     {
@@ -36,7 +36,7 @@ class AdminController extends AbstractController
     /**
      * Sélection d'un utilisateur à supprimer. Renvoie vers la demande de confirmation.
      *
-     * @Route("/admin/liste_utilisateurs/{slug}/suppression", name="admin_user_delete")
+     * @Route("/admin/liste_utilisateurs/{slug}/suppression", name="admin_user_delete", schemes={"https"})
      * 
      */
     
@@ -51,7 +51,7 @@ class AdminController extends AbstractController
     /**
      * Confirmation de suppression d'utilisateur
      * 
-     * @Route("/admin/liste_utilisateurs/{slug}/suppression_confirmation", name="admin_user_delete_confirm")
+     * @Route("/admin/liste_utilisateurs/{slug}/suppression_confirmation", name="admin_user_delete_confirm", schemes={"https"})
      * 
      * @param Users $users
      * @param ObjectManager $manager

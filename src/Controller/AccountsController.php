@@ -13,42 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class AccountsController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="account_login")
-     */
-    public function login(AuthenticationUtils $utils){
-
-        // La méthode getLastAuthenticationError renvoie une information (en anglais) s'il y a eu un problème avec le formulaire
-        $errors = $utils->getLastAuthenticationError();
-        // La méthode getLastUsername renvoie le dernier login introduit par l’utilisateur, afin de ne pas devoir le retapper en cas d'erreur de mot de passe
-        $login = $utils->getLastUsername();
-
-        return $this->render('accounts/login.html.twig', [
-            // S'il n'y a pas d'erreur retournée par getLastAuthenticationError, sa valeur est dès lors nulle.
-            'hasError' => $errors!== null,
-            'login' => $login
-        ]);
-    }
-
-    /**
-     * Permet de se déconnecter.
-     * Fonctionne grâce à security.yaml, via le firewall logout.
-     * @Route("/deconnexion", name="account_logout")
-     * @return void
-     */
-    public function logout(){}
-
-
-    /**
      * Permet de s'inscrire
      * La propriété Request représente ici le POST
-     * @Route("/inscription", name="account_register")
+     * @Route("/inscription", name="account_register", schemes={"https"})
      */
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
         $users = new Users();
@@ -84,7 +57,7 @@ class AccountsController extends AbstractController
     /**
      * Permet d'éditer son compte. Seuls le propriétaire du compte et un admin peuvent accéder à cette page et modifier les informations de comptes.
      * Doit se trouver avant /profil/{slug}, sinon il va considérer cette route comme étant un slug.
-     * @Route("/profil/modification", name="account_edit")
+     * @Route("/profil/modification", name="account_edit", schemes={"https"})
      * @IsGranted("ROLE_USER")
      * @return Response
      */
@@ -116,7 +89,7 @@ class AccountsController extends AbstractController
 
     /**
      * Permet d'afficher le profil utilisateur
-     * @Route("/profil/{slug}", name="account_profile")
+     * @Route("/profil/{slug}", name="account_profile", schemes={"https"})
      */
     public function accountProfile(UsersRepository $repo_user, $slug)
     {
