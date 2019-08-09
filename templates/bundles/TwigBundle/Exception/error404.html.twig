@@ -1,0 +1,25 @@
+{# Access to this page in dev mode : https://localhost/_error/404 #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="error404-page" class="slide">
+        <div class="container-dialogue fixed-bottom">
+            <div class="row">
+                <div class="character-content col-12 text-center">
+                    <img id="guard2-character" class="img-fluid" src="../img/guard2.png" alt="Guard">
+                </div>
+                <div class="dialogue p-3 pl-5 pr-5 m-3 ml-5 mr-5 fixed-bottom">
+                    <div class="name-character">Garde :</div>   
+                    <div class="dialogue-text">
+                        <p><b>La ruelle 404 ?!</b></p>
+                        <p>Qu'est-ce que c'est que ce nom de rue ?</p>
+                        <p>Vous avez passé la nuit à vider les fûts de la taverne du Dindon Farceur, c'est ça ? Vous devriez vraiment arrêter de picoler !</p>
+                        <p>Allez, circulez !</p>
+                    </div>
+                    <a href="{{ path('home')}}" class="btn btn-danger">Je devrais revérifier mon itinéraire...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

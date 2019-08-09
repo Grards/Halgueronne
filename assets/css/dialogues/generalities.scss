@@ -1,0 +1,73 @@
+.container-dialogue{
+    position: absolute;
+    z-index: 100;
+    overflow: hidden;
+
+    // .character-content{
+    //     img{
+    //     }
+    // }
+
+    .dialogue{
+        background-color: rgba(245,245,245,0.85);
+        overflow-y: scroll;
+        height: 300px;
+        border: 10px double rgb(40, 94, 138);
+        z-index: 200; 
+        
+        transform: scale(0);
+        animation-name: DialoguePop;
+        animation-delay: 0.5s; 
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+
+        @keyframes DialoguePop {
+            0%{
+                transform: scale(0.5);
+            }
+
+            100%{
+                transform: scale(1);
+            }
+        }
+
+        .name-character{
+            font-size: 25px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: rgb(40, 94, 138);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .dialogue-text::before{
+            content:"\“";
+            font-size: 40px;
+            font-style: italic;
+            float: left;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            line-height: 25px;
+        }
+
+        .dialogue-text::after{
+            content:"\”";
+            font-size: 40px;
+            font-style: italic;
+            float: right;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            line-height: 25px;
+        }
+
+        p{
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 0.2rem;
+            margin: 0 30px; 
+        }
+
+        .btn{
+            margin: 25px 30px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    }
+}

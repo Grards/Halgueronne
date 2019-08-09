@@ -1,0 +1,132 @@
+
+#guard-character{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+@media (min-width: 1200px){
+    .dialogue{
+        width: 70%;
+        position: absolute;
+        left: 12.5%;
+    }
+}
+
+// // 4K (desktops, less than 6000px)
+// @media (max-width: 5999.9px) {
+//     .container-dialogue{
+
+//         .character-content{
+//             height: 1500px;
+//         }
+
+//         .dialogue{
+//             height: 600px;
+//             border: 20px double rgb(40, 94, 138);
+
+//             h1{
+//                 font-size: 64px;
+//             }
+
+//             p{
+//                 font-size: 32px;
+//             }
+
+//             .btn{ 
+//             }
+//         }
+//     }
+// }
+
+// // Televisions (desktops, less than 3840px)
+
+// // Extra-Large devices (desktops, less than 1500px)
+// @media (max-width: 1499.98px) {
+//     .container-dialogue{
+
+//         .character-content{
+//         }
+
+//         .dialogue{
+
+//             h1{
+//             }
+
+//             p{
+//             }
+
+//             .btn{ 
+//             }
+//         }
+//     }
+// }
+
+// // Large devices (desktops, less than 1200px)
+// @media (max-width: 1199.98px) { 
+//     .container-dialogue{
+
+//         .character-content{
+//         }
+
+//         .dialogue{
+//             h1{
+//             }
+
+//             p{
+//             }
+
+//             .btn{ 
+//             }
+//         }
+//     }
+// }
+
+// // Medium devices (tablets, less than 992px)
+// @media (max-width: 991.98px) {
+//     .container-dialogue{
+
+//         .character-content{
+//         }
+
+//         .dialogue{
+//             h1{
+//             }
+
+//             p{
+//             }
+
+//             .btn{ 
+//             }
+//         }
+//     }
+// }
+
+// // Small devices (landscape phones, less than 768px)
+// @media (max-width: 767.98px) {
+//     .container-dialogue{
+
+//         .character-content{
+//             height: 550px;
+//         }
+
+//         .dialogue{
+//             height: 250px;
+//             margin: 5px !important;
+//             padding: 10px !important;
+
+//             h1{
+//                 font-size: 30px;
+//             }
+
+//             p{
+//             }
+
+//             .btn{ 
+//             }
+//         }
+//     }
+// }

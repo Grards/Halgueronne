@@ -59,5 +59,11 @@ h1{
 @import "login.scss";
 @import "register.scss";
 @import "profile.scss";
+/* --- IMPORTS DIALOGUES SCSS --- */
+@import "dialogues/generalities.scss";
+@import "dialogues/dialogues-404.scss";
 /* --- IMPORTS ADMIN SCSS --- */
 @import "admin/home.scss";
+/* --- IMPORTS ERROR PAGES SCSS --- */
+@import "error/404.scss";
+@import "error/500.scss";
