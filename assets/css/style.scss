@@ -16,11 +16,13 @@
 *{
     margin: 0;
     padding: 0;
+    
 }
 
 body, html{
     height: 100%;
     overflow-x: hidden;
+    cursor: url(../../public/img/cursor-red.png) 0 0, auto;
 }
 
 h1{

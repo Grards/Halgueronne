@@ -180,10 +180,7 @@
         left: 0;
         height: 100%;
         width: 100%;
+        opacity: 1;
+        cursor: url(../../public/img/cursor-red.png) 0 0, auto;
     }
 }
-
-#home-page:hover{
-    cursor: url(../../public/img/mouse-border.png) 0 0, auto;
-}
-
