@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Halgueronne - Informations générales{% endblock %}
+
+{% block body %}
+<div id="general-encyclopedia" class="slide encyclopedia">
+    <div class="container">
+        {% include 'partials/title.html.twig' %}
+        <div class="row">
+            <div class="last-updates col-xs-12 col-lg-8">
+                <div class="row">
+                    <h2>Les dernières informations et mises à jour ...</h2>
+                </div>
+                <div class="row">
+                    {% for post in last_posts %}
+                        <a href="{{ path('article_show', {'slug' : post.slug}) }}" class="w-100">
+                            <div class="card">
+                                <div class="row no-gutters">
+                                    <div class="col-auto">
+                                        <img src="{{post.encyclopediaTopic.encyclopediaCategory.cover}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-block px-2">
+                                            <h4 class="card-title">{{post.title}}</h4>
+                                            <p class="card-text">{{post.post|slice(0,200)}} <small><i>... (Lire la suite)</i></small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer w-100 text-muted">
+                                    <p class="card-text"><small>Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
+                                    <small>Dernière mise à jour le {{post.updateDate | date('d/m/Y')}} à {{post.updateDate | date('H:m:s')}}</small></p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="headings col-xs-12 col-lg-4">
+                <div class="row">
+                    <h2>Les rubriques</h2>
+                </div>
+                <div class="container-content">
+                    <ul id="categories_list">
+                        {% for category in encyclopedia_categories %}
+                            {% if category.visible == 1 %}
+                                <li>{{category.title}}</li>
+                                <ul id="topics_list">
+                                    {% for topic in category.encyclopediaTopics %}
+                                        {% if topic.visible == 1 %}
+                                            <li><a href="{{ path('posts_list',{'slug':topic.slug}) }}">{{topic.title}}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+#general-encyclopedia{
+
+    .last-updates{
+
+        h2{
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card:hover .card-footer{
+            background-color: rgb(103, 201, 201);
+        }
+
+        .card:hover .card-footer .card-text{
+            color: whitesmoke;
+        }
+    }
+
+    .headings{
+
+        h2{
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    #categories_list{
+        font-weight: bold;
+
+        li{
+            :hover{
+                color: cadetblue;
+            }
+        }
+    }
+
+    #topics_list{
+        margin-left: 15px;
+        font-weight: normal;
+    }
+}

@@ -34,6 +34,29 @@ class CharactersRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    // public function findCharacterByName($name){
+    //     return $this->createQueryBuilder('c')
+    //                 ->select('c.lastname as nom, c.firstname prenom, c.slug as slug, c.picture as picture')
+    //                 ->where('c.lastname LIKE :nom')
+    //                 ->setParameter('nom', 'Paxton')
+    //                 ->orderBy('c.lastname','ASC')
+    //                 // ->addOrderBy('c.firstname','ASC')
+    //                 ->getQuery()
+    //                 ->getResult();
+    // }
+
+    public function findCharacterByName($name){
+        return $this->createQueryBuilder('c')
+                    ->select('c.lastname as lastname, c.firstname as firstname, c.slug as slug, c.picture as picture')
+                    ->where('c.lastname LIKE :nom')
+                    ->orWhere('c.firstname LIKE :nom')
+                    ->setParameter('nom', '%'.$name.'%')
+                    ->orderBy('c.lastname','ASC')
+                    ->addOrderBy('c.firstname','ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return Characters[] Returns an array of Characters objects
     //  */

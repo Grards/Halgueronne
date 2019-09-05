@@ -38,9 +38,6 @@ class RegisterType extends AbstractType
             ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Confirmation","veuillez confirmer votre mot de passe"))
             ->add('mail', EmailType::class, $this->getConfiguration("Email","Ex : exemple@mail.com"))
             ->add('avatar', UrlType::class, ['attr'=>['placeholder' => "Ex : http://www.urlavatar.com"], 'required'=>false])
-            ->add('role', HiddenType::class, ['attr'=>['placeholder' => "Will be filled automatically"], 'required'=>false])
-            ->add('posts', HiddenType::class, ['attr'=>['placeholder' => "Will be filled automatically"], 'required'=>false])
-            ->add('slug', HiddenType::class, ['attr'=>['placeholder' => "Will be filled automatically"], 'required'=>false])
         ;
     }
 

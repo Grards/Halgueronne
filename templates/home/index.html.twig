@@ -3,14 +3,100 @@
 {% block body %}
     <div id="home-page" class="container-fluid">
         <div id="knight-in-blizzard" class="row slide">
-            <h1 class="text-center">Halgueronne</h1>
+            <img id="blizzard-front" src="img/blizzard2.gif" alt="Blizzard">
             <div id="knight-content">
                 <img id="shadow-knight" src="img/shadow_knight.png" class="img-fluid" alt="Shadow of Knight">
                 <img id="knight" src="img/knight.png" class="img-fluid" alt="Knight">
             </div>
-            <img id="blizzard-front" src="img/blizzard2.gif" alt="Blizzard">
+            <h1 class="text-center">Halgueronne</h1>
+            <i id="go-down" class="fas fa-arrow-down"></i>
+        </div>
+        <!-- Page Wrapper -->
+        <div id="halgueronne-promo">
+            <div id="page-wrapper">
+                {# <!-- Banner -->
+                <section id="prebanner">
+                    <section id="banner">
+                        <div class="inner">
+                            <h2><img src="images/logo.png" alt="Halgueronne" height="217" width="485"></h2>
+                            <p>Serveur Minecraft RP<br />
+                            Dark Fantasy</p>
+                        </div>
+                        <a href="#one" class="more scrolly">En savoir plus</a>
+                    </section>
+                </section> #}
+                    
+                <!-- One -->
+                <section id="one" class="wrapper style3 special">
+                    <div class="inner">
+                        <header class="major">
+                            <h2>Le jeu</h2>
+                            <p>Halgueronne est un <b>jeu de rôle</b> où les rôlistes décrivent par écrit leurs actions et dialogues.<br />
+                            <br />Vous y incarnez un personnage de l'<a href="" target="_blank">Ordre des Héritiers d'Atãrius</a> !
+                            <br />Ses membres proviennent de tous les horizons, unis par un but commun : combattre la <a href="" target="_blank">Mort Rampante</a> et les abominations qu'elle fait déferler sur le monde !</p>				
+                        </header>
+                        <ul class="features">
+                            <li class="icon fa-users">
+                                <h3>Personnages</h3>
+                                <p>Pour participer, il vous faut créer au moins, un <a href="{{ path('character_create') }}" target="_blank">personnage</a> susceptible de participer à l'aventure.</p>
+                            </li>
+                            <li class="icon fa-comments-o">
+                                <h3>Communauté</h3>
+                                <p>Les joueurs peuvent se connecter à toutes heures sur le <a href="https://discord.gg/MNQ595y" target="_blank">discord</a> afin de dialoguer et jouer ensemble.</p>
+                            </li>
+                            <li class="icon fa-pencil-square-o">
+                                <h3>Maîtres de jeu</h3>
+                                <p>Des maîtres de jeu conçoivent et animentent des scénarios qui font avancer la trame principale de l'histoire.</p>
+                            </li>
+                            <li class="icon fa-cogs">
+                                <h3>Mécaniques de jeu</h3>
+                                <p>Lorsqu'un personnage tente une action incertaine, un système de jets de dés indique si l'action échoue ou réussit.</p>
+                            </li>
+
+                            <li class="icon fa-cubes">
+                                <h3>Pierre à l'édifice</h3>
+                                <p>Le monde fictionnel d'Halgueronne s'enrichit de vos aventures qui impactent l'histoire.</p>
+                            </li>
+                            <li class="icon fa-book">
+                                <h3>Histoire complexe</h3>
+                                <p>L'<a href="{{ path('encyclopedia') }}" target="_blank">univers</a> d'Halgueronne est très travaillé et offre de nombreuses possibilités de jeu.</p>
+                            </li>
+                        </ul>
+                        <p>
+                            <img src="/img/14ans.png" alt="14 ans de jeu de role" height="85" width="85"><br /><br />
+                            L'univers d'Halgueronne a été crée il y a plus de <b>14 ans</b>.<br />
+                            Joué à maintes reprises en <b>jdr papier</b>, il connu également <b>trois versions de jdr forum</b>.<br>
+                            Ainsi qu'une version sur serveur <b>Minecraft</b> pour un premier rendu 3D de cet univers.
+                            <br /><br />
+                            Chaque nouvelle génération de joueurs pose sa marque et influence l'histoire d'Halgueronne.
+                        </p>
+                    </div>
+                </section>
+
+
+
+                <!-- CTA -->
+                <section id="cta" class="wrapper style4">
+                    <div class="inner">
+                        <header>
+                            <h2>Rejoindre le jeu</h2>
+                            <p>Avant de vous lancer dans l'aventure il vous faut créer votre <a href="{{ path('character_create') }}" target="_blank">personnage</a> sur notre site.</p>
+                        </header>
+                        <ul class="actions vertical">
+                            <li><a href="{{ path('account_register') }}" class="button fit special">Inscription</a></li>
+                            {# <li><a href="https://www.launchmycraft.fr/getlauncher/91909/executable/jar" class="button fit" target="_blank">Launcher</a></li> #}
+                            <li><a id="discord-link" href="https://discord.gg/MNQ595y" target="_blank"><img src="/img/discord_halg.png" alt="Discord Halgueronne" height="75" width="235"></a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <ul class="copyright">
+                        <li> Halgueronne &copy; 2019</li><li>Webmaster: <a href="http://www.grardsteve.be/">Steve Grard</a></li><li>Credit: <a href="http://html5up.net">HTML5 UP</li>
+                    </ul>
+                </footer>
+            </div>
         </div>
     </div>
-
-
 {% endblock %}

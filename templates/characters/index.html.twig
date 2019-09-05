@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CharactersController!{% endblock %}
+{% block title %}Halgueronne - Personnages{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Admin/Documents/PHP/examen/Halgueronne/src/Controller/CharactersController.php'|file_link(0) }}">src/Controller/CharactersController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Admin/Documents/PHP/examen/Halgueronne/templates/characters/index.html.twig'|file_link(0) }}">templates/characters/index.html.twig</a></code></li>
-    </ul>
+<div id="characters-page" class="slide">
+    <div class="container">
+        {% include 'partials/title.html.twig' %}
+        <div class="row">
+            <h2 class="ml-3 mb-5">Vos fiches de personnages</h2>
+            {% if users.characters|length > 0 %}
+                <a class="col-12 mb-5" href="{{ path('character_create') }}"><div class="btn btn-info" role="button" aria-pressed="true">Créer un personnage</div></a>
+            {% endif %}
+        </div>
+        <div class="row no-gutters">
+            
+            {% for character in users.characters %}
+                <div class="col-xs-12 col-md-6 col-lg-3 pl-3 pr-3 mb-5">
+                    <a href="{{ path('character_show', {'slug' : character.slug}) }}" title="Voir détails du personnage">
+                        <div class="card ">
+                            <img src="{{character.picture}}" class="card-img-center" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{character.firstname}} {{character.lastname}}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                <div class="container-content">
+                    <h4 class="col-12 text-center"><i>Oups ! On dirait que vous n'avez pas encore de personnage ...</i></h4>
+                    <a class="" href="{{ path('character_create') }}"><button type="button" class="col-xs-12 col-lg-4 offset-lg-4 btn btn-info btn-lg mt-5 mb-5">Créons un personnage !</button></a>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>  
 </div>
 {% endblock %}

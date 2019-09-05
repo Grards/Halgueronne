@@ -1,0 +1,166 @@
+#home-page{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    
+    .slide{
+        height: 100%;
+        background-color: #679fb8;
+        overflow: hidden;
+    }
+
+    h1{
+        position: absolute;
+        display: block;
+        margin: 0 auto;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        font-size: 8.5vw;
+        background: -webkit-gradient(linear, left top, left bottom, from(#facc7c), to(#d3962d));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        z-index: 150;
+        opacity: 0;
+        animation-name: Title;
+        animation-delay: 1.8s;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+
+        // 4k devices (desktops, more than 3000px)
+        @media (min-width: 3000px) {
+            top: 55%;
+        } 
+
+        // Large devices (desktops, less than 1200px)
+        @media (max-width: 1199.98px) {
+            top: 55%;
+        }
+        
+        // Medium devices (tablets, less than 992px)
+        @media (max-width: 991.98px) {
+            top: 55%;
+            font-size: 15vw;
+        }
+
+        // Small devices (landscape phones, less than 768px)
+        @media (max-width: 767.98px) {
+            font-size: 18vw;
+            top: 55%;
+        }
+    }
+
+    @keyframes Title{
+        0%{
+            opacity: 0;
+        }
+
+        100%{
+            opacity: 1;
+        }
+    }
+
+    #knight-in-blizzard{
+        background-color: black;
+        background-image: url(../../../public/img/losth.jpg);
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #knight-content{
+        position: absolute;
+        z-index: 50;
+        width: 65%;
+        bottom: 0;
+        left: 50%;
+        margin-left: -31%;
+
+        // Extra-Large devices (desktops, less than 1500px)
+        @media (max-width: 1499.98px) {
+            width: 75%;
+            margin-left: -35%;
+        } 
+
+        // Large devices (desktops, less than 1200px)
+        @media (max-width: 1199.98px) { 
+            width: 90%;
+            margin-left: -40%;
+        }
+
+        // Medium devices (tablets, less than 992px)
+        @media (max-width: 991.98px) {
+            width: 110%;
+            margin-left: -50%;
+        }
+
+        // Small devices (landscape phones, less than 768px)
+        @media (max-width: 767.98px) {
+            width: 800px;
+            margin-left: -370px;
+        }
+    }
+
+    #shadow-knight{
+        position: absolute;
+        bottom: 0;
+        z-index: 30;
+        opacity: 1;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    #knight{
+        position: relative;
+        bottom: 0;
+        z-index: 40;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        animation-name: Title;
+        animation-delay: 0.1s;
+        animation-duration: 5s;
+        animation-fill-mode: forwards;
+    }
+
+    #blizzard-front{
+        position: relative;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 1;
+    }
+
+    #go-down{
+        position: absolute;
+        bottom: 25px;
+        left: 25px;
+        font-size: 50px;
+        color: #facc7c;
+        filter: drop-shadow(1px 1px #333);
+        z-index: 400;
+        animation-name: goDown;
+        animation-delay: 2.5s;
+        animation-duration: 1.2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 3;
+        opacity: 0;
+    }
+
+    @keyframes goDown{
+        0%{
+            opacity: 1;
+            bottom : 100px;
+        }
+
+        100%{
+            bottom: 25px;
+            opacity: 0;
+        }
+    }
+}

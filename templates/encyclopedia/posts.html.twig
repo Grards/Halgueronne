@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Halgueronne - Informations générales{% endblock %}
+
+{% block body %}
+<div id="posts-list-encyclopedia" class="slide encyclopedia">
+    <div class="container">
+        {% include 'partials/title.html.twig' %}
+        <div class="row">
+            <h2 class="mb-5">Liste des sujets concernant le topic : {{topic.title}}</h2>
+            {% for post in topic.encyclopediaPosts %}
+                {% if post.visible == 1 %}
+                    <a href="{{ path('article_show', {'slug' : post.slug}) }}">
+                        <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-12">
+                                    <div class="card-block px-2">
+                                        <h4 class="card-title">{{post.title}}</h4>
+                                        <p class="card-text">{{post.post|slice(0,200)}} <small><i>... (Lire la suite)</i></small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer w-100 text-muted">
+                                <p class="card-text"><small>Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
+                                <small>Dernière mise à jour le {{post.updateDate | date('d/m/Y')}} à {{post.updateDate | date('H:m:s')}}</small></p>
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

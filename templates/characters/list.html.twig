@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Halgueronne - Administration - Création de contenu{% endblock %}
+
+{% block body %}
+<div id="admin-encyclopedia-post-page" class="slide">
+    <div class="container">
+        {% include 'partials/title.html.twig' %}
+        <h2>Liste des personnages existants</h2>
+        <div class="row no-gutters">
+            <form class="col-12" action="{{ path('characters_search') }}" method="GET">
+                <div class="input-group md-form form-sm form-1 pl-0 mb-5">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-white"
+                            aria-hidden="true"></i></span>
+                    </div>
+                    <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" name="search">
+                    <button type="submit">Rechercher</button>
+                </div>
+            </form>
+            {% for character in characters %}
+                <div class="col-xs-12 col-md-6 col-lg-3 pl-3 pr-3 mb-5">
+                    <a href="{{ path('character_show', {'slug' : character.slug}) }}" title="Voir détails du personnage">
+                        <div class="card ">
+                            <img src="{{character.picture}}" class="card-img-center" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{character.firstname}} {{character.lastname}}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

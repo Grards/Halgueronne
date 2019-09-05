@@ -1,17 +1,113 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-<div id="register-page" class="slide">
-    <div class="container">
-        <div class="container-content">
-            <h1>Création de personnage</h1>
+{% block title %}Halgueronne - Création fiche de personnage{% endblock %}
 
+{% block body %}
+<div id="character-create-page" class="slide">
+    <div class="container mb-5">
+        {% include 'partials/title.html.twig' %}
+        <h2>Création de fiche de personnage</h2>
+        <div class="container-content">
             {{ form_start(form) }}
-            {{ form_widget(form) }}
-                <button type="submit" class="btn btn-success">Valider</button>
-                <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
+                <fieldset class="col-12 mb-4">    	
+                    <legend>Identité</legend>
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-12">{{ form_row(form.picture)}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-6">{{ form_row(form.lastname) }}</div>
+                                <div class="col-xs-12 col-lg-6">{{ form_row(form.firstname) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4 mb-4 pl-0">
+                        {{ form_row(form.gender) }}
+                    </div >
+                    <div class="col-xs-12 col-lg-8 pr-0">
+                        <fieldset class="col-12 mb-4">    	
+                            <legend>Date de naissance</legend>
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-lg-4">{{ form_row(form.birthDay) }}</div>
+                                        <div class="col-xs-12 col-lg-4">{{ form_row(form.birthMonth) }}</div>
+                                        <div class="col-xs-12 col-lg-4">{{ form_row(form.birthYear) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <fieldset class="col-12 mb-4">    	
+                        <legend>Spécificités</legend>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    {{ form_row(form.races) }}
+                                    {{ form_row(form.classes) }}
+                                    {{ form_row(form.skills) }} 
+                                    {# <label for="skill-choice">Compétences</label>
+                                    <div class="custom-control custom-checkbox mb-4">
+                                        {% for skill in skills %}
+                                            <div class="custom-control custom-checkbox mb-1">
+                                                <input type="checkbox" class="custom-control-input" id="{{skill.id}}" name="skill" value="{{skill.id}}">
+                                                <label class="custom-control-label" for="{{skill.id}}" style="color:cadetblue; font-weight:bold;">{{skill.title}}</label> : <small><i>{{skill.description}}</i></small>
+                                            </div>
+                                        {% endfor %}
+                                    </div> #}
+                                    {# <label for="spell-choice">Sorts</label>
+                                    <div class="custom-control custom-checkbox mb-4">
+                                        {% for spell in spells %}
+                                            <div class="custom-control custom-checkbox mb-1">
+                                                <input type="checkbox" class="custom-control-input" id="{{spell.id}}" name="skill" value="{{spell.id}}">
+                                                <label class="custom-control-label" for="{{spell.id}}" style="color:cadetblue; font-weight:bold;">{{spell.title}}</label> : <small><i>{{spell.description}}</i></small>
+                                            </div>
+                                        {% endfor %}
+                                    </div> #}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>	
+                </div>
+                <div class="row mb-5">
+                    <fieldset class="col-12 mb-4">    	
+                        <legend>Historique</legend>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-12">
+                                    {{ form_row(form.background) }}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                
+            
+                <button type="submit" class="btn btn-success mr-3">Confirmer la création</button>
+                <a href="{{ path('characters', {'slug' : app.user.slug} )}}" class="btn btn-danger">Retour à mes fiches</a>
             {{ form_end(form) }}
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('build/js/app.js')}}"></script>
+    <script>
+        var limit = 5;
+        $('input.custom-control-input').on('change', function(evt) {
+            if($(this).siblings(':checked').length > limit) {
+                this.checked = false;
+            }
+        });
+    </script>
 {% endblock %}

@@ -1,0 +1,18 @@
+#character-informations-page{
+    li {
+        list-style: none;
+    }
+
+    .dead-alert {
+        color: whitesmoke;
+        font-size: 5vw;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        font-family: "Geizer";
+        background-color: #333;
+        padding: 0 50px;
+        height: 300px;
+        line-height: 150px;
+    }
+}

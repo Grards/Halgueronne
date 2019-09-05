@@ -57,11 +57,11 @@ class AccountsController extends AbstractController
     /**
      * Permet d'éditer son compte. Seuls le propriétaire du compte et un admin peuvent accéder à cette page et modifier les informations de comptes.
      * Doit se trouver avant /profil/{slug}, sinon il va considérer cette route comme étant un slug.
-     * @Route("/profil/modification", name="account_edit", schemes={"https"})
+     * @Route("/profil/modification/{id}", name="account_edit", schemes={"https"})
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function accountEdit(Request $request, ObjectManager $manager) {
+    public function accountEdit(Request $request, ObjectManager $manager,$id) {
         $user = $this->getUser();
         $form = $this->createForm(RegisterType::class, $user);
 

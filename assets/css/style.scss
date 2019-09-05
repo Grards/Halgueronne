@@ -4,13 +4,20 @@
 */
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+@import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
 /* --- IMPORTS FONT-FACES --- */
 @font-face {
     font-family: "Geizer";
     src: url("../../public/fonts/geizer/Geizer.otf");
 }
 
+
+
 /* --- VARIABLES --- */
+$gradiant-example : linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%), url('../../public/img/losth.jpg');
+$gradiant-sky : -webkit-gradient(linear, left top, left bottom, from(#cce5ec), to(#5b6c7c));
+$losth: url('../../public/img/losth.jpg');
 
 /* --- GENERALITIES --- */
 *{
@@ -22,11 +29,24 @@
 body, html{
     height: 100%;
     overflow-x: hidden;
-    cursor: url(../../public/img/cursor-red.png) 0 0, auto;
+    background: $losth;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h1{
     font-family: "Geizer";
+}
+
+h2{
+    text-shadow: 1px 1px 2px black;
+    text-transform: uppercase;
+    color: whitesmoke;
+
+    // Small devices (landscape phones, 576px and up)
+    @media (max-width: 767.98px) {
+        font-size: 6vw;
+    }
 }
 
 .slide{
@@ -54,9 +74,30 @@ h1{
     margin: 0;
 }
 
+.general-title{
+    display: block;
+    text-align: center;
+    font-size: 7vw;
+    background: -webkit-gradient(linear, left top, left bottom, from(#facc7c), to(#d3962d));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 2px #333);
+    margin-bottom: 35px;
+
+    // Small devices (landscape phones, 576px and up)
+    @media (max-width: 767.98px) {
+        font-size: 16vw;
+    }
+}
+
+
 /* --- IMPORTS SCSS --- */
 @import "header.scss";
-@import "home.scss";
+/* --- IMPORT HOME --- */
+@import "home/slide1.scss";
+@import "home/font-awesome.min.scss";
+@import "home/slide2.scss";
+/* --- IMPORT PUBLIC PAGES */
 @import "users.scss";
 @import "login.scss";
 @import "register.scss";
@@ -66,6 +107,17 @@ h1{
 @import "dialogues/dialogues-404.scss";
 /* --- IMPORTS ADMIN SCSS --- */
 @import "admin/home.scss";
+@import "admin/encyclopedia-post.scss";
+@import "admin/user-delete.scss";
+@import "admin/user-list.scss";
 /* --- IMPORTS ERROR PAGES SCSS --- */
 @import "error/404.scss";
 @import "error/500.scss";
+/* --- IMPORTS ENCYCLOPEDIA PAGES SCSS --- */
+@import "encyclopedia/generalities.scss";
+@import "encyclopedia/index.scss";
+@import "encyclopedia/show.scss";
+/* --- IMPORTS CHARACTERS PAGES SCSS --- */
+@import "characters/index.scss";
+@import "characters/show.scss";
+@import "characters/create.scss";

@@ -1,45 +1,58 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Halgueronne - Fiche du personnage {{ character.firstname }} {{ character.lastname }}{% endblock %}
+
 {% block body %}
-<div id="personnage-page" class="slide">
+<div id="character-informations-page" class="slide">
     <div class="container">
+        {% include 'partials/title.html.twig' %}
         <div class="row">
-            <h1>{{ character.firstname }} {{ character.lastname }}</h1>
+            <h2>{{ character.firstname }} {{ character.lastname }}</h2>
         </div>
-        <div class="row">
-            {% if character.picture == 'img/no-character-picture.png' %}
-                <div><img class="row" src="../../img/no-character-picture.png" alt="Image du personnage"></div>
-            {% else %}
-                <div><img class="row" src="{{ character.picture }}" alt="Image du personnage "></div>
-            {% endif %}
-        </div> 
-        <div class="row">
-            <ul>
-                <li>Sexe : 
-                {% if character.gender == 'f' %}
-                    Féminin
-                {% elseif character.gender == 'm' %}
-                    Masculin
+        <div class="container-content">
+            <div class="row">
+                {% if character.picture == 'img/no-character-picture.png' %}
+                    <div class="col-4 col-lg-2"><img class="" src="../../img/no-character-picture.png" alt="Image du personnage"></div>
                 {% else %}
-                    Indéfini
+                    <div class="col-4 col-lg-2"><img class="" src="{{ character.picture }}" alt="Image du personnage "></div>
                 {% endif %}
-                </li>
-                <li>Naissance : {{ character.birthDay }} / {{ character.birthMonth }} / {{ character.birthYear }} </li>
-                <li>Mort : 
-                {% if (character.deathDay == NULL) and (character.deathMonth == NULL) and (character.deathYear == NULL) %}
-                    -
-                {% else %}
-                    {{ character.deathDay }} / {{ character.deathMonth }} / {{ character.deathYear }} </li>
+                {% if (character.deathDay != NULL) or (character.deathMonth != NULL) or (character.deathYear != NULL) %}
+                    <div class="dead-alert col-5 col-lg-10">
+                        <p>Mort</p>
+                        <i class="fas fa-skull mb-5"></i>    
+                    </div>
+                                  
                 {% endif %}
-            </ul>
+            </div> 
+            <div class="row">
+                <ul>
+                    <li>Sexe : 
+                    {% if character.gender == 'f' %}
+                        Féminin
+                    {% elseif character.gender == 'm' %}
+                        Masculin
+                    {% else %}
+                        Indéfini
+                    {% endif %}
+                    </li>
+                    <li>Naissance : {{ character.birthDay }} / {{ character.birthMonth }} / {{ character.birthYear }} </li>
+                    <li>Mort : 
+                    {% if (character.deathDay == NULL) and (character.deathMonth == NULL) and (character.deathYear == NULL) %}
+                        -
+                    {% else %}
+                        {{ character.deathDay }} / {{ character.deathMonth }} / {{ character.deathYear }} </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
         <div class="row">
-            <h3>Biographie :</h3>
-            {{ character.background }}
+            <div class="container-content mt-3 mb-5">
+                <h3>Biographie :</h3>
+                {{ character.background }}
+            </div>
         </div>
         <div class="row">
-            <a href="{{ path('character_edit')}}" class="btn btn-primary">Editer le personnage</a>
-            <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
+            <a href="{{ path('character_edit', {'slug' : character.slug}) }}" class="btn btn-primary mb-5">Editer le personnage</a>
         </div> 
     </div>  
 </div>

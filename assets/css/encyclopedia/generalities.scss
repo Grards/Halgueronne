@@ -1,0 +1,30 @@
+.encyclopedia{
+    height: auto;
+    min-height: 100%;
+
+    h1, h2{
+        color: whitesmoke;
+    }
+    
+    a{
+        text-decoration: none;
+        color: #333;
+
+        img {
+            filter: grayscale(1);
+            transition-duration: 0.5s;
+        }
+
+        :hover img{
+            filter: grayscale(0);
+        }
+    }
+
+    .card{
+        margin-bottom: 20px;
+    }
+
+    .container-content{
+        height: auto;
+    }
+}

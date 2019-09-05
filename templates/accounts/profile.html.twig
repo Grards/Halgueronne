@@ -1,51 +1,57 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Halgueronne - Profil utilisateur{% endblock %}
+
 {% block body %}
 <div id="profile-page" class="slide">
     <div class="container">
-        <div class="row">
-            <h1>Utilisateur</h1>
+        {% include 'partials/title.html.twig' %}
+        <div class="row mb-4">
+            <h2>Utilisateur</h2>
         </div>
-        <div class="row">
-            <h3>{{ users.login }}</h3>
-        </div>
-        <div class="row">
-            {% if users.avatar == 'img/no-avatar.png' %}
-                <div><img class="row users-list-avatar" src="../../public/img/no-avatar.png" alt="Avatar de l'utilisateur"></div>
-            {% else %}
-                <div><img class="row users-list-avatar" src="{{ users.avatar }}" alt="Avatar de l'utilisateur"></div>
-            {% endif %}
-        </div> 
-        <div class="row">
-            <ul>
-                <li>Email : {{ users.mail }}</li>
-                <li>Message : {{users.posts }}</li>
-                <li>Personnages :</li>
-                {% if users.characters == NULL %}
-                    <FORM>
-                        <SELECT name="characters_list" size="1">
-                            <OPTION> -
-                        </SELECT>
-                    </FORM>
+        <div class="container-content">
+            
+            <div class="row">
+                <h3>{{ users.login }}</h3>
+            </div>
+            <div class="row">
+                {% if users.avatar == 'img/no-avatar.png' %}
+                    <div><img class="row users-list-avatar" src="../../public/img/no-avatar.png" alt="Avatar de l'utilisateur"></div>
                 {% else %}
-                    <FORM>
-                        <SELECT name="characters_list" size="1">
-                            {% for character in users.characters %}
-                                <OPTION>{{character.firstname}} {{character.lastname}}
-                            {% endfor %}
-                        </SELECT>
-                    </FORM>
+                    <div><img class="row users-list-avatar" src="{{ users.avatar }}" alt="Avatar de l'utilisateur"></div>
                 {% endif %}
-                
-            </ul>
+            </div> 
+            <div class="row">
+                <ul>
+                    <li><b>Email :</b> {{ users.mail }}</li>
+                    {# <li>Message : {{users.posts }}</li> #}
+                    {# <li>Personnages :</li>
+                    {% if users.characters == NULL %}
+                        <form>
+                            <select name="characters_list" size="1">
+                                <option> - </option>
+                            </select>
+                        </form>
+                    {% else %}
+                        <form>
+                            <select name="characters_list" size="1">
+                                {% for character in users.characters %}
+                                    <option>{{character.firstname}} {{character.lastname}}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    {% endif %} #}
+                    
+                </ul>
+            </div>
+            <div class="row">
+                {# Empêche un utilisateur accédant à la page de profil d'un tiers, d'avoir accès au bouton "Editer mon profil". Seuls le propriétaire et un admin peuvent le voir. #}
+                {# {% if (app.user.role == 'ROLE_ADMIN') or (app.user.login == users.login) %} #}
+                <a href="{{ path('account_edit',{'id':users.id}) }}" class="btn btn-info mr-4">Editer mon profil</a>
+                {# {% endif %} #}
+                <a href="{{ path('home')}}" class="btn btn-danger">Retour à l'accueil</a>
+            </div> 
         </div>
-        <div class="row">
-            {# Empêche un utilisateur accédant à la page de profil d'un tiers, d'avoir accès au bouton "Editer mon profil". Seuls le propriétaire et un admin peuvent le voir. #}
-            {# {% if (app.user.role == 'ROLE_ADMIN') or (app.user.login == users.login) %} #}
-            <a href="{{ path('account_edit') }}" class="btn btn-primary">Editer mon profil</a>
-            {# {% endif %} #}
-            <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
-        </div> 
     </div>  
 </div>
 {% endblock %}

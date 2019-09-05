@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Halgueronne - Encyclopédie{% endblock %}
+
+{% block body %}
+    <div id="show-encyclopedia" class="slide encyclopedia">
+        <div class="container">
+            {% include 'partials/title.html.twig' %}
+            <div class="row">
+                <h2>{{post.title}}</h2>
+                <div class="container-content">
+                    {{post.post}}
+                </div>
+                <div id="post_informations" class="card-footer w-100 text-muted">
+                    <p class="card-text">
+                        <small>Auteur : {{post.author.login}}</small><br>
+                    <small class="text-muted">Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
+                    <small>Dernière mise à jour le {{post.updateDate | date('d/m/Y')}} à {{post.updateDate | date('H:m:s')}}</small></p>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('encyclopedia_edit_post',{'slug':post.slug}) }}" class="mt-4"><button class="btn btn-info">Editer ce poste</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -73,9 +73,15 @@ class Users implements UserInterface
      */
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EncyclopediaPosts", mappedBy="author", orphanRemoval=true)
+     */
+    private $encyclopediaPosts;
+
     public function __construct()
     {
         $this->characters = new ArrayCollection();
+        $this->encyclopediaPosts = new ArrayCollection();
     }
 
     /**
@@ -269,6 +275,37 @@ class Users implements UserInterface
     public function setPosts(int $posts): self
     {
         $this->posts = $posts;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EncyclopediaPosts[]
+     */
+    public function getEncyclopediaPosts(): Collection
+    {
+        return $this->encyclopediaPosts;
+    }
+
+    public function addEncyclopediaPost(EncyclopediaPosts $encyclopediaPost): self
+    {
+        if (!$this->encyclopediaPosts->contains($encyclopediaPost)) {
+            $this->encyclopediaPosts[] = $encyclopediaPost;
+            $encyclopediaPost->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEncyclopediaPost(EncyclopediaPosts $encyclopediaPost): self
+    {
+        if ($this->encyclopediaPosts->contains($encyclopediaPost)) {
+            $this->encyclopediaPosts->removeElement($encyclopediaPost);
+            // set the owning side to null (unless already changed)
+            if ($encyclopediaPost->getAuthor() === $this) {
+                $encyclopediaPost->setAuthor(null);
+            }
+        }
 
         return $this;
     }

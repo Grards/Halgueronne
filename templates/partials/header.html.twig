@@ -4,14 +4,35 @@
     <div class="bar" id="bar2"></div>
     <div class="bar" id="bar3"></div>
   </nav>
+  {# <a id="home-return" href="{{path('home')}}"><i id="compass" class="far fa-compass"></i></a> #}
 
   <div id="menu">
     <div id="menu-content">
-      <h2>Titre test</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id similique unde fugiat corporis sunt odit eos ipsum eligendi modi sint, cupiditate possimus necessitatibus doloribus molestias asperiores reprehenderit voluptatum impedit suscipit.</p>
-      <h2>Titre test</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id similique unde fugiat corporis sunt odit eos ipsum eligendi modi sint, cupiditate possimus necessitatibus doloribus molestias asperiores reprehenderit voluptatum impedit suscipit.</p>
-      <h2>Titre test</h2>
+      <h2><a href="{{ path('home')}}">Accueil</a></h2>
+        <p>Vous voulez retourner à la page d'accueil du site ? C'est par ici.</p>
+      <h2><a href="{{ path('encyclopedia')}}">Encyclopédie</a></h2>
+        <p>Que ce soit votre première visite ou non, cette section apportera de nombreuses réponses à vos questions sur Halgueronne, son univers et son jeu de rôles.</p>
+      <h2><a href="{{ path('characters_list') }}">Les personnages</a></h2>
+        <p>Vous trouverez ici tous les personnages existants.<br>
+      {% if app.user %}
+      <h2><a href="{{ path('characters',{'slug' :app.user.slug}) }}">Vos fiches</a></h2>
+        <p>Sont regroupées ici toutes vos fiches de personnages, que vous avez créées.<br>
+        Vous pouvez les y consulter, les éditer et les retirer de votre vue.</p>  
+      {# <h2>Le forum</h2>
+        <p>Venez discuter avec les membres de notre communauté et une fois que votre fiche de personnage aura été créée, vous pourrez participer au jeu de rôles.</p>
+      <h2>Vos badges</h2>
+        <p>La liste de vos haut-faits et réussites au travers du jeu.</p> #}
+      {% else %}
+        <a id="connexion-reminder" href="{{ path('account_login') }}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">Connectez-vous</a>
+      {% endif %}
+      {% if app.user %}
+        {% if app.user.role == 'ROLE_ADMIN' %}
+          <div id="menu-administration">
+            <h2><a href="{{ path('admin') }}">Administration</a></h2>
+            <p>Pour administrer le site, rajouter des informations à l'encyclopédie, gérer les utilisateurs et fiches de personnages, etc ...</p>
+          </div>
+        {% endif %}
+      {% endif %}
     </div>
   </div>
 
@@ -21,9 +42,6 @@
       <div id="connexion-user">
         <div id="connexion-nav">
           <div id="connexion-nav-list">
-            {% if app.user.role == 'ROLE_ADMIN' %}
-              <a href="{{ path('admin') }}">Admin</a>
-            {% endif %}
             <a href="{{ path('account_profile',{'slug' :app.user.slug}) }}">Profil</a>
             <a href="{{ path('account_logout') }}">Déconnexion</a>
           </div>

@@ -1,0 +1,63 @@
+#admin-encyclopedia-post-page{
+
+    h2{
+        margin-bottom: 30px;
+        color: whitesmoke;
+    }
+
+    .ewrapper{
+        width: 100%;
+
+        .toolbar{
+            a {
+                color: #000;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: #e9ecef;
+                border: 1px solid #ced4da;
+                color: #495057;
+                border-radius: 3px;
+                padding: 5px 10px;
+            }
+
+            a:hover{
+                background-color: #ced4da;
+            }
+        }
+    
+        .editable {
+            font-family: Verdana;
+            font-size: 11px;
+            padding: 10px;
+            background-color: whitesmoke;
+            min-height: 400px;
+            min-width: 80%;
+        }
+
+        #toolbar [data-wysihtml-action] {
+            float: right;
+        }
+        
+        .wysihtml-command-active {
+        font-weight: bold;
+        }
+        
+        [data-wysihtml-dialog] {
+        margin: 5px 0 0;
+        padding: 5px;
+        border: 1px solid #666;
+        }
+        
+        a[data-wysihtml-command-value="red"] {
+        color: red !important;
+        }
+        
+        a[data-wysihtml-command-value="green"] {
+        color: green !important;
+        }
+        
+        a[data-wysihtml-command-value="blue"] {
+        color: blue !important;
+        }
+    }
+}

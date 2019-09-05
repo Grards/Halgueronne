@@ -48,52 +48,47 @@ Characters:
     slug (VAR - 255)
     user (INT - 11) -> ManyToOne // Plusieurs personnages pour un utilisateur. (Mais via leur rang, les MJ's pourront avoir accès à TOUS les peronnages + édition, etc...)
 
-races:
+Races:
     id (INT - 11)
-    titre (VAR - 75)
+    title (VAR - 75)
     description (TEXT)
-    image (VAR - 255)
-    slug (VAR - 255)
-    personnage (INT - 11) -> OneToMany // Une même race pour plusieurs personnages.
+    picture (VAR - 255)
+    character_race (INT - 11) -> OneToMany // Une même race pour plusieurs personnages.
 
-classes:
+Classes:
     id (INT - 11)
-    titre (VAR - 75)
+    title (VAR - 75)
     description (TEXT)
-    image (VAR - 255)
-    slug (VAR - 255)
-    personnage (INT - 11) -> OneToMany // Une même classe pour plusieurs personnages.
+    picture (VAR - 255)
+    character_classe (INT - 11) -> OneToMany // Une même classe pour plusieurs personnages.
 
-blessures:
+Injuries:
     id (INT - 11)
-    titre (VAR - 75)
-    effet (TEXT)
-    image (VAR - 255)
-    slug (VAR - 255)
-    personnage (INT - 11) -> ManyToMany // Plusieurs blessures pour plusieurs personnages.
-
-competences:
-    id (INT - 11)
-    titre (VAR - 75)
+    title (VAR - 75)
     description (TEXT)
-    image (VAR - 255)
-    slug (VAR - 255)
-    personnage (INT - 11) -> ManytToMany // Plusieurs compétences pour plusieurs personnages.
+    picture (VAR - 255)
+    character_injury (INT - 11) -> ManyToMany // Plusieurs blessures pour plusieurs personnages.
 
-sorts:
+Skills:
     id (INT - 11)
-    titre (VAR - 75)
+    title (VAR - 75)
     description (TEXT)
-    image (VAR - 255)
-    slug (VAR - 255)
-    personnage (INT - 11) -> ManyToMany // Plusieurs sorts pour plusieurs personnages.
+    picture (VAR - 255)
+    character_skill (INT - 11) -> ManyToMany // Plusieurs compétences pour plusieurs personnages.
+
+Spells:
+    id (INT - 11)
+    title (VAR - 75)
+    description (TEXT)
+    picture (VAR - 255)
+    character_spell (INT - 11) -> ManyToMany // Plusieurs sorts pour plusieurs personnages.
 
 forums_categories:
     id (INT - 11)
     parent_id (INT - 11) NULL // Si NULL, ce forum est une section qui regroupe des catégories.
     titre (VAR - 75)
     description (TEXT) NULL
-    ordre (SMALLINT)
+    order (SMALLINT)
     date_creation (DATETIME)
     droit_acces (VAR - 75)
     visible (BOOL)
@@ -135,35 +130,30 @@ forums_historiques: // Historique des actions effectuées au niveau du forum (vi
     description (VAR - 255)
     date_creation (DATETIME)
 
-encyclopedie_categories:
+Encyclopedia_Categories:
     id (INT - 11)
-    parent_id (INT - 11) NULL // Si NULL, il s'agit d'une section qui regroupe des catégories.
-    titre (VAR - 75)
+    title (VAR - 100) // unique
     description (TEXT) NULL
-    couverture (VAR - 255) NULL // Si ce n'est pas une section, pas de couverture.
-    ordre (SMALLINT)
-    date_creation (DATETIME)
-    droit_acces (VAR - 75)
-    visible (BOOL)
+    cover (VAR - 255)
+    order_number (SMALLINT)
+    visible (BOOL) // Par défaut, Non. Si Non, visible uniquement en admin pour édition.
     slug (VAR - 255)
 
-encyclopedie_sujets:
+Encyclopedia_Topics:
     id (INT - 11)
-    titre (VAR - 75)
+    title (VAR - 100) // unique
     description (TEXT) NULL
-    ordre (SMALLINT)
-    date_creation (DATETIME)
-    visible (BOOL)
+    order_number (SMALLINT)
+    visible (BOOL) // Par défaut, Non. Si Non, visible uniquement en admin pour édition.
     slug (VAR - 255)
-    encyclopedie_categorie (INT - 11) -> ManyToOne // Plusieurs sujets pour une catégorie.
-
-encyclopedie_posts:
+    encyclopedia_category (INT - 11) -> ManyToOne // Plusieurs topics pour une catégorie.
+                                                                                                                                                                                    
+Encyclopedia_Posts:
     id (INT - 11)
-    titre (VAR - 75)
-    description (TEXT) NULL
-    ordre (SMALLINT)
-    date_creation (DATETIME)
-    visible (BOOL)
+    title (VAR - 100) // unique
+    creation_date (DATETIME)
+    update_date (DATETIME) // A la création, la même que creation date
+    visible (BOOL) // Par défaut, Non. Si Non, visible uniquement en admin pour édition.
     slug (VAR - 255)
-    encyclopedie_sujet (INT - 11) -> ManyToOne // Chaque sujet peut avoir plusieurs posts.
-    auteur (INT - 11) -> OneToOne // Chaque post ne peut avoir qu'un seul auteur.
+    encyclopedia_topic (INT - 11) -> ManyToOne // Plusieurs posts pour un topic.
+    author (INT - 11) -> ManyToOne // Plusieurs postes pour un auteur.
