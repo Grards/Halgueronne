@@ -3,40 +3,42 @@
 {% block title %}Halgueronne - Liste des utilisateurs{% endblock %}
 
 {% block body %}
-<div id="admin_user_list" class="container">
-    {% include 'partials/title.html.twig' %}
-    <div class="row mb-4">
-        <h2>Liste des utilisateurs</h2>
-    </div>
-    <div class="container-content mb-5">
-        {% for user in users %}
-            <div class="row">
-                <h3>{{ user.login }}</h3>
-            </div>
-            <div class="row">
-                <div><img class="users-list-avatar" src="{{ user.avatar }}" alt="Avatar de l'utilisateur"></div>
-            </div> 
-            <div class="row">
-                <ul>
-                    <li><b>Mail :</b> {{ user.mail }}</li>
-                    {% if user.role == 'ROLE_ADMIN' %}
-                        <li><b>Role :</b> <span class="bg-danger text-white">ADMIN</span></li>
-                    {% elseif user.role == 'ROLE_USER' %}
-                        <li><b>Role :</b> Utilisateur</li>
-                    {% else %}
-                        <li><b>Role :</b> {{ user.role }}</li>
-                    {% endif %}
-                    
-                    {# <li>Posts : {{user.posts }}</li> #}
-                </ul>
-            </div>
-            <div class="row mb-4">
-                <a href="{{ path('account_profile', {'slug' : user.slug}) }}" class="btn btn-info mr-3">Voir utilisateur</a>
-                <a href="{{ path('admin_user_delete', {'slug' : user.slug}) }}" class="btn btn-danger">Supprimer utilisateur</a>
-            </div> 
-        {% endfor %}
+<div id="admin-users-list-page" class="slide pb-5">
+    <div class="container">
+        {% include 'partials/title.html.twig' %}
         <div class="row">
-            <a href="{{ path('admin')}}" class="btn btn-danger">Accueil Administration</a>
+            <h2>Liste des utilisateurs</h2>
+        </div>
+        <div class="container-content">
+            {% for user in users %}
+                <div class="row">
+                    <h3>{{ user.login }}</h3>
+                </div>
+                <div class="row">
+                    <div><img class="users-list-avatar" src="{{ user.avatar }}" alt="Avatar de l'utilisateur"></div>
+                </div> 
+                <div class="row">
+                    <ul>
+                        <li><b>Mail :</b> {{ user.mail }}</li>
+                        {% if user.role == 'ROLE_ADMIN' %}
+                            <li><b>Role :</b> <span class="bg-danger text-white">ADMIN</span></li>
+                        {% elseif user.role == 'ROLE_USER' %}
+                            <li><b>Role :</b> Utilisateur</li>
+                        {% else %}
+                            <li><b>Role :</b> {{ user.role }}</li>
+                        {% endif %}
+                        
+                        {# <li>Posts : {{user.posts }}</li> #}
+                    </ul>
+                </div>
+                <div class="row mb-4">
+                    <a href="{{ path('account_profile', {'slug' : user.slug}) }}" class="btn btn-info mr-3">Voir utilisateur</a>
+                    <a href="{{ path('admin_user_delete', {'slug' : user.slug}) }}" class="btn btn-danger">Supprimer utilisateur</a>
+                </div> 
+            {% endfor %}
+            <div class="row">
+                <a href="{{ path('admin')}}" class="btn btn-danger">Accueil Administration</a>
+            </div>
         </div>
     </div>
 </div>

@@ -3,11 +3,13 @@
 {% block title %}Halgueronne - Informations générales{% endblock %}
 
 {% block body %}
-<div id="posts-list-encyclopedia" class="slide encyclopedia">
+<div id="encyclopedia-posts-page" class="slide encyclopedia pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
         <div class="row">
             <h2 class="mb-5">Liste des sujets concernant le topic : {{topic.title}}</h2>
+        </div>
+        <div class="row">
             {% for post in topic.encyclopediaPosts %}
                 {% if post.visible == 1 %}
                     <a href="{{ path('article_show', {'slug' : post.slug}) }}">

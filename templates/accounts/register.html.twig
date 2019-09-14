@@ -3,13 +3,20 @@
 {% block title %}Halgueronne - Inscription{% endblock %}
 
 {% block body %}
-<div id="register-page" class="slide">
+<div id="accounts-register-page" class="slide pb-5">
     <div class="container">
+        {% include 'partials/title.html.twig' %}
         <div class="container-content">
             <h1>Inscription</h1>
 
             {{ form_start(form) }}
-            {{ form_widget(form) }}
+                {{ form_row(form.login) }}
+                {{ form_row(form.password) }}
+                {{ form_row(form.passwordConfirm) }}
+                {{ form_row(form.mail) }}
+                {{ form_row(form.avatar) }}
+                {{ form_row(form.timeZone) }}
+                
                 <button type="submit" class="btn btn-success">M'inscrire</button>
                 <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
             {{ form_end(form) }}

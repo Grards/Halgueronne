@@ -37,6 +37,7 @@ class AppFixtures extends Fixture
         $spell_array=[];
 
         $adminUser = new Users();
+
         $adminUser->setLogin('Lucifer_Kira')
                     ->setPassword($this->encoder->encodePassword($adminUser, 'password'))
                     ->setMail('grard.steve@gmail.com')
@@ -64,6 +65,7 @@ class AppFixtures extends Fixture
                     ->setAvatar($avatar)
                     ->setRole('ROLE_USER')
                     ->setPosts(mt_rand(0,120));
+
 
             $manager->persist($users);
             $user_array[] = $users; /* pour remplir le tableau  */

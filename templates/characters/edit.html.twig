@@ -3,16 +3,19 @@
 {% block title %}Halgueronne - Edition fiche de personnage{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row">
-        <h1>Modifications de la fiche du personnage</h1>
-    </div>
-    <div class="row">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-            <button type="submit" class="btn btn-success">Editer le personnage</button>
-            <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
-        {{ form_end(form) }}
+<div id="characters-edit-page" class="slide pb-5">
+    <div class="container">
+        {% include 'partials/title.html.twig' %}
+        <div class="row">
+            <h2>Modifications de la fiche du personnage</h2>
+        </div>
+        <div class="row">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+                <button type="submit" class="btn btn-success">Editer le personnage</button>
+                <a href="{{ path('home')}}" class="btn btn-danger">Retour</a>
+            {{ form_end(form) }}
+        </div>
     </div>
 </div>
 {% endblock %}

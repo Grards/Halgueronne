@@ -25,6 +25,7 @@ class AccountsController extends AbstractController
      */
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
         $users = new Users();
+        
         $form = $this->createForm(RegisterType::class, $users);
         // Fonction qui permet de parcourir la requête et d'extraire les information du form
         $form->handleRequest($request);
@@ -61,7 +62,7 @@ class AccountsController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function accountEdit(Request $request, ObjectManager $manager,$id) {
+    public function accountEdit(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, $id) {
         $user = $this->getUser();
         $form = $this->createForm(RegisterType::class, $user);
 

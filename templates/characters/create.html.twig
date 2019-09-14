@@ -3,10 +3,12 @@
 {% block title %}Halgueronne - Création fiche de personnage{% endblock %}
 
 {% block body %}
-<div id="character-create-page" class="slide">
-    <div class="container mb-5">
+<div id="characters-create-page" class="slide pb-5">
+    <div class="container">
         {% include 'partials/title.html.twig' %}
-        <h2>Création de fiche de personnage</h2>
+        <div class="row">
+            <h2>Création de fiche de personnage</h2>
+        </div>
         <div class="container-content">
             {{ form_start(form) }}
                 <fieldset class="col-12 mb-4">    	

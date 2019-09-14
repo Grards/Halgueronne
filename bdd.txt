@@ -6,6 +6,7 @@ Users:
     avatar (VAR - 255) NULL
     role (VAR - 75)
     posts (INT - 11)
+    inscription_date
     slug (VAR - 255) // unique
 
 messages:

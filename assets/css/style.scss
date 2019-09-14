@@ -79,6 +79,7 @@ h2{
     text-align: center;
     font-size: 7vw;
     background: -webkit-gradient(linear, left top, left bottom, from(#facc7c), to(#d3962d));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(2px 2px #333);
@@ -90,6 +91,11 @@ h2{
     }
 }
 
+.users-list-avatar{
+    width: 200px;
+    height: 200px;
+}
+
 
 /* --- IMPORTS SCSS --- */
 @import "header.scss";
@@ -97,19 +103,20 @@ h2{
 @import "home/slide1.scss";
 @import "home/font-awesome.min.scss";
 @import "home/slide2.scss";
-/* --- IMPORT PUBLIC PAGES */
-@import "users.scss";
-@import "login.scss";
-@import "register.scss";
-@import "profile.scss";
+/* --- IMPORT LOGIN PAGES */
+@import "login/index.scss";
+/* --- IMPORT ACCOUNTS PAGES */
+@import "accounts/register.scss";
+@import "accounts/profile.scss";
 /* --- IMPORTS DIALOGUES SCSS --- */
 @import "dialogues/generalities.scss";
 @import "dialogues/dialogues-404.scss";
 /* --- IMPORTS ADMIN SCSS --- */
-@import "admin/home.scss";
-@import "admin/encyclopedia-post.scss";
-@import "admin/user-delete.scss";
-@import "admin/user-list.scss";
+@import "admin/index.scss";
+@import "admin/encyclopedia_new_post.scss";
+@import "admin/encyclopedia_edit_post.scss";
+@import "admin/user_delete.scss";
+@import "admin/user_list.scss";
 /* --- IMPORTS ERROR PAGES SCSS --- */
 @import "error/404.scss";
 @import "error/500.scss";

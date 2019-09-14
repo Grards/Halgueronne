@@ -3,10 +3,12 @@
 {% block title %}Halgueronne - Administration - Création de contenu{% endblock %}
 
 {% block body %}
-<div id="admin-encyclopedia-post-page" class="slide">
+<div id="characters-list-page" class="slide pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
-        <h2>Liste des personnages existants</h2>
+        <div class="row">
+            <h2>Liste des personnages existants</h2>
+        </div>
         <div class="row no-gutters">
             <form class="col-12" action="{{ path('characters_search') }}" method="GET">
                 <div class="input-group md-form form-sm form-1 pl-0 mb-5">

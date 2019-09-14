@@ -1,8 +1,10 @@
-#register-page{
-    background-image: url(../../public/img/woman-knight.jpg);
+#accounts-register-page{
+    background-image: url(../../../public/img/woman-knight.jpg);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+    height: auto;
+    min-height: 100%;
 
     .container-content{
         margin-top: 100px;

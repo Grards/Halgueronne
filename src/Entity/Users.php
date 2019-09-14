@@ -78,10 +78,30 @@ class Users implements UserInterface
      */
     private $encyclopediaPosts;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $inscriptionDate;
+
+    /**
+     * @ORM\Column(type="string", length=75)
+     */
+    private $timeZone;
+
     public function __construct()
     {
         $this->characters = new ArrayCollection();
         $this->encyclopediaPosts = new ArrayCollection();
+
+        /**
+         * La DateTime enregistrée dans la base de données est en heure UTC, en regard de la config du server et de PHP, configurés en heure UTC.
+         * Cette heure commune sera convertie à l'affichage pour les différents utilisateurs, selon leur TimeZone.
+         * Par défaut, on place la timeZone sur Paris.
+         * https://blog.elao.com/fr/dev/date-php-timezone-utc-pourquoi-est-ce-important/
+         */ 
+        
+        $this->inscriptionDate = new \DateTime();
+        $this->timeZone = 'Europe/Paris';
     }
 
     /**
@@ -306,6 +326,30 @@ class Users implements UserInterface
                 $encyclopediaPost->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInscriptionDate(): ?\DateTimeInterface
+    {
+        return $this->inscriptionDate;
+    }
+
+    public function setInscriptionDate(\DateTimeInterface $inscriptionDate): self
+    {
+        $this->inscriptionDate = $inscriptionDate;
+
+        return $this;
+    }
+
+    public function getTimeZone(): ?string
+    {
+        return $this->timeZone;
+    }
+
+    public function setTimeZone(string $timeZone): self
+    {
+        $this->timeZone = $timeZone;
 
         return $this;
     }

@@ -3,7 +3,7 @@
 {% block title %}Halgueronne - Profil utilisateur{% endblock %}
 
 {% block body %}
-<div id="profile-page" class="slide">
+<div id="accounts-profile-page" class="pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
         <div class="row mb-4">
@@ -24,14 +24,13 @@
             <div class="row">
                 <ul>
                     <li><b>Email :</b> {{ users.mail }}</li>
-                    {# <li>Message : {{users.posts }}</li> #}
-                    {# <li>Personnages :</li>
+                    <li><b>Message :</b> {{users.posts }}</li>
+                    <li><b>Inscription :</b> le {{ users.inscriptionDate|date('d/m/Y à H:m:s', users.timeZone) }}</li>
+                    <li><b>Fuseau horaire :</b> {{users.timeZone}}</li>
+                    <li><b>Personnages :</b></li>
                     {% if users.characters == NULL %}
-                        <form>
-                            <select name="characters_list" size="1">
-                                <option> - </option>
-                            </select>
-                        </form>
+                        <i>Pas de personnage actuellement.</i>
+                        <a href="{{ path('character_create') }}"><button type="button" class="btn btn-primary">En créer un</button></a>
                     {% else %}
                         <form>
                             <select name="characters_list" size="1">
@@ -40,11 +39,10 @@
                                 {% endfor %}
                             </select>
                         </form>
-                    {% endif %} #}
-                    
+                    {% endif %}
                 </ul>
             </div>
-            <div class="row">
+            <div class="row mt-4">
                 {# Empêche un utilisateur accédant à la page de profil d'un tiers, d'avoir accès au bouton "Editer mon profil". Seuls le propriétaire et un admin peuvent le voir. #}
                 {# {% if (app.user.role == 'ROLE_ADMIN') or (app.user.login == users.login) %} #}
                 <a href="{{ path('account_edit',{'id':users.id}) }}" class="btn btn-info mr-4">Editer mon profil</a>

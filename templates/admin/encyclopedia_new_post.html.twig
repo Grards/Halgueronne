@@ -3,10 +3,12 @@
 {% block title %}Halgueronne - Administration - Création de contenu{% endblock %}
 
 {% block body %}
-<div id="admin-encyclopedia-post-page" class="slide">
+<div id="admin-encyclopedia-new-post-page" class="slide pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
-        <h2>Création de contenu pour l'encyclopédie</h2>
+        <div class="row">
+          <h2>Création de contenu pour l'encyclopédie</h2>
+        </div>
         <div class="container-content ">
           {{ form_start(form, {'attr': {'class': 'ewrapper'}}) }}
             {{ form_row(form.encyclopediaTopic) }}
