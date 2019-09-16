@@ -94,6 +94,7 @@ class CharacterType extends AbstractType
                 'choice_label' => function($skills){
                     return $skills->getTitle()." : ".$skills->getDescription();
                 },
+                'label' => 'Compétences',
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false

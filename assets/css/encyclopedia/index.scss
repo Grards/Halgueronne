@@ -1,45 +1,203 @@
 #encyclopedia-index-page{
-
-    .last-updates{
-
-        h2{
-            margin-top: 25px;
-            margin-bottom: 25px;
-        }
-
-        .card:hover .card-footer{
-            background-color: rgb(103, 201, 201);
-        }
-
-        .card:hover .card-footer .card-text{
-            color: whitesmoke;
-        }
-    }
-
-    .headings{
-
-        h2{
-            margin-top: 25px;
-            margin-bottom: 25px;
-        }
-    }
-
     ul {
         list-style-type: none;
     }
-
-    #categories_list{
-        font-weight: bold;
-
-        li{
-            :hover{
-                color: cadetblue;
+    .last-updates{
+        h2{
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .card-deck{
+            .card{
+                overflow: hidden;
+                transition: all .5s;
+                -webkit-transition: all .5s;
+                -moz-transition: .5s all;
+                -o-transition: .5s all;
+                img{
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                }
+                .reverse{
+                    -webkit-transform: scale(1.25) scaleX(-1);
+                    transform: scale(1.25) scaleX(-1);
+                }
+            }
+            .card:hover{
+                z-index: 3;
+                transform: scale(1.06);
+                box-shadow: 0 11px 30px 0 rgba(0,0,0,.75);
+            }
+            .card:hover img{
+                filter: grayscale(0);
+            }
+            .card:hover .card-img-overlay{
+                background: $card-onecolore;
+            }
+            .card-text{
+                visibility: hidden;
+            }
+            .card:hover .card-text{
+                visibility: visible;
+            }
+            .card-img-overlay{
+                height: 100%;
+                background: $card-bicolore;
+                .card-content{
+                    display: flex;
+                    height: 100%;
+                    flex-direction: column; /* direction d'affichage verticale */
+                    justify-content: center; /* alignement vertical */
+                    line-height: 1;
+                    h4, p{
+                        color: $gold-light;
+                        filter: drop-shadow(1px 2px #1a1a1a);
+                    }
+                    h4{
+                        font-size: 3em;
+                    }
+                    p{
+                        font-size: 1.35em;
+                    }
+                }
+            }
+        }
+        .maj {
+            .card-title{
+                // background-color : $gold-light;
+                padding-top: 5px;
+            }
+            hr{
+                margin-top: 0;
+            }
+            .card:hover .card-footer{
+                background-color: $gold-dark;
+            }
+            .card:hover .card-footer .card-text{
+                color: whitesmoke;
+                // filter: drop-shadow(1px 1px #1a1a1a);
+            }
+            .alert-new-article{
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            .card:hover .alert-new-article{
+                display: inline-block;
+                color: #FFFED6 !important;
+                -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+                animation: heartbeat 1.5s ease-in-out infinite both;
+                @-webkit-keyframes heartbeat {
+                    from {
+                    -webkit-transform: scale(1);
+                            transform: scale(1);
+                    -webkit-transform-origin: center center;
+                            transform-origin: center center;
+                    -webkit-animation-timing-function: ease-out;
+                            animation-timing-function: ease-out;
+                    }
+                    10% {
+                    -webkit-transform: scale(0.91);
+                            transform: scale(0.91);
+                    -webkit-animation-timing-function: ease-in;
+                            animation-timing-function: ease-in;
+                    }
+                    17% {
+                    -webkit-transform: scale(0.98);
+                            transform: scale(0.98);
+                    -webkit-animation-timing-function: ease-out;
+                            animation-timing-function: ease-out;
+                    }
+                    33% {
+                    -webkit-transform: scale(0.87);
+                            transform: scale(0.87);
+                    -webkit-animation-timing-function: ease-in;
+                            animation-timing-function: ease-in;
+                    }
+                    45% {
+                    -webkit-transform: scale(1);
+                            transform: scale(1);
+                    -webkit-animation-timing-function: ease-out;
+                            animation-timing-function: ease-out;
+                    }
+                }
+                @keyframes heartbeat {
+                    from {
+                    -webkit-transform: scale(1);
+                            transform: scale(1);
+                    -webkit-transform-origin: center center;
+                            transform-origin: center center;
+                    -webkit-animation-timing-function: ease-out;
+                            animation-timing-function: ease-out;
+                    }
+                    10% {
+                    -webkit-transform: scale(0.91);
+                            transform: scale(0.91);
+                    -webkit-animation-timing-function: ease-in;
+                            animation-timing-function: ease-in;
+                    }
+                    17% {
+                    -webkit-transform: scale(0.98);
+                            transform: scale(0.98);
+                    -webkit-animation-timing-function: ease-out;
+                            animation-timing-function: ease-out;
+                    }
+                    33% {
+                    -webkit-transform: scale(0.87);
+                            transform: scale(0.87);
+                    -webkit-animation-timing-function: ease-in;
+                            animation-timing-function: ease-in;
+                    }
+                    45% {
+                    -webkit-transform: scale(1);
+                            transform: scale(1);
+                    -webkit-animation-timing-function: ease-out;
+                            animation-timing-function: ease-out;
+                    }
+                }
             }
         }
     }
+    .headings{
+        h2{
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .card{
+            #categories_list{
+                font-weight: bold;
+                .categories{
+                    .categories_content{
+                        // display: none;
+                        margin-left: 15px;
+                        font-weight: normal;
+                        margin-bottom: 20px;
 
-    #topics_list{
-        margin-left: 15px;
-        font-weight: normal;
+                        .posts-titles{
+                            width: 100%;
+                            
+                            a:hover{
+                                background-color: $gold-light;
+                            }
+                            span{
+                                width: 40px;
+                                float: left;
+                                text-align: center;
+                                line-height: 22px;
+                                font-family: "Geizer";
+                                font-size: 20px;
+                                border-radius: 4px;
+                                letter-spacing: 1px;
+                            }
+                            a{
+                                margin-left: 5px;
+                                padding-left: 5px;
+                                display: inline-block;
+                                width: 80%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -6,7 +6,12 @@ nav{
     top: 25px;
     left: 25px;
     z-index: 2000;
+
     cursor: pointer;
+    // Small devices (landscape phones, 576px and up)
+    @media (max-width: 767.98px) {
+        left: 10px;
+    }
 }
 
 #home-return{
@@ -63,6 +68,7 @@ nav{
     box-shadow: none;
 }
 
+
 #menu{
     width: 40%;
     height: 100%;
@@ -91,9 +97,22 @@ nav{
         width: 80%;
         margin-right: auto;
         margin-left: auto;
-        margin-top: 100px;
+        margin-top: 75px;
         margin-bottom: auto;
         padding: 25px;
+
+        h2{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            margin-bottom: 10px;
+            font-size: 2em;
+            text-transform : uppercase;
+            filter: none;
+            
+            // Small devices (landscape phones, 576px and up)
+            @media (max-width: 767.98px) {
+                font-size: 1.5em;
+            }    
+        }
 
         #menu-administration{
             margin-top: 50px;
@@ -141,6 +160,7 @@ nav{
         color: whitesmoke;
         text-align: justify;
         word-break: break-word;
+        margin-bottom: 20px;
     }
 }
 

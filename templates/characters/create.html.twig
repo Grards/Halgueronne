@@ -3,13 +3,13 @@
 {% block title %}Halgueronne - Création fiche de personnage{% endblock %}
 
 {% block body %}
-<div id="characters-create-page" class="slide pb-5">
+<div id="characters-create-page" class="pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
+        <div class="container-content">
         <div class="row">
             <h2>Création de fiche de personnage</h2>
         </div>
-        <div class="container-content">
             {{ form_start(form) }}
                 <fieldset class="col-12 mb-4">    	
                     <legend>Identité</legend>
@@ -56,24 +56,6 @@
                                     {{ form_row(form.races) }}
                                     {{ form_row(form.classes) }}
                                     {{ form_row(form.skills) }} 
-                                    {# <label for="skill-choice">Compétences</label>
-                                    <div class="custom-control custom-checkbox mb-4">
-                                        {% for skill in skills %}
-                                            <div class="custom-control custom-checkbox mb-1">
-                                                <input type="checkbox" class="custom-control-input" id="{{skill.id}}" name="skill" value="{{skill.id}}">
-                                                <label class="custom-control-label" for="{{skill.id}}" style="color:cadetblue; font-weight:bold;">{{skill.title}}</label> : <small><i>{{skill.description}}</i></small>
-                                            </div>
-                                        {% endfor %}
-                                    </div> #}
-                                    {# <label for="spell-choice">Sorts</label>
-                                    <div class="custom-control custom-checkbox mb-4">
-                                        {% for spell in spells %}
-                                            <div class="custom-control custom-checkbox mb-1">
-                                                <input type="checkbox" class="custom-control-input" id="{{spell.id}}" name="skill" value="{{spell.id}}">
-                                                <label class="custom-control-label" for="{{spell.id}}" style="color:cadetblue; font-weight:bold;">{{spell.title}}</label> : <small><i>{{spell.description}}</i></small>
-                                            </div>
-                                        {% endfor %}
-                                    </div> #}
                                 </div>
                             </div>
                         </div>
