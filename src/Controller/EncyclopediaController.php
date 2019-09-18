@@ -30,11 +30,11 @@ class EncyclopediaController extends AbstractController
 
     /**
      * Permet d'afficher la liste des posts en regard d'un topic en particulier
-     * @Route("/topic/{slug}", name="posts_list", schemes={"https"})
+     * @Route("/encyclopedie/topic/{categorySlug}/{topicSlug}", name="posts_list", schemes={"https"})
      */
-    public function topicsList(EncyclopediaPostsRepository $repo_posts, EncyclopediaTopicsRepository $repo_topics, $slug)
+    public function topicsList(EncyclopediaPostsRepository $repo_posts, EncyclopediaTopicsRepository $repo_topics, $categorySlug, $topicSlug)
     {
-        $topic = $repo_topics->findOneBySlug($slug);
+        $topic = $repo_topics->findOneBySlug($topicSlug);
         return $this->render('encyclopedia/posts.html.twig',[
             'topic' => $topic,
         ]);
@@ -42,11 +42,11 @@ class EncyclopediaController extends AbstractController
 
     /**
      * Permet d'afficher un article en particulier de l'encyclopédie
-     * @Route("/article/{slug}", name="article_show", schemes={"https"})
+     * @Route("/encyclopedie/post/{categorySlug}/{topicSlug}/{postSlug}", name="post_show", schemes={"https"})
      */
-    public function postShow(EncyclopediaPostsRepository $repo_posts, $slug, UsersRepository $repo_users)
+    public function postShow(EncyclopediaPostsRepository $repo_posts, UsersRepository $repo_users, $categorySlug, $topicSlug, $postSlug)
     {
-        $post = $repo_posts->findOneBySlug($slug);
+        $post = $repo_posts->findOneBySlug($postSlug);
         $users = $repo_users->findAll();
         return $this->render('encyclopedia/show.html.twig', [
             'post' => $post,

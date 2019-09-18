@@ -21,7 +21,7 @@ class EncyclopediaPostsRepository extends ServiceEntityRepository
 
     public function findLastPostsVisibles($number){
         return $this->createQueryBuilder('p')
-                    ->select('p.title as title, p.post as post, p.creationDate as creationDate, p.updateDate as updateDate, p.visible as visible, p.slug as slug, c.cover as cover')
+                    ->select('p.title as title, p.post as post, p.creationDate as creationDate, p.updateDate as updateDate, p.visible as visible, p.slug as postSlug, t.slug as topicSlug, c.slug as categorySlug , c.cover as categoryCover')
                     ->join('p.encyclopediaTopic', 't')
                     ->join('t.encyclopediaCategory', 'c')
                     ->where('p.visible = 1')

@@ -103,7 +103,7 @@ class AdminController extends AbstractController
             );
 
             // Redirection vers la page désirée une fois le formulaire envoyé.
-            return $this->redirectToRoute('article_show',['slug'=>$post->getSlug()]);
+            return $this->redirectToRoute('post_show',['categorySlug'=>$post->getEncyclopediaTopic()->getEncyclopediaCategory()->getSlug(),'topicSlug'=>$post->getEncyclopediaTopic()->getSlug(),'postSlug'=>$post->getSlug()]);
         }
 
         return $this->render('admin/encyclopedia_edit_post.html.twig', [
@@ -146,7 +146,7 @@ class AdminController extends AbstractController
             );
 
             // Redirection vers la page désirée une fois le formulaire envoyé.
-            return $this->redirectToRoute('article_show',['slug'=>$post->getSlug()]);
+            return $this->redirectToRoute('post_show',['categorySlug'=>$post->getEncyclopediaTopic()->getEncyclopediaCategory()->getSlug(),'topicSlug'=>$post->getEncyclopediaTopic()->getSlug(),'postSlug'=>$post->getSlug()]);
         }
 
         return $this->render('admin/encyclopedia_new_post.html.twig', [

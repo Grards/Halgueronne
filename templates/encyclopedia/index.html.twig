@@ -109,11 +109,11 @@
                     <div class="maj row">
                         {% for post in last_3_posts %}
 
-                                <a href="{{ path('article_show', {'slug' : post.slug}) }}" class="w-100">
+                                <a href="{{ path('post_show', {'categorySlug' : post.categorySlug , 'topicSlug' : post.topicSlug , 'postSlug' : post.postSlug}) }}" class="w-100">
                                     <div class="card">
                                         <div class="row no-gutters">
                                             <div class="col-auto">
-                                                <img src="{{post.cover}}" class="img-fluid" alt="">
+                                                <img src="{{post.categoryCover}}" class="img-fluid" alt="">
                                             </div>
                                             <div class="col">
                                                 <div class="card-block px-2">
@@ -131,7 +131,7 @@
                                             <p class="card-text">
                                                 {# Si la date de création du poste remonte à moins de 7 jours, le poste est indiqué comme "nouveau" #}
                                                 {% if leftDays < 14 %}
-                                                    <small><span class="alert-new-article text-danger"><i class="fas fa-scroll"></i> Nouveau !</span> Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
+                                                    <small><span class="alert-new-post text-danger"><i class="fas fa-scroll"></i> Nouveau !</span> Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
                                                 {% else %}
                                                     <small>Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
                                                 {% endif %}
@@ -186,7 +186,7 @@
                                                         {% else %}
                                                             <span class="bg-danger text-white" style="visibility:hidden;"><small>0</small></span>
                                                         {% endif %}
-                                                    <a href="{{ path('posts_list',{'slug':topic.slug}) }}">{{topic.title}}</a></li>                                      
+                                                    <a href="{{ path('posts_list',{'categorySlug' : topic.encyclopediaCategory.slug, 'topicSlug':topic.slug}) }}">{{topic.title}}</a></li>                                      
                                                 {% endif %}
                                             {% endfor %}
                                         </ul>

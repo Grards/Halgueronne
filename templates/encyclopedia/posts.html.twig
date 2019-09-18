@@ -12,7 +12,7 @@
         <div class="row">
             {% for post in topic.encyclopediaPosts %}
                 {% if post.visible == 1 %}
-                    <a href="{{ path('article_show', {'slug' : post.slug}) }}">
+                    <a href="{{ path('post_show', {'categorySlug' : post.encyclopediaTopic.encyclopediaCategory.slug , 'topicSlug' : post.encyclopediaTopic.slug , 'postSlug' : post.slug}) }}">
                         <div class="card">
                             <div class="row no-gutters">
                                 <div class="col-12">
