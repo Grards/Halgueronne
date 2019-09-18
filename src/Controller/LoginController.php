@@ -18,7 +18,7 @@ class LoginController extends AbstractController
         // La méthode getLastUsername renvoie le dernier login introduit par l’utilisateur, afin de ne pas devoir le retapper en cas d'erreur de mot de passe
         $login = $utils->getLastUsername();
 
-        return $this->render('login/index.html.twig', [
+        return $this->render('login/login.html.twig', [
             // S'il n'y a pas d'erreur retournée par getLastAuthenticationError, sa valeur est dès lors nulle.
             'hasError' => $errors!== null,
             'login' => $login
