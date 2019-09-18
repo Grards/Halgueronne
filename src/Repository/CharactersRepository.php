@@ -19,32 +19,6 @@ class CharactersRepository extends ServiceEntityRepository
         parent::__construct($registry, Characters::class);
     }
 
-    /*
-    * Retourne tous les personnages qui appartiennent à un utilisateur passé en paramètre
-    */
-    
-    public function findCharactersOfUser($user){
-        return $this->createQueryBuilder('u')
-                    ->select('c.lastname as nom, c.firstname as prenom, c.gender as genre, c.picture as image, c.birthDay as naissJ, c.birthMonth as naissM, c.birthYear as naissA, c.deathDay as mortJ, c.deathMonth as mortM, c.deathYear as mortA, c.background as bio, c.user as utilisateur')
-                    ->join('u.characters', 'c')
-                    ->groupBy($user)
-                    ->orderBy('c.lastname','c.firstname','ASC')
-                    ->where('c.user' == $user)
-                    ->getQuery()
-                    ->getResult();
-    }
-
-    // public function findCharacterByName($name){
-    //     return $this->createQueryBuilder('c')
-    //                 ->select('c.lastname as nom, c.firstname prenom, c.slug as slug, c.picture as picture')
-    //                 ->where('c.lastname LIKE :nom')
-    //                 ->setParameter('nom', 'Paxton')
-    //                 ->orderBy('c.lastname','ASC')
-    //                 // ->addOrderBy('c.firstname','ASC')
-    //                 ->getQuery()
-    //                 ->getResult();
-    // }
-
     public function findCharacterByName($name){
         return $this->createQueryBuilder('c')
                     ->select('c.lastname as lastname, c.firstname as firstname, c.slug as slug, c.picture as picture')

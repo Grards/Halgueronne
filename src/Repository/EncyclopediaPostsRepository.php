@@ -19,6 +19,20 @@ class EncyclopediaPostsRepository extends ServiceEntityRepository
         parent::__construct($registry, EncyclopediaPosts::class);
     }
 
+    public function findLastPostsVisibles($number){
+        return $this->createQueryBuilder('p')
+                    ->select('p.title as title, p.post as post, p.creationDate as creationDate, p.updateDate as updateDate, p.visible as visible, p.slug as slug, c.cover as cover')
+                    ->join('p.encyclopediaTopic', 't')
+                    ->join('t.encyclopediaCategory', 'c')
+                    ->where('p.visible = 1')
+                    ->andWhere('t.visible = 1')
+                    ->andWhere('c.visible = 1')
+                    ->orderBy('p.updateDate','DESC')
+                    ->setMaxResults($number)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return EncyclopediaPosts[] Returns an array of EncyclopediaPosts objects
     //  */

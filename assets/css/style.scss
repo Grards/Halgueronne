@@ -22,8 +22,9 @@ $gold-dark : #d3962d;
 
 //backgrounds
 $gold-gradiant : -webkit-gradient(linear, left top, left bottom, from($gold-light), to($gold-dark)); 
-$card-bicolore : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 30%, rgba(0, 0, 0, 0.7) 30%);
-$card-onecolore : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 30%, rgba(0, 0, 0, 0) 30%);
+$card-bicolor : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 30%, rgba(0, 0, 0, 0.7) 30%);
+$card-onecolor : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 30%, rgba(0, 0, 0, 0) 30%);
+$card-onecolor-small : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 20%, rgba(0, 0, 0, 0) 20%);
 $gradiant-sky : -webkit-gradient(linear, left top, left bottom, from(#cce5ec), to(#5b6c7c));
 
 

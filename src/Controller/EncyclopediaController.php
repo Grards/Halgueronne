@@ -19,10 +19,12 @@ class EncyclopediaController extends AbstractController
         $encyclopedia_categories = $categories->findAll();
         $encyclopedia_topics = $topics->findAll();
         $last_posts = $posts->findBy(['visible' => 1], ['updateDate' => 'DESC'], 3);
+        $last_3_posts = $posts->findLastPostsVisibles(3);
         return $this->render('encyclopedia/index.html.twig', [
             'encyclopedia_categories' => $encyclopedia_categories,
             'encyclopedia_topics' => $encyclopedia_topics,
-            'last_posts' => $last_posts
+            'last_posts' => $last_posts,
+            'last_3_posts' => $last_3_posts
         ]);
     }
 
