@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Repository\UsersRepository;
+use App\Repository\TimelinesRepository;
 use App\Repository\EncyclopediaPostsRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EncyclopediaTopicsRepository;
+use App\Repository\TimelinesCategoriesRepository;
 use App\Repository\EncyclopediaCategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -35,8 +37,10 @@ class EncyclopediaController extends AbstractController
     public function topicsList(EncyclopediaPostsRepository $repo_posts, EncyclopediaTopicsRepository $repo_topics, $categorySlug, $topicSlug)
     {
         $topic = $repo_topics->findOneBySlug($topicSlug);
+        $posts = $repo_topics->findPostsOfTopicByUpdate($topicSlug);
         return $this->render('encyclopedia/posts.html.twig',[
             'topic' => $topic,
+            'posts' => $posts
         ]);
     }
 
@@ -51,6 +55,20 @@ class EncyclopediaController extends AbstractController
         return $this->render('encyclopedia/show.html.twig', [
             'post' => $post,
             'users' => $users
+        ]);
+    }
+
+    /**
+     * Permet d'afficher les frises chronologiques
+     * @Route("/encyclopedie/chronologie/{slug}", name="timelines", schemes={"https"})
+     */
+    public function timeLine(TimelinesCategoriesRepository $repo_timelines_categories, $slug)
+    {
+        $category = $repo_timelines_categories->findOneBySlug($slug);
+        $timelines = $repo_timelines_categories->findTimelineOrderedByDate($slug);
+        return $this->render('encyclopedia/timelines.html.twig',[
+            'category' => $category,
+            'timelines' => $timelines
         ]);
     }
 }

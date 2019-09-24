@@ -64,9 +64,7 @@
                 }
             }
 
-            .card:hover .card-img-overlay{
-                // background: $card-onecolor-small;
-                
+            .card:hover .card-img-overlay{              
                 -webkit-animation: slide 0.5s ease-in-out both;
                 animation: slide 0.5s ease-in-out both;
                 @-webkit-keyframes slide {
@@ -132,6 +130,9 @@
         .maj {
             .card-title{
                 padding-top: 5px;
+            }
+            .card-block .card-text{
+                padding-bottom: 30px;
             }
             hr{
                 margin-top: 0;

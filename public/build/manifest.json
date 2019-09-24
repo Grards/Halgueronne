@@ -18,6 +18,10 @@
   "build/fonts/fontawesome-webfont.woff2": "/build/fonts/fontawesome-webfont.97493d3f.woff2",
   "build/fonts/fontawesome-webfont.woff": "/build/fonts/fontawesome-webfont.d9ee23d5.woff",
   "build/fonts/fontawesome-webfont.eot": "/build/fonts/fontawesome-webfont.f7c2b4b7.eot",
+  "build/images/Knob Attention.png": "/build/images/Knob Attention.56304e9a.png",
+  "build/images/Knob Info.png": "/build/images/Knob Info.fca117ca.png",
+  "build/images/Knob Stop.png": "/build/images/Knob Stop.61f8e98d.png",
+  "build/images/Knob Valid Green.png": "/build/images/Knob Valid Green.4569dd0a.png",
   "build/images/arrow.svg": "/build/images/arrow.977a7a0a.svg",
   "build/images/banner.jpg": "/build/images/banner.e627b79d.jpg",
   "build/images/bars.svg": "/build/images/bars.4c5358d4.svg",
@@ -29,9 +33,5 @@
   "build/images/fontawesome-webfont.svg": "/build/images/fontawesome-webfont.139e74e2.svg",
   "build/images/losth.jpg": "/build/images/losth.5d95ef13.jpg",
   "build/images/town-arch.jpg": "/build/images/town-arch.f718efa3.jpg",
-  "build/images/woman-knight.jpg": "/build/images/woman-knight.f820f91a.jpg",
-  "build/images/Knob Attention.png": "/build/images/Knob Attention.56304e9a.png",
-  "build/images/Knob Info.png": "/build/images/Knob Info.fca117ca.png",
-  "build/images/Knob Stop.png": "/build/images/Knob Stop.61f8e98d.png",
-  "build/images/Knob Valid Green.png": "/build/images/Knob Valid Green.4569dd0a.png"
+  "build/images/woman-knight.jpg": "/build/images/woman-knight.f820f91a.jpg"
 }

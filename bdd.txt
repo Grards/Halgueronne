@@ -27,7 +27,7 @@ Badges:
     picture (VAR - 255)
     slug (VAR - 255)
 
-Badges_Obtained:
+BadgesObtained:
     id (INT - 11)
     date_obtained (DATETIME)
     badge (INT - 11) -> ManyToMany // Une seule obtention de badge par utilisateur
@@ -131,7 +131,7 @@ forums_historiques: // Historique des actions effectuées au niveau du forum (vi
     description (VAR - 255)
     date_creation (DATETIME)
 
-Encyclopedia_Categories:
+EncyclopediaCategories:
     id (INT - 11)
     title (VAR - 100) // unique
     description (TEXT) NULL
@@ -140,21 +140,37 @@ Encyclopedia_Categories:
     visible (BOOL) // Par défaut, Non. Si Non, visible uniquement en admin pour édition.
     slug (VAR - 255)
 
-Encyclopedia_Topics:
+EncyclopediaTopics:
     id (INT - 11)
-    title (VAR - 100) // unique
+    title (VAR - 100)
     description (TEXT) NULL
     order_number (SMALLINT)
     visible (BOOL) // Par défaut, Non. Si Non, visible uniquement en admin pour édition.
     slug (VAR - 255)
     encyclopedia_category (INT - 11) -> ManyToOne // Plusieurs topics pour une catégorie.
                                                                                                                                                                                     
-Encyclopedia_Posts:
+EncyclopediaPosts:
     id (INT - 11)
-    title (VAR - 100) // unique
+    title (VAR - 100)
     creation_date (DATETIME)
     update_date (DATETIME) // A la création, la même que creation date
     visible (BOOL) // Par défaut, Non. Si Non, visible uniquement en admin pour édition.
     slug (VAR - 255)
     encyclopedia_topic (INT - 11) -> ManyToOne // Plusieurs posts pour un topic.
     author (INT - 11) -> ManyToOne // Plusieurs postes pour un auteur.
+
+TimelinesCategories:
+    id (INT - 11)
+    category (VAR - 100) // unique
+    picture (VAR - 255) // NULL
+    description (TEXT) // NULL
+    slug (VAR - 255) // unique   
+
+Timelines:
+    id (INT - 11)
+    title (VAR - 100)
+    description (TEXT)
+    year (INT)
+    picture (VAR - 255) // NULL
+    timelineCategory (INT - 11) -> ManyToOne // Plusieurs timelines pour une catégorie de timelines.
+

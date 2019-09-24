@@ -9,9 +9,11 @@ use App\Entity\Skills;
 use App\Entity\Spells;
 use App\Entity\Classes;
 use App\Entity\Injuries;
+use App\Entity\Timelines;
 use App\Entity\Characters;
 use App\Entity\EncyclopediaPosts;
 use App\Entity\EncyclopediaTopics;
+use App\Entity\TimelinesCategories;
 use App\Entity\EncyclopediaCategories;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -196,7 +198,7 @@ class AppFixtures extends Fixture
 
             $title = $faker->sentence($nbWords = 6, $variableNbWords = true);
             $description = $faker->paragraph($nbSentences = 3, $variableNbSentences = true);
-            $cover = $faker->imageUrl($width = 400, $height = 200);
+            $cover = $faker->imageUrl($width = 1000, $height = 600);
 
             $encyclopedia_categories->setTitle($title)
                                     ->setDescription($description)
@@ -241,6 +243,38 @@ class AppFixtures extends Fixture
             $manager->persist($encyclopedia_categories);
         }
 
+        for($i=1; $i<=20; $i++){
+
+            $timelines_categories = new TimelinesCategories();
+
+            $category = $faker->sentence($nbWords = 4, $variableNbWords = true);
+            $description = $faker->text($maxNbChars = 200);
+            $picture = 'https://unsplash.it/400/400?image='.mt_rand(1,100);
+
+            
+            $timelines_categories->setCategory($category)
+                                 ->setDescription($description)
+                                 ->setPicture($picture);
+                  
+            $manager->persist($timelines_categories);
+
+            for($j=1; $j<=10; $j++){
+                $timelines = new Timelines();
+
+                $title = $faker->sentence($nbWords = 4, $variableNbWords = true);
+                $description = $faker->text($maxNbChars = 200);
+                $post = $faker->text($maxNbChars = 2000);
+                $picture = 'https://unsplash.it/1920/500?image='.mt_rand(1,100);
+
+                $timelines->setTitle($title)
+                          ->setDescription($description)
+                          ->setYear(mt_rand(-10000,1300))
+                          ->setPicture($picture)
+                          ->settimelineCategory($timelines_categories);
+
+                $manager->persist($timelines);
+            }
+        }
 
         // $badge_array=[]; /* pour ajouter des users à nos annonces automatiquement */
         // for($i=1; $i<=30; $i++){

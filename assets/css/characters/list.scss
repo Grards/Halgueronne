@@ -1,0 +1,37 @@
+#characters-list-page{
+    h2{
+        margin-left:15px;
+    }
+    .btn{
+        border-radius: 0;
+    }
+    h4{
+        background-color: $gold-light;
+        text-align: center;
+        margin-top: 5px;
+    }
+    a{
+        .characters-list-avatars{
+            position: relative;
+            height: 150px;
+            object-fit: cover;
+            object-position: center 30%;
+            margin: 5px 0px;
+        }
+        span{
+            position: absolute;
+            margin-top: 120px;
+            left: 25px;
+            z-index: 50;
+            color: whitesmoke;
+            filter: drop-shadow(2px 2px #333);
+            font-size: 1.25em;
+        }
+    }
+    a .characters-list-avatars:hover{
+        z-index: 3;
+        transform: scale(1.06);
+        box-shadow: 0 11px 10px 0 rgba(0,0,0,.75);
+    }
+    
+}

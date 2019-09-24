@@ -21,11 +21,13 @@ $gold-light : #facc7c;
 $gold-dark : #d3962d;
 
 //backgrounds
-$gold-gradiant : -webkit-gradient(linear, left top, left bottom, from($gold-light), to($gold-dark)); 
+$gold-gradiant : -webkit-gradient(linear, left top, left bottom, from($gold-light), to($gold-dark));
+$gold-gradiant-inverse : -webkit-gradient(linear, left bottom, left top, from($gold-light), to($gold-dark));
+$gold-gradiant-right: -webkit-gradient(linear, left center, right center, from($gold-light), to($gold-dark));
 $card-bicolor : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 30%, rgba(0, 0, 0, 0.7) 30%);
 $card-onecolor : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 30%, rgba(0, 0, 0, 0) 30%);
 $card-onecolor-small : linear-gradient(-70deg, rgba(250, 204, 124, 0.9) 20%, rgba(0, 0, 0, 0) 20%);
-$gradiant-sky : -webkit-gradient(linear, left top, left bottom, from(#cce5ec), to(#5b6c7c));
+$sky-gradiant : -webkit-gradient(linear, left bottom, left top, from(#cce5ec), to(#5b6c7c));
 
 
 /* --- GENERALITIES --- */
@@ -113,7 +115,7 @@ h3{
     padding: 15px 10px 15px 50px;
     background-repeat: no-repeat;
     background-position: 10px center;
-    font-family: Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+    font-family: Tahoma,Geneva,Arial,sans-serif;
     font-size: 13px;
 }
 .info {
@@ -164,7 +166,10 @@ h3{
 @import "encyclopedia/generalities.scss";
 @import "encyclopedia/index.scss";
 @import "encyclopedia/show.scss";
+@import "encyclopedia/timelines.scss";
 /* --- IMPORTS CHARACTERS PAGES SCSS --- */
 @import "characters/index.scss";
 @import "characters/show.scss";
 @import "characters/create.scss";
+@import "characters/list.scss";
+@import "characters/search.scss";

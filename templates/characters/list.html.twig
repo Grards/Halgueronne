@@ -1,37 +1,281 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Halgueronne - Administration - Création de contenu{% endblock %}
+{% block title %}Halgueronne - Personnages du jeu{% endblock %}
 
 {% block body %}
 <div id="characters-list-page" class="slide pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
-        <div class="row">
-            <h2>Liste des personnages existants</h2>
-        </div>
-        <div class="row no-gutters">
-            <form class="col-12" action="{{ path('characters_search') }}" method="GET">
-                <div class="input-group md-form form-sm form-1 pl-0 mb-5">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-white"
-                            aria-hidden="true"></i></span>
-                    </div>
-                    <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" name="search">
-                    <button type="submit">Rechercher</button>
-                </div>
-            </form>
-            {% for character in characters %}
-                <div class="col-xs-12 col-md-6 col-lg-3 pl-3 pr-3 mb-5">
-                    <a href="{{ path('character_show', {'slug' : character.slug}) }}" title="Voir détails du personnage">
-                        <div class="card ">
-                            <img src="{{character.picture}}" class="card-img-center" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{character.firstname}} {{character.lastname}}</h5>
-                            </div>
+        <div class="container-content">
+            <div class="row mb-4">
+                <h2>Les personnages du jeu</h2>
+            </div>
+            <div class="row">
+                <form class="col-xs-12 col-lg-6 m-auto" action="{{ path('characters_search') }}" method="GET">
+                    <div class="input-group md-form form-sm form-1 pl-0 mb-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-white"
+                                aria-hidden="true"></i></span>
                         </div>
-                    </a>
+                        <input class="form-control my-0 py-1" type="text" placeholder="Chercher un personnage ..." aria-label="Search" name="search">
+                        <button type="submit" class="btn btn-light">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-6 col-xl-4">
+                    <h4>A</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'A' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>B</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'B' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>C</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'C' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>D</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'D' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>E</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'E' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>F</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'F' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>G</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'G' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>H</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'H' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-            {% endfor %}
+                <div class="col-xs-12 col-lg-6 col-xl-4">
+                    <h4>I</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'I' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>J</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'J' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>K</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'K' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>L</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'L' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>M</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'M' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>N</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'N' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>O</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'O' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>P</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'P' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-xs-12 col-lg-6 col-xl-4">
+                    <h4>Q</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'Q' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>R</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'R' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>S</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'S' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>T</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'T' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>U</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'U' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>V</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'V' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>W</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'W' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>X</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'X' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>Y</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'Y' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                    <h4>Z</h4>
+                    {% for character in characters %}
+                        {% if character.lastname|first == 'Z' %}
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}">
+                            <img class="characters-list-avatars w-100" src="{{character.picture}}" alt="Avatar du personnage {{character.lastname}} {{character.firstname}}">
+                            <span>{{character.lastname}} {{character.firstname}}</span>
+                        </a><br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        
+            {# <div class="col-xs-12 col-md-6 col-lg-3 pl-3 pr-3 mb-5">
+                <a href="{{ path('character_show', {'slug' : character.slug}) }}" title="Voir détails du personnage">
+                    <div class="card ">
+                        <img src="{{character.picture}}" class="card-img-center" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{character.firstname}} {{character.lastname}}</h5>
+                        </div>
+                    </div>
+                </a>
+            </div> #}
+            
         </div>
     </div>
 </div>

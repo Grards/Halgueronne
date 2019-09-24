@@ -6,32 +6,34 @@
 <div id="characters-index-page" class="slide pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
-        <div class="row">
-            <h2 class="ml-3 mb-5">Vos fiches de personnages</h2>
+        <div class="container-content mb-5">
+            <div class="row">
+                <h2 class="ml-3 mb-5">Vos fiches de personnages</h2>
+                
+            </div>
+            <div class="row">
+                {% for character in users.characters %}
+                    <div class="col-xs-12 col-md-6 col-lg-4 col-xl-2 mb-5">
+                        <a href="{{ path('character_show', {'slug' : character.slug}) }}" title="Voir détails du personnage">
+                            <div class="card ">
+                                <img src="{{character.picture}}" class="card-img-center" alt="...">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{character.firstname}} {{character.lastname}}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div>
+                        <h4 class="col-12 text-center"><i>Oups ! On dirait que vous n'avez pas encore de personnage ...</i></h4>
+                        <a class="" href="{{ path('character_create') }}"><button type="button" class="col-xs-12 col-lg-4 offset-lg-4 btn btn-info btn-lg mt-5 mb-5">Créons un personnage !</button></a>
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="{{ path('home') }}" title="Retour"><button type="button" class="btn btn-info mr-3"><i class="fas fa-arrow-left"></i></button></a>
             {% if users.characters|length > 0 %}
                 <a class="col-12 mb-5" href="{{ path('character_create') }}"><div class="btn btn-info" role="button" aria-pressed="true">Créer un personnage</div></a>
             {% endif %}
-        </div>
-        <div class="row no-gutters">
-            
-            {% for character in users.characters %}
-                <div class="col-xs-12 col-md-6 col-lg-3 pl-3 pr-3 mb-5">
-                    <a href="{{ path('character_show', {'slug' : character.slug}) }}" title="Voir détails du personnage">
-                        <div class="card ">
-                            <img src="{{character.picture}}" class="card-img-center" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{character.firstname}} {{character.lastname}}</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            {% else %}
-                <div class="container-content">
-                    <h4 class="col-12 text-center"><i>Oups ! On dirait que vous n'avez pas encore de personnage ...</i></h4>
-                    <a class="" href="{{ path('character_create') }}"><button type="button" class="col-xs-12 col-lg-4 offset-lg-4 btn btn-info btn-lg mt-5 mb-5">Créons un personnage !</button></a>
-                </div>
-            {% endfor %}
-            
         </div>
     </div>  
 </div>

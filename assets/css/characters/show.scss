@@ -1,8 +1,16 @@
 #characters-show-page{
-    li {
-        list-style: none;
+    h2{
+        margin-left: 15px;
     }
-
+    ul{
+        margin-left: 15px;
+        li {
+            list-style: none;
+        }
+    }
+    #background-show{
+        margin-left: 15px;
+    }
     .dead-alert {
         color: whitesmoke;
         font-size: 5vw;

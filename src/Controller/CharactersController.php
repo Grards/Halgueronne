@@ -15,6 +15,7 @@ use App\Repository\CharactersRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security; 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -118,7 +119,7 @@ class CharactersController extends AbstractController
      * Permet d'éditer un personnage
      * Doit se trouver avant /profil/{slug}, sinon il va considérer cette route comme étant un slug.
      * @Route("/personnage/{slug}/modification", name="character_edit", schemes={"https"})
-     * @IsGranted("ROLE_USER")
+     * @Security("is_granted('ROLE_USER') and user === characters.getUser() or is_granted('ROLE_ADMIN')", message="Vous ne pouvez pas modifier un personnage que vous n'avez pas créé"),
      * @return Response
      */
     public function characterEdit(Characters $characters, Request $request, ObjectManager $manager){

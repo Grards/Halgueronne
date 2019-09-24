@@ -6,30 +6,86 @@
 <div id="encyclopedia-posts-page" class="slide encyclopedia pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
-        <div class="row">
-            <h2 class="mb-5">Liste des sujets concernant le topic : {{topic.title}}</h2>
-        </div>
-        <div class="row">
-            {% for post in topic.encyclopediaPosts %}
-                {% if post.visible == 1 %}
-                    <a href="{{ path('post_show', {'categorySlug' : post.encyclopediaTopic.encyclopediaCategory.slug , 'topicSlug' : post.encyclopediaTopic.slug , 'postSlug' : post.slug}) }}">
-                        <div class="card">
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <div class="card-block px-2">
-                                        <h4 class="card-title">{{post.title}}</h4>
-                                        <p class="card-text">{{post.post|slice(0,200)}} <small><i>... (Lire la suite)</i></small></p>
-                                    </div>
+        <div class="container-content">
+            <div class="row">
+                <div class="banner-categories col-12 p-0">
+                    <img class="w-100" src="{{topic.encyclopediaCategory.cover}}" alt="Image de la catégorie {{topic.encyclopediaCategory.title}}" style="max-height:300px; object-fit:cover;"></img>
+                    <div class="title-centered-category">{{topic.encyclopediaCategory.title}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <h2 class="mb-3">Topic : <small style="color:#444;">{{topic.title}}</small></h2>
+            </div>
+            <div class="row no-gutters mb-2">
+                <div class="card-deck">
+                    
+                    {% for post in posts %}
+                        {% if post.visible == 1 %}
+                            {# endDate and startDate are strings or DateTime objects #}
+                            {% set difference = date(post.creationDate).diff(date('now')) %}
+                            {% set difference2 = date(post.updateDate).diff(date('now')) %}
+                            {% set leftDays = difference.days %}
+                            {% set leftDays2 = difference2.days %}
+
+                            {# Si la date de création du poste remonte à moins de 7 jours, le poste est indiqué comme "nouveau" #}
+                            {% if leftDays < 14 or leftDays2 < 14 %}
+                                <!-- Card package -->
+                                <div class="col-xs-12 col-md-12 col-lg-12 col-xl-4">
+                                    <a href="{{ path('post_show', {'categorySlug' : post.categorySlug , 'topicSlug' : post.topicSlug , 'postSlug' : post.postSlug}) }}">
+                                        <!--Card-->
+                                        <div class="card testimonial-card mt-2 mb-3">
+                                            <!-- Background color -->
+                                            {% if leftDays < 14 %}
+                                                <div class="card-up color-new-2x"><span class="text-pop-up-top">New</span></div>
+                                            {% elseif leftDays2 < 14 %}
+                                                <div class="card-up color-maj-2x"><span class="text-pop-up-top">Maj</span></div>
+                                            {% endif %}
+                                            <!-- Avatar -->
+                                            <div class="avatar mx-auto white">
+                                                <img src="{{post.avatar}}" class="rounded-circle img-responsive" alt="Avatar de l'auteur">
+                                            </div>
+                                            <!-- Content -->
+                                            <div class="card-body">
+                                                <!-- Name -->
+                                                <h4 class="card-title font-weight-bold">{{post.title}}</h4>
+                                                <hr>
+                                                <!-- Quotation -->
+                                                <p><i class="fas fa-quote-left"></i> {{post.post|slice(0,200)}} <small><i>... (Lire la suite)</i></small></p>
+                                            </div>
+                                        </div>
+                                        <!--Card-->
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="card-footer w-100 text-muted">
-                                <p class="card-text"><small>Créé le {{post.creationDate | date('d/m/Y')}}</small><br>
-                                <small>Dernière mise à jour le {{post.updateDate | date('d/m/Y')}} à {{post.updateDate | date('H:m:s')}}</small></p>
-                            </div>
-                        </div>
-                    </a>
-                {% endif %}
-            {% endfor %}
+                            {% else %}
+                                <!-- Card package -->
+                                <div class="col-xs-12 col-md-12 col-lg-12 col-xl-4">
+                                    <a href="{{ path('post_show', {'categorySlug' : post.categorySlug , 'topicSlug' : post.topicSlug , 'postSlug' : post.postSlug}) }}">
+                                        <!--Card-->
+                                        <div class="card testimonial-card mt-2 mb-3">
+                                            <!-- Background color -->
+                                            <div class="card-up"></div>
+                                            <!-- Avatar -->
+                                            <div class="avatar mx-auto white">
+                                                <img src="{{post.avatar}}" class="rounded-circle img-responsive" alt="Avatar de l'auteur">
+                                            </div>
+                                            <!-- Content -->
+                                            <div class="card-body">
+                                                <!-- Name -->
+                                                <h4 class="card-title font-weight-bold">{{post.title}}</h4>
+                                                <hr>
+                                                <!-- Quotation -->
+                                                <p><i class="fas fa-quote-left"></i> {{post.post|slice(0,200)}} <small><i>... (Lire la suite)</i></small></p>
+                                            </div>
+                                        </div>
+                                        <!--Card-->
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <a href="{{path('encyclopedia')}}" title="Retour"><button type="button" class="btn btn-info"><i class="fas fa-arrow-left"></i></button></a>
         </div>
     </div>
 </div>

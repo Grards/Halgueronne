@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Halgueronne - Frise chronologique mondiale{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800'>
+    <!-- La fonction twig asset() permet de retrouver un fichier statique, peu importe sa version. Et donc de récupérer la css créée par npm run build -->
+    <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
+{% endblock %}
+
+{% block body %}
+<div id="timelines-page">
+    {% include 'partials/title.html.twig' %}
+    <h2 class="title">Frise chronologique<br><small>{{category.category}}</small></h2>
+    <div class="timeline">
+        <div class="swiper-container" style="height: {{timelines|length * 75}}px; min-height: 100%;">
+            <div class="swiper-wrapper">
+                {% for timeline in timelines %}
+                    <div class="swiper-slide" style="background-image: url({{timeline.picture}};" data-year="{{timeline.year}}">
+                        <div class="swiper-slide-content"><span class="timeline-year">{{timeline.year}}</span>
+                            <h4 class="timeline-title">{{timeline.title}}</h4>
+                            <p class="timeline-text">{{timeline.description}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('build/js/app.js')}}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js'></script>
+    <script>
+        var timelineSwiper = new Swiper ('.timeline .swiper-container', {
+        direction: 'vertical',
+        loop: false,
+        speed: 1600,
+        pagination: '.swiper-pagination',
+        paginationBulletRender: function (swiper, index, className) {
+            var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
+            return '<span class="' + className + '">' + year + '</span>';
+        },
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        breakpoints: {
+            768: {
+            direction: 'horizontal',
+            }
+        }
+        });
+    </script>
+{% endblock %}

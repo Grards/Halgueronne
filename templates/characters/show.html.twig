@@ -6,11 +6,12 @@
 <div id="characters-show-page" class="slide pb-5">
     <div class="container">
         {% include 'partials/title.html.twig' %}
-        <div class="row">
-            <h2>{{ character.firstname }} {{ character.lastname }}</h2>
-        </div>
-        <div class="container-content">
+        <div class="container-content mb-4">
             <div class="row">
+                <h2>{{ character.firstname }} {{ character.lastname }}</h2>
+            </div>
+        
+            <div class="row mb-4">
                 {% if character.picture == 'img/no-character-picture.png' %}
                     <div class="col-4 col-lg-2"><img class="" src="../../img/no-character-picture.png" alt="Image du personnage"></div>
                 {% else %}
@@ -20,8 +21,7 @@
                     <div class="dead-alert col-5 col-lg-10">
                         <p>Mort</p>
                         <i class="fas fa-skull mb-5"></i>    
-                    </div>
-                                  
+                    </div>       
                 {% endif %}
             </div> 
             <div class="row">
@@ -44,16 +44,24 @@
                     {% endif %}
                 </ul>
             </div>
-        </div>
-        <div class="row">
-            <div class="container-content mt-3 mb-5">
-                <h3>Biographie :</h3>
+        
+            <div id="background-show" class="row mb-4">
+                <h4>Biographie :</h4>
                 {{ character.background }}
             </div>
+            <a href="{{path('home')}}" title="Retour"><button type="button" class="btn btn-info"><i class="fas fa-arrow-left"></i></button></a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.id == character.user.id %}
+                <div class="row">
+                    <a href="{{ path('character_edit', {'slug' : character.slug}) }}" class="btn btn-primary mb-5">Editer mon personnage</a>
+                </div>
+            {% elseif is_granted('ROLE_ADMIN') %}
+                <div class="row">
+                    <a href="{{ path('character_edit', {'slug' : character.slug}) }}" class="btn btn-danger mb-5">Administrer ce personnage</a>
+                </div>
+            {% else %}
+                {# Tous les autres cas dont le fait de ne pas être connecté à sa session #}
+            {% endif %}
         </div>
-        <div class="row">
-            <a href="{{ path('character_edit', {'slug' : character.slug}) }}" class="btn btn-primary mb-5">Editer le personnage</a>
-        </div> 
     </div>  
 </div>
 {% endblock %}

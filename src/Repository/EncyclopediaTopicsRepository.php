@@ -19,6 +19,19 @@ class EncyclopediaTopicsRepository extends ServiceEntityRepository
         parent::__construct($registry, EncyclopediaTopics::class);
     }
 
+    public function findPostsOfTopicByUpdate($slug){
+        return $this->createQueryBuilder('t')
+                    ->select('p.title as title, p.post as post, p.creationDate as creationDate, p.updateDate as updateDate, p.visible as visible, p.slug as postSlug, t.slug as topicSlug, c.slug as categorySlug , c.cover as categoryCover, a.avatar as avatar')
+                    ->join('t.encyclopediaPosts', 'p')
+                    ->join('t.encyclopediaCategory', 'c')
+                    ->join('p.author', 'a')
+                    ->where('t.slug = :slug')
+                    ->setParameter('slug', $slug)
+                    ->orderBy('p.updateDate','DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return EncyclopediaTopics[] Returns an array of EncyclopediaTopics objects
     //  */
