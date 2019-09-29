@@ -12,13 +12,28 @@
 {% block body %}
 <div id="timelines-page">
     {% include 'partials/title.html.twig' %}
-    <h2 class="title">Frise chronologique<br><small>{{category.category}}</small></h2>
+    <h2 class="title d-none d-md-block">Frise chronologique<br><small>{{category.category}}</small></h2>
     <div class="timeline">
-        <div class="swiper-container" style="height: {{timelines|length * 75}}px; min-height: 100%;">
+        <div class="swiper-container d-none d-md-block" style="height: {{timelines|length * 75}}px; min-height: 100%;">
             <div class="swiper-wrapper">
                 {% for timeline in timelines %}
                     <div class="swiper-slide" style="background-image: url({{timeline.picture}};" data-year="{{timeline.year}}">
-                        <div class="swiper-slide-content"><span class="timeline-year">{{timeline.year}}</span>
+                        <div class="swiper-slide-content"><span class="timeline-year">An {{timeline.year}} {% if timeline.year < 0 %}av I.E.{% else %}ap I.E.{% endif %}</span>
+                            <h4 class="timeline-title">{{timeline.title}}</h4>
+                            <p class="timeline-text">{{timeline.description}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper-container d-block d-md-none" style="height: 100%;">
+            <div class="swiper-wrapper">
+                {% for timeline in timelines %}
+                    <div class="swiper-slide" style="background-color: #333;" data-year="{{timeline.year}}">
+                        <div class="swiper-slide-content"><span class="timeline-year">An {{timeline.year}} {% if timeline.year < 0 %}av I.E.{% else %}ap I.E.{% endif %}</span>
                             <h4 class="timeline-title">{{timeline.title}}</h4>
                             <p class="timeline-text">{{timeline.description}}</p>
                         </div>
@@ -54,6 +69,20 @@
             direction: 'horizontal',
             }
         }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            /* animation menu */
+            $(window).scroll(function() {
+                var height = $(window).scrollTop();
+                if(height < 50) {
+                    $(".general-title").css("opacity","1");
+                }
+                else if(height > 50){
+                    $(".general-title").css("opacity","0");
+                }
+            });         
         });
     </script>
 {% endblock %}
