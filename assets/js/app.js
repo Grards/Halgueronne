@@ -9,7 +9,6 @@ require('../../node_modules/bootstrap/dist/js/bootstrap.min.js');
 
 require('../../node_modules/@fortawesome/fontawesome-free/js/all.js');
 
-
 $(document).ready(function(){
             
     var etat=0;

@@ -14,7 +14,7 @@
             {{ form_row(form.encyclopediaTopic) }}
             {{ form_row(form.title, {'attr': {'class': 'mb-5'}}) }}
             
-            <div class="toolbar mb-4" style="display: block;">
+            <!-- <div class="toolbar mb-4" style="display: block;">
               <a data-wysihtml-command="bold" title="CTRL+B"><i class="fas fa-bold"></i></a>
               <a data-wysihtml-command="italic" title="CTRL+I"><i class="fas fa-italic"></i></a>
               <a data-wysihtml-command="createLink"><i class="fas fa-link"></i></a>
@@ -58,7 +58,12 @@
               </div>
             </div>
             
-            {{ form_row(form.post) }}
+            {{ form_row(form.post) }} -->
+
+            <!-- Wisywyg -->
+            <div class="fr-view">
+              {{ form_row(form.post) }}
+            </div>
 
             <button type="submit" class="btn btn-success mr-3">Confirmer la création du poste</button>
             <a href="{{ path('admin')}}" class="btn btn-danger">Retour à l'admin</a>

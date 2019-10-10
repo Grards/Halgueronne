@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EncyclopediaTopicsRepository;
 use App\Repository\EncyclopediaCategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 
 class AdminController extends AbstractController
 {

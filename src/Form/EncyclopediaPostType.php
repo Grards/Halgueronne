@@ -37,7 +37,8 @@ class EncyclopediaPostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, $this->getConfiguration("Titre","Encodez un titre pour votre poste"))
-            ->add('post', TextareaType::class, $this->getConfiguration("Poste","Entrez un texte ..."))
+            //->add('post', TextareaType::class, $this->getConfiguration("Poste","Entrez un texte ..."))
+            ->add( "post", FroalaEditorType::class)
             ->add('encyclopediaTopic', EntityType::class,[
                 'placeholder' => 'Choisissez un topic qui contiendra votre poste',
                 'class' => EncyclopediaTopics::class,
