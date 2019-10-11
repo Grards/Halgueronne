@@ -29,11 +29,11 @@ class CharacterType extends AbstractType
      */
     protected function getConfiguration($label, $placeholder, $options = [] ){
         return array_merge_recursive([
-                'label' => $label,
-                'attr' => [
-                    'placeholder' => $placeholder
-                ]
-                ],$options);
+            'label' => $label,
+            'attr' => [
+                'placeholder' => $placeholder
+            ]
+        ],$options);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

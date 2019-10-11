@@ -1,148 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Halgueronne - Administration - Création de contenu{% endblock %}
+{% block stylesheets %}
+    <!-- La fonction twig asset() permet de retrouver un fichier statique, peu importe sa version. Et donc de récupérer la css créée par npm run build -->
+    <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
+{% endblock %}
 
 {% block body %}
-<div id="admin-encyclopedia-new-post-page" class="slide pb-5">
-    <div class="container">
-        {% include 'partials/title.html.twig' %}
-        <div class="row">
-          <h2>Création de contenu pour l'encyclopédie</h2>
-        </div>
-        <div class="container-content ">
-          {{ form_start(form, {'attr': {'class': 'ewrapper'}}) }}
-            {{ form_row(form.encyclopediaTopic) }}
-            {{ form_row(form.title, {'attr': {'class': 'mb-5'}}) }}
-            
-            <!-- <div class="toolbar mb-4" style="display: block;">
-              <a data-wysihtml-command="bold" title="CTRL+B"><i class="fas fa-bold"></i></a>
-              <a data-wysihtml-command="italic" title="CTRL+I"><i class="fas fa-italic"></i></a>
-              <a data-wysihtml-command="createLink"><i class="fas fa-link"></i></a>
-              <a data-wysihtml-command="removeLink"><i class="fas fa-unlink"></i></a>
-              <a data-wysihtml-command="insertImage"><i class="fas fa-images"></i></a>
-              <a data-wysihtml-command="formatBlock" data-wysihtml-command-value="h1"><i class="fas fa-heading"></i>1</a>
-              <a data-wysihtml-command="formatBlock" data-wysihtml-command-value="h2"><i class="fas fa-heading"></i>2</a>
-              <a data-wysihtml-command="formatBlock" data-wysihtml-command-blank-value="true"><i class="fas fa-remove-format"></i></a>
-              <a data-wysihtml-command="insertUnorderedList"><i class="fas fa-list"></i></a>
-              <a data-wysihtml-command="insertOrderedList"><i class="fas fa-list-ol"></i></a>
-              {# <a data-wysihtml-command="foreColor" data-wysihtml-command-value="red"><i class="fas fa-square"></i></a>
-              <a data-wysihtml-command="foreColor" data-wysihtml-command-value="green"><i class="fas fa-square"></i></a>
-              <a data-wysihtml-command="foreColor" data-wysihtml-command-value="blue"><i class="fas fa-square"></i></a> #}
-              <a data-wysihtml-command="undo"><i class="fas fa-undo"></i></a>
-              <a data-wysihtml-command="redo"><i class="fas fa-redo"></i></a>
-              {# <a data-wysihtml-command="insertSpeech"><i class="fas fa-quote-right"></i></a> #}
-              <a data-wysihtml-action="change_view"><i class="fas fa-code"></i></a>
-              
-              <div data-wysihtml-dialog="createLink" style="display: none;">
-              <label>
-                  Link:
-                  <input data-wysihtml-dialog-field="href" value="http://">
-              </label>
-              <a data-wysihtml-dialog-action="save">OK</a>&nbsp;<a data-wysihtml-dialog-action="cancel">Annuler</a>
-              </div>
-              
-              <div data-wysihtml-dialog="insertImage" style="display: none;">
-                <label>
-                    Image:
-                    <input data-wysihtml-dialog-field="src" value="http://">
-                </label>
-                <label>
-                    Alignement:
-                    <select data-wysihtml-dialog-field="className">
-                    <option value="">défaut</option>
-                    <option value="wysiwyg-float-left">gauche</option>
-                    <option value="wysiwyg-float-right">droite</option>
-                    </select>
-                </label>
-                <a data-wysihtml-dialog-action="save">OK</a>&nbsp;<a data-wysihtml-dialog-action="cancel">Annuler</a>
-              </div>
-            </div>
-            
-            {{ form_row(form.post) }} -->
-
-            <!-- Wisywyg -->
-            <div class="fr-view">
-              {{ form_row(form.post) }}
-            </div>
-
-            <button type="submit" class="btn btn-success mr-3">Confirmer la création du poste</button>
-            <a href="{{ path('admin')}}" class="btn btn-danger">Retour à l'admin</a>
-          {{ form_end(form) }}
-        </div>
-
-           {# <form class="ewrapper" method="POST" action={{path('encyclopedia_new_post')}}>
-
-              <div class="toolbar" style="display: none;">
-                <a data-wysihtml-command="bold" title="CTRL+B"><i class="fas fa-bold"></i></a>
-                <a data-wysihtml-command="italic" title="CTRL+I"><i class="fas fa-italic"></i></a>
-                <a data-wysihtml-command="createLink"><i class="fas fa-link"></i></a>
-                <a data-wysihtml-command="removeLink"><i class="fas fa-unlink"></i></a>
-                <a data-wysihtml-command="insertImage"><i class="fas fa-images"></i></a>
-                <a data-wysihtml-command="formatBlock" data-wysihtml-command-value="h1"><i class="fas fa-heading"></i>1</a>
-                <a data-wysihtml-command="formatBlock" data-wysihtml-command-value="h2"><i class="fas fa-heading"></i>2</a>
-                <a data-wysihtml-command="formatBlock" data-wysihtml-command-blank-value="true"><i class="fas fa-remove-format"></i></a>
-                <a data-wysihtml-command="insertUnorderedList"><i class="fas fa-list"></i></a>
-                <a data-wysihtml-command="insertOrderedList"><i class="fas fa-list-ol"></i></a>
-                {# <a data-wysihtml-command="foreColor" data-wysihtml-command-value="red"><i class="fas fa-square"></i></a>
-                <a data-wysihtml-command="foreColor" data-wysihtml-command-value="green"><i class="fas fa-square"></i></a>
-                <a data-wysihtml-command="foreColor" data-wysihtml-command-value="blue"><i class="fas fa-square"></i></a> 
-                <a data-wysihtml-command="undo"><i class="fas fa-undo"></i></a>
-                <a data-wysihtml-command="redo"><i class="fas fa-redo"></i></a>
-                <a data-wysihtml-command="insertSpeech"><i class="fas fa-quote-right"></i></a>
-                <a data-wysihtml-action="change_view"><i class="fas fa-code"></i></a>
-                
-                <div data-wysihtml-dialog="createLink" style="display: none;">
-                <label>
-                    Link:
-                    <input data-wysihtml-dialog-field="href" value="http://">
-                </label>
-                <a data-wysihtml-dialog-action="save">OK</a>&nbsp;<a data-wysihtml-dialog-action="cancel">Annuler</a>
+    <div id="admin-encyclopedia-new-post-page" class="slide pb-5">
+        <div class="container">
+            {% include 'partials/title.html.twig' %}
+            <div class="container-content">
+                <div class="row">
+                    <h2>Création de contenu pour l'encyclopédie</h2>
                 </div>
-                
-                <div data-wysihtml-dialog="insertImage" style="display: none;">
-                  <label>
-                      Image:
-                      <input data-wysihtml-dialog-field="src" value="http://">
-                  </label>
-                  <label>
-                      Alignement:
-                      <select data-wysihtml-dialog-field="className">
-                      <option value="">défaut</option>
-                      <option value="wysiwyg-float-left">gauche</option>
-                      <option value="wysiwyg-float-right">droite</option>
-                      </select>
-                  </label>
-                  <a data-wysihtml-dialog-action="save">OK</a>&nbsp;<a data-wysihtml-dialog-action="cancel">Annuler</a>
+                <div>
+                    {{ form_start(form, {'attr': {'class': 'ewrapper'}}) }}
+                        {{ form_row(form.encyclopediaTopic) }}
+                        {{ form_row(form.title, {'attr': {'class': 'mb-5'}}) }}
+                        {{ form_row(form.post) }}
+
+                        <button type="submit" class="btn btn-success mr-3">Confirmer la création du poste</button>
+                        <a href="{{ path('admin')}}" class="btn btn-danger">Retour à l'admin</a>
+                    {{ form_end(form) }}
                 </div>
-                  
-              </div>
-              <br>
-              <div class="editable" data-placeholder="Entrez votre texte ..." name="post-text"></div>
-              <br><input id="add-post-button" class="btn btn-info mb-5" type="submit" value="Envoyer">
-            </form> #}
-
-
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{asset('build/js/app.js')}}"></script>
-    <script src="/js/wysi/wysihtml.js"></script>
-    <script src="/js/wysi/wysihtml.all-commands.min.js"></script>
-    <script src="/js/wysi/wysihtml.table_editing.min.js"></script>
-    <script src="/js/wysi/wysihtml.toolbar.min.js"></script>
-    <script src="/js/wysi/advanced_and_extended.js"></script>
-    <script>
-      var editors = [];
- 
-      $('.ewrapper').each(function(idx, wrapper) {
-      var e = new wysihtml.Editor($(wrapper).find('.editable').get(0), {
-          toolbar:        $(wrapper).find('.toolbar').get(0),
-          parserRules:    wysihtmlParserRules,
-          stylesheets:  "css/stylesheet.css"
-          //showToolbarAfterInit: false
-      });
-      editors.push(e);
-      });
-    </script>
 {% endblock %}
 

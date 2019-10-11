@@ -50,7 +50,7 @@
                                                 <h4 class="card-title font-weight-bold">{{post.title}}</h4>
                                                 <hr>
                                                 <!-- Quotation -->
-                                                <p><i class="fas fa-quote-left"></i> {{post.post|slice(0,200)}} <small><i>... (Lire la suite)</i></small></p>
+                                                <p><i class="fas fa-quote-left"></i> {{post.post|slice(0,200)|raw}} <small><i>... (Lire la suite)</i></small></p>
                                             </div>
                                         </div>
                                         <!--Card-->

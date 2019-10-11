@@ -1,3 +1,20 @@
-kms_froala_editor:
+# Doc : https://symfony.com/doc/current/bundles/FOSCKEditorBundle/usage/toolbar.html
+fos_ck_editor:
+    default_config: default
+    configs:
+        default:
+            # toolbar: "full"
+        encyclopedia_tools:
+            extraPlugins: ["wordcount" , "autogrow", "youtube"]
+            toolbar: "encyclopedia_toolbar"
+    toolbars:
+        configs:
+            encyclopedia_toolbar: [ [ "Maximize", "-", "Source", "-", "Undo", "Redo", "-", "Cut", "Copy", "Paste", "PasteText", "PasteFromWord"], "/", [ "Anchor" , "Youtube" ], "/", [ "Maximize" ] ]
 
-  language: "fr"
+            plugins:
+                wordcount:
+                    path:     '/bundles/fosckeditor/plugins/wordcount/wordcount/'
+                    filename: "plugin.js"
+                autogrow:
+                    path:     '/bundles/fosckeditor/plugins/autogrow/'
+                    filename: "plugin.js"
